@@ -1,0 +1,64 @@
+﻿@model ffWeb.UI.MVC.Models.RegisterModel
+@{
+    ViewBag.Title = "DeRegister";
+}
+
+
+
+<hgroup class="title">
+    <h2 class="page-title">@ViewBag.Title.</h2>
+    <h2 class="page-title">Close all Offers and Accounts.</h2>
+</hgroup>
+
+@using (Html.BeginForm("DeRegister", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "de-register-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+      <fieldset>
+            <legend>DeRegister</legend>
+    <p>
+        <input type="submit" value="DeRegister" formaction="javascript:document.getElementById('logoutForm').submit()" onclick="" id="btnSubmitDeRegisterForm" />
+    </p> 
+     </fieldset>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitDeRegisterForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#de-register-form").submit();
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+
+
+

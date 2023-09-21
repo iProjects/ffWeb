@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{64FBEAF0-12E1-46FE-845A-88537497219C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{A7264DC9-D67B-4604-97D5-8C0404DAE86D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{AE2D4B2C-DA42-40A0-AE34-1D5086931F20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{68CC3F74-FCB4-42AC-B61C-3CFA0D5E1C13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.UI.MVC", "Presentation\ffWeb.UI.MVC\ffWeb.UI.MVC.csproj", "{328B4A8E-3857-43D8-B2B1-671A74C7DF53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.UI.MVC.Tests", "Presentation\ffWeb.UI.MVC.Tests\ffWeb.UI.MVC.Tests.csproj", "{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.Framework", "Shared\ffWeb.Framework\ffWeb.Framework.csproj", "{3F257661-09E9-42F6-B9C0-89422480FF47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0FE1190C-7C85-4B4E-8FD7-42EAB7E6CD18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.Data", "Data\ffWeb.Data\ffWeb.Data.csproj", "{7B9885FB-C888-4E00-967D-EAE14CDEA140}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.Hosts.Web", "Hosts\ffWeb.Hosts.Web\ffWeb.Hosts.Web.csproj", "{424877F8-518B-4EFE-92CC-A79A1C10BC1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F2ED218-F4C0-4013-AD79-A53F2F6A1F9F}"
+	ProjectSection(SolutionItems) = preProject
+		ffWeb.vsmdi = ffWeb.vsmdi
+		Tests\Solution Items\local.testsettings = Tests\Solution Items\local.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ffWeb.Test", "Tests\ffWeb.Test\ffWeb.Test.csproj", "{FDC1389D-A28C-4536-BA4C-E804257D5338}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0C8262EE-DB80-47CE-AE9C-16A8FC01A264}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ffWeb.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{328B4A8E-3857-43D8-B2B1-671A74C7DF53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328B4A8E-3857-43D8-B2B1-671A74C7DF53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328B4A8E-3857-43D8-B2B1-671A74C7DF53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328B4A8E-3857-43D8-B2B1-671A74C7DF53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F257661-09E9-42F6-B9C0-89422480FF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F257661-09E9-42F6-B9C0-89422480FF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F257661-09E9-42F6-B9C0-89422480FF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F257661-09E9-42F6-B9C0-89422480FF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9885FB-C888-4E00-967D-EAE14CDEA140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9885FB-C888-4E00-967D-EAE14CDEA140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9885FB-C888-4E00-967D-EAE14CDEA140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9885FB-C888-4E00-967D-EAE14CDEA140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{424877F8-518B-4EFE-92CC-A79A1C10BC1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{424877F8-518B-4EFE-92CC-A79A1C10BC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{424877F8-518B-4EFE-92CC-A79A1C10BC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{424877F8-518B-4EFE-92CC-A79A1C10BC1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC1389D-A28C-4536-BA4C-E804257D5338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC1389D-A28C-4536-BA4C-E804257D5338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC1389D-A28C-4536-BA4C-E804257D5338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC1389D-A28C-4536-BA4C-E804257D5338}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF4AEAE3-B1EF-4D67-81F8-8B41CB83A3FD} = {64FBEAF0-12E1-46FE-845A-88537497219C}
+		{328B4A8E-3857-43D8-B2B1-671A74C7DF53} = {64FBEAF0-12E1-46FE-845A-88537497219C}
+		{424877F8-518B-4EFE-92CC-A79A1C10BC1E} = {A7264DC9-D67B-4604-97D5-8C0404DAE86D}
+		{3F257661-09E9-42F6-B9C0-89422480FF47} = {AE2D4B2C-DA42-40A0-AE34-1D5086931F20}
+		{4F2ED218-F4C0-4013-AD79-A53F2F6A1F9F} = {68CC3F74-FCB4-42AC-B61C-3CFA0D5E1C13}
+		{FDC1389D-A28C-4536-BA4C-E804257D5338} = {68CC3F74-FCB4-42AC-B61C-3CFA0D5E1C13}
+		{7B9885FB-C888-4E00-967D-EAE14CDEA140} = {0FE1190C-7C85-4B4E-8FD7-42EAB7E6CD18}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.PolicyInjection.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.Database.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

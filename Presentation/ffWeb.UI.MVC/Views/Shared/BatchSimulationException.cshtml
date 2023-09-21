@@ -1,0 +1,34 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@using fanikiwaGL.Framework.ExceptionTypes
+
+@{
+    ViewBag.Title = "StaticPostingException";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 class="error">Batch simulation Error.</h1>
+    <h2 class="error">An error occurred while processing your request.</h2>
+</hgroup>
+
+
+ <p>
+ Message: @Model.Exception.Message
+
+ </p>
+
+@{
+    BatchSimulationException ex = (BatchSimulationException)Model.Exception;
+    foreach(var stat in ex.SimulatePostStatus.SimulateStatus)
+    {
+     foreach(var err in stat.Errors)
+     {
+         @err.Message
+         <br />
+     }
+    }
+    }
+
+<p>
+    Stack Trace: @Model.Exception.StackTrace
+</p>

@@ -1,0 +1,10 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Data.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Data.pdb
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.dll
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Data.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Data.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.csprojResolveAssemblyReference.cache
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Data\ffWeb.Data\obj\Debug\ffWeb.Data.pdb

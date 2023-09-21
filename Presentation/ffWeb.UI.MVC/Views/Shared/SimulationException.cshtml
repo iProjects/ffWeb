@@ -1,0 +1,33 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@using fanikiwaGL.Framework.ExceptionTypes
+
+@{
+    ViewBag.Title = "StaticPostingException";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 class="error">Simulation Posting Error.</h1> 
+    <h2 class="error">An error occurred while processing your request.</h2>
+</hgroup>
+
+
+ <p>
+ Message: @Model.Exception.Message
+
+ </p>
+
+@{
+    SimulationException ex = (SimulationException)Model.Exception;
+    foreach(var err in ex.SimulatePostStatus.Errors)
+    {
+        <p>
+        @err.Message
+
+        </p>
+    }
+    }
+
+<p>
+    Stack Trace: @Model.Exception.StackTrace
+</p>

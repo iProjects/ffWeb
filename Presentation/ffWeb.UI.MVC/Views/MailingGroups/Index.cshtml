@@ -1,0 +1,20 @@
+﻿@model fPeerLending.Entities.MailingGroup
+
+<div id="tree">
+    @if (Model != null)
+    { 
+        <ul>
+
+            <li>
+                @Html.CheckBox(Model.ShortCode, new { data_groupid = Model.GroupId, data_shortcode = Model.ShortCode })
+                @Model.NodeName
+                @Html.Partial("ChildNode", Model.ChildNode)
+            </li>
+        </ul>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

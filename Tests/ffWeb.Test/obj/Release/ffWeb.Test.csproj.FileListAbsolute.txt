@@ -1,0 +1,6 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.dll.config
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.pdb
+C:\My Projects\fanikiwa\ffWeb\Tests\ffWeb.Test\obj\Release\ffWeb.Test.dll
+C:\My Projects\fanikiwa\ffWeb\Tests\ffWeb.Test\obj\Release\ffWeb.Test.pdb
+C:\My Projects\fanikiwa\ffWeb\Tests\ffWeb.Test\obj\Release\ffWeb.Test.csprojResolveAssemblyReference.cache

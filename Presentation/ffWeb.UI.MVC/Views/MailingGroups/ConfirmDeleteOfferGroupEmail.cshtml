@@ -1,0 +1,68 @@
+﻿@model ffWeb.UI.MVC.Models.ConfirmDeleteModel
+
+@{
+    ViewBag.Title = "Confirm Delete";
+    var GroupAddress = Model.Description.ToUpper(); 
+}
+
+<h2 class="page-title">Confirm Delete Group Address - @GroupAddress </h2>
+
+@using (Html.BeginForm("DeleteMailingAddress", "Offers", FormMethod.Post, new { id = "delete-offer-group-email-form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Confirm Delete</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <p>
+            <input type="submit" value="Delete" id="btnSubmitDeleteMailingAddressForm" />
+        </p>
+    </fieldset>
+}
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitDeleteMailingAddressForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#delete-offer-group-email-form").submit();
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<fanikiwaGL.Entities.TransactionModel>
+
+@{
+    ViewBag.Title = "Mini Statemement";
+    int Transactions = Model.Count();
+    decimal _debitsTotal = Model.Sum(i => i.Debit);
+    decimal _creditsTotal = Model.Sum(i => i.Credit);
+    decimal _totalTransactions = _debitsTotal + _creditsTotal;
+}
+
+<h2 class="page-title">Total Statements Value [ @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", _totalTransactions)  ]  </h2>
+
+<h2 class="page-title">Statements [ @Transactions ] </h2>
+ 
+<table>
+    <tr> 
+        <th>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Narrative)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Debit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.ContraReference)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr> 
+        <td>
+                @{
+    var PostDateAsString = item.PostDate;
+                }
+
+                @Html.TextBoxFor(model => item.PostDate, new { Value = PostDateAsString.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date" })
+                 
+            </td>  
+        <td>
+            @Html.DisplayFor(modelItem => item.Narrative)
+        </td>
+        <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Debit)
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Credit)
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Balance)
+            </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.ContraReference)
+        </td>
+        
+    </tr>
+}
+
+</table>

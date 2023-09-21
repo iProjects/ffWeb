@@ -1,0 +1,33 @@
+﻿@model ffWeb.UI.MVC.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log In - Peer-to-Peer Lending";
+}
+
+
+ 
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<fanikiwaGL.Entities.STO>
+
+@{
+    ViewBag.Title = "My Loans";
+    int MyLoans = Model.Count();
+}
+
+<h2 class="page-title">My Loans [ @MyLoans ] </h2>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalToPay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NextPayDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Interval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CrAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfPayments)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalToPay)
+            </td>
+            <td>
+            <td>
+                @{
+        var NextPayDateAsString = item.NextPayDate;
+                }
+
+                @Html.TextBoxFor(model => item.NextPayDate, new { Value = NextPayDateAsString.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date" })
+            </td>
+            <td>
+            <td>
+                @{
+        var StartDateAsString = item.StartDate;
+                }
+
+                @Html.TextBoxFor(model => item.StartDate, new { Value = StartDateAsString.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date" })
+            </td>
+            <td>
+            <td>
+                @{
+        var EndDateAsString = item.EndDate;
+                }
+
+                @Html.TextBoxFor(model => item.EndDate, new { Value = EndDateAsString.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Interval)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CrAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfPayments)
+            </td>
+            <td></td>
+        </tr>
+    }
+
+</table>

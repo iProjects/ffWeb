@@ -1,0 +1,5 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Data.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Data.pdb
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Release\ffWeb.Data.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Release\ffWeb.Data.dll
+C:\My Projects\fanikiwa\ffWeb\Data\ffWeb.Data\obj\Release\ffWeb.Data.pdb

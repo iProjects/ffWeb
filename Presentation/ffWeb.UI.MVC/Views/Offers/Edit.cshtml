@@ -1,0 +1,132 @@
+﻿@model fPeerLending.Entities.OfferModel
+
+@{
+    ViewBag.Title = "Edit  Offer";
+}
+
+<h2 class="page-title">Edit Offer</h2>
+
+
+<article class="col1">
+    <div class="pad">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Offer</legend>
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Description, new { style = "width: 310px;height: 50px;", placeholder = "offer description", @disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PublicOffer)
+                </div>
+                <div class="editor-field">
+                    @{
+            List<SelectListItem> _offermailingmethods = new List<SelectListItem>();
+            _offermailingmethods.Add(new SelectListItem
+            {
+                Text = "Public",
+                Value = "B",
+                Selected = true
+            });
+            _offermailingmethods.Add(new SelectListItem
+            {
+                Text = "Private",
+                Value = "V"
+            });
+                    }
+                    @Html.DropDownListFor(model => model.PublicOffer, _offermailingmethods, new { id = "cboOfferMailingMethods", style = "width: 310px;height: 30px;", @disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PublicOffer)
+                </div>
+
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.OfferType)
+                </div>
+                <div class="editor-field">
+                    @{
+            List<SelectListItem> _offerTypes = new List<SelectListItem>();
+            _offerTypes.Add(new SelectListItem
+            {
+                Text = "Borrow",
+                Value = "B",
+                Selected = true
+            });
+            _offerTypes.Add(new SelectListItem
+            {
+                Text = "Lend",
+                Value = "L"
+            });
+                    }
+                    @Html.DropDownListFor(model => model.OfferType, _offerTypes, new { id = "cboOfferTypes", style = "width: 310px;height: 30px;", @disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.OfferType)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Amount)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Amount, new { @disabled = "disabled", type = "number", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Amount)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Term)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Term, new { @disabled = "disabled", type = "number", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Term)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Interest)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Interest, new { @disabled = "disabled", type = "number", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Interest)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PartialPay)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PartialPay, new { @disabled = "disabled", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PartialPay)
+                </div>
+
+
+            </fieldset>
+        }
+
+    </div>
+</article>
+
+<article class="col2">
+    <div class="pad">
+        @if (Model.PublicOffer.Equals("V"))
+        {
+            { Html.RenderAction("Index", "Offerees", new { Offerid = Model.Id }); }
+        }
+    </div>
+</article>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

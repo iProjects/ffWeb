@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Upload Image";
+}
+
+<h2 class="page-title">Upload Image</h2>
+
+
+
+<div class="clearboth">
+
+
+    @using (Html.BeginForm("UploadMemberImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "upload-logo-form" }))
+    { 
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div id="form-upload-logo-div">
+
+            <input type="file" name="HttpPostedLogo" value="" id="HttpPostedLogo" />
+            <input type="submit" value="Upload Image" id="btnSubmitUploadLogoForm" />
+
+        </div>          
+                    
+    }
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitUploadLogoForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#upload-logo-form").submit();
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

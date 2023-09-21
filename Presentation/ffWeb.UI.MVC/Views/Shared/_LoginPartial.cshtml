@@ -1,0 +1,90 @@
+﻿<div id="loginPartial-div">
+
+    @if (Request.IsAuthenticated)
+    {
+        <text>
+
+        <b>No of Users Online:</b>
+        <b>@Context.ApplicationInstance.Application["OnlineUsers"].ToString()</b><br />
+        <br />
+
+
+
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "log-off-partial-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <text>
+            Welcome To Fanikiwa,  @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage Profile" }) !
+<a  id="btnSubmitLogOffPartialForm" style="cursor: pointer;" title="Log Off">Log off</a>
+     </text>
+        }
+
+        </text>
+    }
+
+
+    else
+    {
+        <text>
+        <b>No of Users Online:</b>
+        <b>@Context.ApplicationInstance.Application["OnlineUsers"].ToString()</b><br />
+        <br />
+        </text>
+    
+        <ul>
+
+            <li>
+                <div class="floatleft">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "register-partial-form" }))
+                    { 
+                        <div>
+                            <a id="btnSubmitRegisterPartialForm" style="cursor: pointer;" title="Register">Register</a>
+                        </div>    
+                    }
+                </div>
+            </li>
+
+            <li>
+                <div class="floatleft">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { enctype = "multipart/form-data", id = "login-partial-form" }))
+                    { 
+                        <div>
+                            <a id="btnSubmitLoginPartialForm" style="cursor: pointer;" title="Log In">Log in</a>
+                        </div>    
+                    }
+                </div>
+            </li>
+
+        </ul>
+     
+    }
+
+
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

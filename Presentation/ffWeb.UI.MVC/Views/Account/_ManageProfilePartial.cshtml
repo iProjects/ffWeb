@@ -1,0 +1,48 @@
+﻿@model ffWeb.UI.MVC.Models.StatisticsModel
+
+
+
+@{
+    ViewBag.Title = "Scores";
+}
+
+<h2 class="page-title">Scores</h2>
+
+<h3>Lend Offers By Me  @Html.TextBoxFor(model => model.LendOffersByMe)</h3>
+<h3>Lend Offers To Me  @Html.TextBoxFor(model => model.LendOffersToMe)</h3>
+<h3>Borrow Offers By Me  @Html.TextBoxFor(model => model.BorrowOffersByMe)</h3>
+<h3>Borrow Offers To Me  @Html.TextBoxFor(model => model.BorrowOffersToMe)</h3>
+
+
+
+<div class="clearboth">
+    @*<a href="javascript:history.back()">Back</a>*@
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+

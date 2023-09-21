@@ -1,0 +1,97 @@
+﻿@model IEnumerable<fPeerLending.Entities.Offer> 
+
+@{
+    ViewBag.Title = "My InvestMents"; 
+}
+
+<h2 class="page-title">My InvestMents</h2>
+
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Term)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicOffer)
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (item.PublicOffer.Equals("B"))
+                {               
+                    <text>Public</text>
+                }
+                @if (item.PublicOffer.Equals("V"))
+                {               
+                    <text>Private</text>
+                }
+            </td>
+           
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+      
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

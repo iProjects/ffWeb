@@ -1,0 +1,404 @@
+﻿@{
+    ViewBag.Title = "Fanikiwa";
+}
+
+
+@section featured {
+
+    <section class="featured">
+        <div class="content-wrapper">
+
+            <hgroup class="title">
+                <h1>Fanikiwa Peer-To-Peer Lending.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+
+            <hgroup class="title">
+                <h1>How peer-to-peer lending work.</h1>
+            </hgroup>
+
+            <div class="clearboth">
+
+                <p>
+                    Also known as social lending or lend-to-save, peer-to-peer lending works by individual lenders and borrowers coming together to get better rates.
+                <br />
+                    Fanikiwa's peer-to-peer loans offer borrowers competitive low rates and flexible terms. 
+                    <br />
+                    Lenders  earn higher returns by lending to borrowers. 
+                    <br />
+                    Peer-to-peer lending sites match up savers, who are willing to lend, with borrowers - either individuals or small businesses.
+                    <br />
+                    Rates can be better than those offered by banks - as high as about 16% for savers, and as low as about 5% for borrowers on a five-year loan.<br />
+                    Peer-To-Peer Lending, which is a concept that has been around for a very long time, but the method as to how it was carried out was not always efficient at all. It went a little something like this:<br />
+                    Friend #1: Hey best friend, can I borrow 100,000 to get a new car?<br />
+                    Friend #2: Do you promise to pay me back?<br />
+                    Friend #1: Of course, you know that I am good for it!<br />
+                    Friend #2: Ok fine, I will get the money to you by next week.<br />
+                    The truth is that these situations are very common.
+                    <br />
+                    We enter into lending/borrowing agreements with friends and families all the time, and the lender enters into a situation with unlimited risk and no reward for their risk.<br />
+                    This is where a website like Fanikiwa comes into play.
+                    <br />
+                    Fanikiwa  is a peer-to-peer lending network that brings investors and borrowers together to satisfy both parties needs by offering a secure, legal, and efficient service. Those people who wish to take more control of their investments can lend money to borrowers, and borrowers who are tired of having limited options for choosing a personal loan product can try Fanikiwa .
+
+                </p>
+
+            </div>
+
+            <div class="clearboth">
+
+                <hgroup class="title">
+                    <h2 class="title">Fanikiwa offers low rate loans with no early repayment fees. </h2>
+                </hgroup>
+
+                <label for="DashBoardAmountrange">Select Amount Range To See Loan APR</label>
+                <input type="range" name="DashBoardAmountrange" value="Amount" min="1000" max="100000" step="1000" id="DashBoardAmountrange" class="text ui-widget-content ui-corner-all">
+
+                <label for="DashBoardAmountValue">Loan APR</label>
+                <input type="text" name="DashBoardAmountValue" id="DashBoardAmountValue" value="" class="text ui-widget-content ui-corner-all">
+            </div>
+
+            @if (Request.IsAuthenticated)
+            { 
+
+                <div class="clearboth">
+                    <ol class="round">
+
+                        <li class="one">
+                            <h5>Complete Your Profile</h5>
+
+                            <div>
+                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-loggedin-form" }))
+                                { 
+                                    <div>
+                                        Complete your Profile by Clicking
+                        <a id="btnSubmitEditProfileLoggedInForm" style="cursor: pointer;">My Profile</a>
+                                        @*@Html.ActionLink("My Profile", "EditProfile", "Account")*@
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+
+                        <li class="two">
+                            <h5>Make An Investement</h5>
+
+                            <div>
+                                @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-loggedin-form" }))
+                                { 
+                                    <div>
+                                        You can make an investment by making a lend offer 
+                                         <a id="btnSubmitListBorrowOffersLoggedInForm" style="cursor: pointer;">Make An Investement</a>
+                                        @*@Html.ActionLink("Make An Investement", "ListBorrowOffers", "Offers")*@
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+
+                        <li class="three">
+                            <h5>Get A loan</h5>
+
+                            <div>
+                                @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-loggedin-form" }))
+                                { 
+                                    <div>
+                                        You can get a loan by making a borrow offer 
+                                        <a id="btnSubmitListLendOffersLoggedInForm" style="cursor: pointer;">Get A loan</a>
+                                        @* @Html.ActionLink("Get A loan", "ListLendOffers", "Offers")*@
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+
+                    </ol>
+                </div> 
+                
+            }
+            else
+            {
+                <div class="clearboth">
+                    <ol class="round">
+
+                        <li class="one">
+                            <h5>Join Fanikiwa!</h5>
+
+                            <div>
+
+                                @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "register-index-form" }))
+                                { 
+                                    <div>
+                                        Enter your details on the register screen by clicking 
+                <a id="btnSubmitRegisterIndexForm" style="cursor: pointer;">Register</a>
+                                        @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
+                                    </div>    
+                                }
+
+                            </div>
+
+                        </li>
+
+                        <li class="two">
+                            <h5>Complete Your Profile</h5>
+
+                            <div>
+
+                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-index-form" }))
+                                { 
+                                    <div>
+                                        After clicking register you will automatically be redirected to the home page. Click on
+                <a id="btnSubmitEditProfileIndexForm" style="cursor: pointer;">My Profile</a>
+                                        @*@Html.ActionLink("My Profile", "EditProfile", "Account")*@
+                                        and Complete your Profile.
+                                    </div>    
+                                }
+
+                            </div>
+
+                        </li>
+
+                        <li class="three">
+                            <h5>Make An Investement</h5>
+
+                            <div>
+
+                                @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-index-form" }))
+                                { 
+                                    <div>
+                                        You can make an investment by making a lend offer 
+                <a id="btnSubmitListBorrowOffersIndexForm" style="cursor: pointer;">Make An Investement</a>
+                                        @*@Html.ActionLink("Make An Investement", "ListBorrowOffers", "Offers")*@
+                                    </div>    
+                                }
+
+                            </div>
+
+                        </li>
+
+                        <li class="four">
+                            <h5>Get A loan</h5>
+
+                            <div>
+
+                                @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-index-form" }))
+                                { 
+                                    <div>
+                                        You can get a loan by making a borrow offer   
+                <a id="btnSubmitListLendOffersIndexForm" style="cursor: pointer;">Get A loan</a>
+                                        @*@Html.ActionLink("Get A loan", "ListLendOffers", "Offers")*@
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+
+
+                    </ol>
+                </div>    
+            }
+
+            <div class="clearboth">
+
+                <hgroup class="title">
+                    <h2 class="title">Why Fanikiwa</h2>
+                </hgroup>
+
+                <ul>
+                    <li>
+                        <h5>Low fixed rates</h5>
+                    </li>
+                    <li>
+                        <h5>Fast and easy online application</h5>
+                    </li>
+                    <li>
+                        <h5>No teaser rates or hidden fees</h5>
+                    </li>
+                    <li>
+                        <h5>Rates from 5% to 20% APR</h5>
+                    </li>
+                    <li>
+                        <h5>No early repayment fees
+                            <br />
+                            (flexibility to repay loan early or make extra payments)</h5>
+                    </li>
+                    <li>
+                        <h5>Borrow between Ksh1,000 and Ksh100,000</h5>
+                    </li>
+                    <li>
+                        <h5>Loans available over 1, 2, 3, 4 or 5 years</h5>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="clearboth">
+
+                <hgroup class="title">
+                    <h2 class="title">How to apply for Fanikiwa loans</h2>
+                </hgroup>
+
+                <ul class="round">
+                    <li class="one">
+                        <h5>Check the rates</h5>
+                    </li>
+
+                    <li class="two">
+                        <h5>Get a quote</h5>
+                    </li>
+
+                    <li class="three">
+                        <h5>Accept the quote and apply online</h5>
+                    </li>
+
+                    <li class="four">
+                        <h5>Approval within 24 hours (Mon to Fri)</h5>
+                    </li>
+
+                    <li class="five">
+                        <h5>Money transferred on approval</h5>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="clearboth">
+
+ @*                 @{
+    var myChart = new Chart(width: 200, height: 200)
+        .AddTitle("Chart Title")
+        .AddSeries(
+            name: "Employee",
+            xValue: new[] {  "Peter", "Andrew", "Julie", "Mary", "Dave" },
+            yValues: new[] { "2", "6", "4", "5", "3" })
+        .Write();
+}*@
+
+            </div>
+
+        </div>
+
+    </section>
+
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+            $("#DashBoardAmountValue").val($("#DashBoardAmountrange").val());
+
+        });
+
+        $("#DashBoardAmountrange").on('change keyup paste mouseup mousemove click mouseleave mouseout mouseenter mousedown keydown keypress hover focusin focusout', '', '', function () {
+            $("#DashBoardAmountValue").val($("#DashBoardAmountrange").val());
+        });
+
+        $("#DashBoardAmountValue").on('change keyup paste mouseup mousemove click mouseleave mouseout mouseenter mousedown keydown keypress hover focusin focusout', '', '', function () {
+            $("#DashBoardAmountrange").val($("#DashBoardAmountValue").val());
+        });
+
+        $("#btnSubmitRegisterIndexForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#register-index-form").submit();
+
+        });
+
+        $("#btnSubmitEditProfileLoggedInForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#edit-profile-loggedin-form").submit();
+
+        });
+
+        $("#btnSubmitListBorrowOffersLoggedInForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#list-borrow-offers-loggedin-form").submit();
+
+        });
+
+        $("#btnSubmitListLendOffersLoggedInForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#list-lend-offers-loggedin-form").submit();
+
+        });
+
+        $("#btnSubmitEditProfileIndexForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#edit-profile-index-form").submit();
+
+        });
+
+        $("#btnSubmitListBorrowOffersIndexForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#list-borrow-offers-index-form").submit();
+
+        });
+
+        $("#btnSubmitListLendOffersIndexForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#list-lend-offers-index-form").submit();
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+

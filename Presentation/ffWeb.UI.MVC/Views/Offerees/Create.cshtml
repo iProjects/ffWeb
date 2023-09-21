@@ -1,0 +1,332 @@
+﻿@model fPeerLending.Entities.OfferReceipient
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="page-title">Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>OfferReceipient</legend>
+        @Html.HiddenFor(model => model.OfferId, new { id = "txtOfferId" })
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdType)
+        </div>
+        <div class="editor-field">
+            @{
+    List<SelectListItem> _offerType = new List<SelectListItem>();
+    _offerType.Add(new SelectListItem
+    {
+        Text = "Email",
+        Value = "E" 
+    });
+    _offerType.Add(new SelectListItem
+    {
+        Text = "Telephone",
+        Value = "T"
+    });
+    _offerType.Add(new SelectListItem
+    {
+        Text = "Group",
+        Value = "G"
+    });
+    _offerType.Add(new SelectListItem
+    {
+        Text = "Member",
+        Value = "M"
+    });
+            }
+            @Html.DropDownListFor(model => model.IdType, _offerType, "-- Select Contact Type --", new { id = "cboofferTypes", style = "width: 310px;height: 30px;" })
+            @Html.ValidationMessageFor(model => model.IdType)
+        </div>
+
+
+
+        <div id="Member" class="displaynone">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MemberId)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MemberId, new { id = "txtMemberId" })
+                @Html.ValidationMessageFor(model => model.MemberId)
+            </div>
+        </div>
+
+        <div id="Email" class="displaynone">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MemberEmail)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MemberEmail, new { id = "txtMemberEmail" })
+                @Html.ValidationMessageFor(model => model.MemberEmail)
+            </div>
+        </div>
+
+        <div id="Telno" class="displaynone">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MemberTelno)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MemberTelno, new { id = "txtMemberTelno" })
+                @Html.ValidationMessageFor(model => model.MemberTelno)
+            </div>
+        </div>
+
+        <div id="Group" class="displaynone">
+            <div class="editor-label displaynone">
+                @Html.LabelFor(model => model.MailingGroup)
+            </div>
+            <div class="editor-field displaynone">
+                @Html.EditorFor(model => model.MailingGroup, new { id = "txtMailingGroup" })
+                @Html.ValidationMessageFor(model => model.MailingGroup)
+
+            </div>
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" id="btnSubmitCreateOfferReceipientForm" />
+            
+            <input type="submit" value="Close" id="btnSubmitCloseOfferReceipientForm" style="float:left; clear:none"/>
+        </p>
+
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $("#progress").hide();
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+             
+
+            $.extend($.expr[':'], {
+                unchecked: function (obj) {
+                    return ((obj.type == 'checkbox' || obj.type == 'radio') && !$(obj).is(':checked'));
+                }
+            });
+
+            $("#tree input:checkbox").on('change', function () {
+                $(this).next('ul').find('input:checkbox').prop('checked', $(this).prop("checked"));
+
+                for (var i = $('#tree').find('ul').length - 1; i >= 0; i--) {
+                    $('#tree').find('ul:eq(' + i + ')').prev('input:checkbox').prop('checked', function () {
+                        return $(this).next('ul').find('input:unchecked').length === 0 ? true : false;
+                    });
+                }
+            });
+
+
+        });
+
+        $("#btnSubmitCreateOfferReceipientForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            var _offerType = "";
+            _offerType = $("#cboofferTypes").val();
+
+            var _offerId = "";
+            _offerId = $("#txtOfferId").val();
+
+            switch (_offerType) {
+                case "E":
+                    var _email = "";
+                    _email = $("#txtMemberEmail").val();
+
+                    var offerReceipient = new Object();
+                    offerReceipient.MailingGroup = _email;
+                    offerReceipient.IdType = _offerType;
+                    offerReceipient.OfferId = _offerId;
+
+                    $.ajax({
+                        url: '/Offerees/Create/',
+                        data: offerReceipient,
+                        type: 'POST',
+                        success: function (data) {
+                        }
+                    });
+                    break;
+                case "T":
+                    var _phone = "";
+                    _phone = $("#txtMemberTelno").val();
+
+                    var offerReceipient = new Object();
+                    offerReceipient.MailingGroup = _phone;
+                    offerReceipient.IdType = _offerType;
+                    offerReceipient.OfferId = _offerId;
+
+                    $.ajax({
+                        url: '/Offerees/Create/',
+                        data: offerReceipient,
+                        type: 'POST',
+                        success: function (data) {
+                        }
+                    });
+                    break;
+                case "G":
+                    var checkedGroups = $('input:checkbox:checked').map(function () {
+                        return $(this).attr('data-shortcode');
+                    }).get();
+
+                    $.each(checkedGroups, function (index, value) {
+
+                        var offerReceipient = new Object();
+                        offerReceipient.MailingGroup = value;
+                        offerReceipient.IdType = _offerType;
+                        offerReceipient.OfferId = _offerId;
+
+                        $.ajax({
+                            url: '/Offerees/Create/',
+                            data: offerReceipient,
+                            type: 'POST',
+                            success: function (data) {
+                            }
+                        });
+
+
+                    });
+
+                    break;
+                case "M":
+                    var _memberid = "";
+                    _memberid = $("#txtMemberId").val();
+                    
+                    var offerReceipient = new Object();
+                    offerReceipient.MailingGroup = _memberid;
+                    offerReceipient.IdType = _offerType;
+                    offerReceipient.OfferId = _offerId;
+
+                    $.ajax({
+                        url: '/Offerees/Create/',
+                        data: offerReceipient,
+                        type: 'POST',
+                        success: function (data) {
+                        }
+                    });
+                    break;
+            }
+           
+
+             
+        });
+
+        $("#btnSubmitCloseOfferReceipientForm").on("click", function (e) {
+
+            //e.preventDefault();
+
+            //var id = "";
+            //id = $("#txtOfferId").val();
+
+            //    $.ajax({
+            //        url: '/Offerees/Index/',
+            //        data: id,
+            //        type: 'POST',
+            //        success: function (data) {
+            //            $("#Group").html(data);
+            //        }
+            //    });
+
+        });
+
+
+        $("#cboofferTypes").change(function () {
+
+            var _offerType = "";
+            _offerType = $("#cboofferTypes").val();
+            var _offerId = "";
+            _offerId = $("#txtOfferId").val();
+
+            GetOfferTypes(_offerType);
+
+        });
+
+
+        function GetOfferTypes(_offerType) {
+            $.ajaxSetup({
+                cache: false
+            });
+
+            switch (_offerType) {
+                case "E":
+                    $("#Email").removeClass('displaynone');
+                    $("#Email").addClass('displayblock');
+                    $("#Member").removeClass('displayblock');
+                    $("#Member").addClass('displaynone');
+                    $("#Telno").removeClass('displayblock');
+                    $("#Telno").addClass('displaynone');
+                    $("#Group").removeClass('displayblock');
+                    $("#Group").addClass('displaynone');
+
+                    $('input:text').val("");
+
+                    break;
+                case "T":
+                    $("#Telno").removeClass('displaynone');
+                    $("#Telno").addClass('displayblock');
+                    $("#Email").removeClass('displayblock');
+                    $("#Email").addClass('displaynone');
+                    $("#Member").removeClass('displayblock');
+                    $("#Member").addClass('displaynone');
+                    $("#Group").removeClass('displayblock');
+                    $("#Group").addClass('displaynone');
+
+                    $('input:text').val("");
+
+                    break;
+                case "G":
+                    $("#Group").removeClass('displaynone');
+                    $("#Group").addClass('displayblock');
+                    $("#Email").removeClass('displayblock');
+                    $("#Email").addClass('displaynone');
+                    $("#Telno").removeClass('displayblock');
+                    $("#Telno").addClass('displaynone');
+                    $("#Member").removeClass('displayblock');
+                    $("#Member").addClass('displaynone');
+
+                    $('input:text').val("");
+                    
+                    $.ajax({
+                        url: "/Offers/Index",
+                        success: function (data) {
+                            $("#Group").html(data);
+                        }
+                    });
+
+                    break;
+                case "M":
+                    $("#Member").removeClass('displaynone');
+                    $("#Member").addClass('displayblock');
+                    $("#Email").removeClass('displayblock');
+                    $("#Email").addClass('displaynone');
+                    $("#Telno").removeClass('displayblock');
+                    $("#Telno").addClass('displaynone');
+                    $("#Group").removeClass('displayblock');
+                    $("#Group").addClass('displaynone');
+
+                    $('input:text').val("");
+
+                    break;
+            }
+        }
+
+         
+
+    </script>
+}

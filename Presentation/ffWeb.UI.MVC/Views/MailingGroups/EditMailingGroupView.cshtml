@@ -1,0 +1,78 @@
+﻿@model fPeerLending.Entities.MailingGroup
+
+@{
+    ViewBag.Title = "Edit Offer Group";
+    var OfferGroup = Model.Description.ToUpper(); 
+}
+
+<h2 class="page-title">Edit Offer Group - @OfferGroup </h2>
+
+@using (Html.BeginForm("EditMailingGroup", "Offers", FormMethod.Post, new { id = "edit-offer-group-form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>OfferGroup</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        @Html.HiddenFor(model => model.Email)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description, new { @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <p>
+            <input type="submit" value="Save"  id="btnSubmitEditOfferGroupForm" />
+        </p>
+    </fieldset>
+}
+
+
+ 
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitEditOfferGroupForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#edit-offer-group-form").submit();
+        });
+
+        </script>
+ 
+}
+
+
+
+
+
+
+
+
+

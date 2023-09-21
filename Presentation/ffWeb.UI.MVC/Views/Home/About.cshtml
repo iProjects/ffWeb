@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<hgroup class="title">
+    <h2 class="page-title">@ViewBag.Title.</h2>
+    <h2 class="page-title">@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+        Also known as social lending or lend-to-save, peer-to-peer lending works by individual lenders and borrowers coming together to get better rates. 
+Fanikiwa's peer-to-peer loans offer borrowers competitive low rates and flexible terms. Lenders  earn higher returns by lending to borrowers.
+    </p>
+
+
+
+</article>
+
+<aside>
+    <h3></h3>
+
+    <ul>
+        <li>
+            <div>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "index-home-form" }))
+                { 
+                    <div>
+                        <a id="btnSubmitIndexHomeForm" style="cursor: pointer;">Home</a>  
+                @*@Html.ActionLink("Home", "Index", "Home")*@
+                    </div>    
+                }
+            </div>
+        </li>
+
+        <li>
+            <div>
+                @using (Html.BeginForm("About", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "about-home-form" }))
+                { 
+                    <div>
+                        <a id="btnSubmitAboutHomeForm" style="cursor: pointer;">About</a> 
+                @*@Html.ActionLink("About", "About", "Home")*@
+                    </div>    
+                }
+            </div>
+        </li>
+
+        <li>
+            <div>
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "contact-home-form" }))
+                { 
+                    <div>
+                        <a id="btnSubmitContactHomeForm" style="cursor: pointer;">Contact</a> 
+                @*@Html.ActionLink("Contact", "Contact", "Home")*@
+                    </div>    
+                }
+            </div>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitIndexHomeForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#index-home-form").submit();
+
+        });
+
+
+        $("#btnSubmitAboutHomeForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#about-home-form").submit();
+
+        });
+
+
+        $("#btnSubmitContactHomeForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#contact-home-form").submit();
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+

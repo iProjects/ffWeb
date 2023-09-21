@@ -1,0 +1,136 @@
+﻿@model ffWeb.UI.MVC.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<hgroup class="title">
+    <h2 class="page-title">@ViewBag.Title.</h2>
+    <h2 class="page-title">Change password</h2>
+</hgroup>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+
+
+@using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "change-password-main-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Change Password Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.OldPassword)
+                @Html.PasswordFor(m => m.OldPassword, new { @autofocus = "autofocus", placeholder = "Old Password" })
+                @Html.ValidationMessageFor(m => m.OldPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NewPassword)
+                @Html.PasswordFor(m => m.NewPassword, new { placeholder = "New Password" })
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+        </ol>
+
+        <input type="submit" value="Change password" id="btnSubmitChangePasswordMainForm" />
+
+    </fieldset>
+}
+
+
+
+@*@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
+}*@
+
+
+@*<section id="externalLogins">*@
+@*@Html.Action("RemoveExternalLogins")
+
+    <h3>Add an external login</h3>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })*@
+@*</section>*@
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        //$("#btnSubmitChangePasswordMainForm").on("click", function (e) {
+
+        //    $("#progress").removeClass('displaynone');
+        //    $("#progress").addClass('displayblock');
+        //    $("#progress").show();
+
+        //    $("#change-password-main-form").submit();
+
+        //});
+
+        //$("#btnSubmitChangePasswordMainForm").on("click", function (e) {
+
+        //    e.preventDefault();
+
+        //    $("#change-password-main-form").validate()
+
+        //    if (!$("#change-password-main-form").valid()) {
+        //        return false;
+        //    }
+
+        //    if ($("#change-password-main-form").valid()) {
+
+        //        $("#progress").removeClass('displaynone');
+        //        $("#progress").addClass('displayblock');
+        //        $("#progress").show();
+
+        //        $("#change-password-main-form").submit();
+        //    }
+
+        //});
+
+        //$("#btnSubmitSetPasswordForm").on("click", function (e) {
+
+        //    $("#progress").removeClass('displaynone');
+        //    $("#progress").addClass('displayblock');
+        //    $("#progress").show();
+
+        //    $("#set-password-form").submit();
+
+        //});
+
+
+    </script>
+}
+
+
+
+
+
+
+

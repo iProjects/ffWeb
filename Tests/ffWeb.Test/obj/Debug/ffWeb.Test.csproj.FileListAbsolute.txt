@@ -1,0 +1,11 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.dll.config
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Test.pdb
+C:\My Projects\fanikiwa\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.dll
+C:\My Projects\fanikiwa\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Test.dll.config
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Test.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Test.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.csprojResolveAssemblyReference.cache
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.pdb

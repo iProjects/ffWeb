@@ -1,0 +1,73 @@
+﻿@model fPeerLending.Entities.MailingGroup
+
+@{
+    ViewBag.Title = "Create Group";
+}
+
+<h2 class="page-title">Create Group </h2>
+
+<h5> Parent @ViewBag.ParentShortcode</h5>
+
+@using (Html.BeginForm("CreateMailingGroup", "Offers", FormMethod.Post, new { id = "create-group-form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Group</legend> 
+
+        @Html.HiddenFor(model => model.ParentGroupId) 
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShortCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortCode, new { @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.ShortCode)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" id="btnSubmitCreateGroupForm" />
+        </p>
+    </fieldset>
+}
+
+
+ 
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitCreateGroupForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#create-group-form").submit();
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

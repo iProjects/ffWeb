@@ -1,0 +1,15 @@
+﻿@model fPeerLending.Entities.MailingGroup
+ 
+<div id="treeDemo">
+    <ul id="tree">
+        <li>
+            <a href="#">@Model.NodeName</a>
+            @Html.Partial("ChildNode", Model.ChildNode)
+        </li>
+    </ul>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

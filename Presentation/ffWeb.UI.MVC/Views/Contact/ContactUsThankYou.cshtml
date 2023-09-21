@@ -1,0 +1,47 @@
+﻿@*@{
+    try {
+
+        WebMail.SmtpServer = "mail.softwareproviders.co.ke";
+
+        WebMail.From = "joan@Softwareproviders.co.ke";
+
+        WebMail.Send("info@Softwareproviders.co.ke", "From Software Providers LTD Website Contact Us Form",
+            Model.FirstName + " " + Model.LastName + " has initiated contact with Software Providers LTD via the website contact form." + "<br /><br />" + "Phone number:" + " " + Model.Phone + "<br /><br />" + "Email address:" + " " + Model.Email + "<br /><br />" + "Subject:" + " " + Model.Subject + "<br /><br />" + "<b>Comment:</b>" + "<br />" + Model.Comment + "<br />");
+    }
+
+    catch (Exception ex) 
+    {
+        @:<b>Sorry we could not send an email with your contact information.</b> + ex.Message
+    }
+}            *@
+
+
+<h2 class="page-title">Thank you @Model.Email for Contacting us.We will get back with you very soon</h2>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+
+
+

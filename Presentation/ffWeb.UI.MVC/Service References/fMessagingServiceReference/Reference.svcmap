@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="148470a7-c53c-4f7a-b3ab-7eec87a7ac39" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6040/FmessagingService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FmessagingService.xsd" MetadataType="Schema" ID="2428d499-b012-4718-b6a0-95bd1bbb1e85" SourceId="1" SourceUrl="http://localhost:6040/FmessagingService?xsd=xsd1" />
+    <MetadataFile FileName="FmessagingService1.xsd" MetadataType="Schema" ID="c979f688-f573-4a81-ac92-db84885fb53b" SourceId="1" SourceUrl="http://localhost:6040/FmessagingService?xsd=xsd0" />
+    <MetadataFile FileName="FmessagingService2.xsd" MetadataType="Schema" ID="b78e2f54-fbfc-4fa8-9aa4-fa6012e7599a" SourceId="1" SourceUrl="http://localhost:6040/FmessagingService?xsd=xsd2" />
+    <MetadataFile FileName="MessagingService.wsdl" MetadataType="Wsdl" ID="851724fb-5e0d-4b48-9f8c-23191081f37e" SourceId="1" SourceUrl="http://localhost:6040/FmessagingService?wsdl" />
+    <MetadataFile FileName="FmessagingService.disco" MetadataType="Disco" ID="cfc4aa51-0da1-498a-b717-72ab7a6f4dcb" SourceId="1" SourceUrl="http://localhost:6040/FmessagingService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

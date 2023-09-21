@@ -1,0 +1,172 @@
+﻿@model ffWeb.UI.MVC.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<hgroup class="title">
+    <h2 class="page-title">@ViewBag.Title.</h2>
+    <h2 class="page-title">Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "register-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Registration Form</legend>
+
+        <article class="col1">
+            <div class="pad">
+
+                <ol>
+
+                    <li>
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.SurName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </li>
+
+
+                    <li>
+                        <h3>*UserName(Use Your Email):</h3>
+                        <span class="add-on"><i class="icon-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", type = "email", placeholder = "username@domain.co.ke" })
+                    </li>
+
+                    <li>
+                        <h3>*SurName:</h3>
+                        <span class="add-on"><i class="icon-key"></i></span>
+                        @Html.TextBoxFor(m => m.SurName, new { autofocus = "autofocus", placeholder = "SurName" })
+                    </li>
+
+                    <li>
+                        <h3>*Password:</h3>
+                        <span class="add-on"><i class="icon-key"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { type = "password", minlength = "6", placeholder = "Password" })
+                    </li>
+
+                    <li>
+                        <h3>*ConfirmPassword:</h3>
+                        <span class="add-on"><i class="icon-key"></i></span>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { type = "password", minlength = "6", placeholder = "Confirm Password" })
+                    </li>
+
+                </ol>
+
+            </div>
+        </article>
+
+        <article class="col2">
+            <div class="pad">
+
+                <ol>
+
+                    <li>
+                        @Html.ValidationMessageFor(model => model.InformBy)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.Telephone)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.TermsAccepted)
+                    </li>
+
+                    <li>
+                        <h3>*InformBy:</h3>
+                        <span class="add-on"><i class="icon-envelope"></i></span>
+                        @{
+    List<SelectListItem> lstinformby = new List<SelectListItem>();
+    lstinformby.Add(new SelectListItem
+         {
+             Text = "SMS",
+             Value = "SMS",
+
+         });
+    lstinformby.Add(new SelectListItem
+         {
+             Text = "EMAIL",
+             Value = "EMAIL",
+             Selected = true
+         });
+                        }
+                        @Html.DropDownListFor(model => model.InformBy, lstinformby, "-- Select Inform By --", new { id = "cboInformBy", style = "width: 310px;height: 30px;" })
+                    </li>
+
+                    <li>
+                        <h3>Phone: Must Conform to International format!</h3>
+                        <span class="add-on"><i class="icon-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.Telephone, new { type = "tel", placeholder = "254717769329" })
+                    </li>
+
+                    <li>
+                        @Html.CheckBoxFor(m => m.TermsAccepted) I Accept the Terms and Conditions
+                    </li>
+
+                </ol>
+
+            </div>
+        </article>
+
+        <input type="submit" value="Register" id="btnSubmitRegisterForm" style="float: left; clear: both" />
+
+    </fieldset>
+    
+     
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitRegisterForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#register-form").validate();
+
+            if (!$("#register-form").valid()) {
+                return false;
+            }
+
+            if ($("#register-form").valid()) {
+
+                $("#progress").removeClass('displaynone');
+                $("#progress").addClass('displayblock');
+                $("#progress").show();
+
+                $("#register-form").submit();
+            }
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+

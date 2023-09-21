@@ -1,0 +1,130 @@
+﻿@model IEnumerable<fPeerLending.Entities.Offer>
+@using fPeerLending.Business;
+
+@{
+    ViewBag.Title = "Make An Investment";
+    int Offers = Model.Count();
+}
+
+<h2 class="page-title">Make An Investment [ @Offers ] </h2>
+
+<div>
+    @using (Html.BeginForm("CreateLendOffer", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "create-offer-form" }))
+    { 
+        <p>
+            <a id="btnSubmitCreateOfferForm" style="cursor: pointer;" title="I want to lend money to somebody">I want to lend money to somebody</a>
+        </p> 
+         
+    }
+</div>
+
+<p>
+</p>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Term)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicOffer)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (item.PublicOffer.Equals("B"))
+                {               
+                    <text>Public</text>
+                }
+                @if (item.PublicOffer.Equals("V"))
+                {               
+                    <text>Private</text>
+                }
+            </td>
+            <td>
+                @if (item.Status.Equals(OfferStatus.Open.ToString()))
+                {               
+                    @Html.ActionLink("Accept", "AcceptBorrowOffer", new { id = item.Id }) <text>|</text>
+                }
+                @if (item.PartialPay && item.Status.Equals(OfferStatus.Open.ToString()))
+                {               
+                    @Html.ActionLink("Accept Partial", "AcceptPartialBorrowOffer", new { id = item.Id }) <text>|</text>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitCreateOfferForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#create-offer-form").submit();
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

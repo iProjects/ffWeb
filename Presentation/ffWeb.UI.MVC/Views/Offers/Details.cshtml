@@ -1,0 +1,241 @@
+﻿@model fPeerLending.Entities.Offer
+
+@{
+    ViewBag.Title = "Offer Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">Offer Details </h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Offer</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferType)
+        </div>
+        <div class="editor-field">
+            @{
+    List<SelectListItem> lstOfferType = new List<SelectListItem>();
+    lstOfferType.Add(new SelectListItem
+    {
+        Text = "Borrow",
+        Value = "B"
+    });
+    lstOfferType.Add(new SelectListItem
+    {
+        Text = "Lend",
+        Value = "L",
+        Selected = true
+    });
+            }
+
+            @Html.DropDownListFor(model => model.OfferType, lstOfferType, "-- Select Offer Type --", new { @id = "cboOfferTypes", @style = "width: 310px;height: 30px;", @autofocus = "autofocus", @disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.OfferType)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, new { @style = "width: 310px;height: 50px;", @placeholder = "offer description", @disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Amount, new { min = "1000", max = "100000", type = "number", @disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Term)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Term, new { min = "1", max = "12", type = "number", @disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.Term)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Interest)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Interest, new { min = "1", max = "100", type = "number", @disabled="disabled" })
+            @Html.ValidationMessageFor(model => model.Interest)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PublicOffer)
+        </div>
+        <div class="editor-field">
+            @{
+    List<SelectListItem> _offermailingmethods = new List<SelectListItem>();
+    _offermailingmethods.Add(new SelectListItem
+    {
+        Text = "Public",
+        Value = "B",
+        Selected = true
+    });
+    _offermailingmethods.Add(new SelectListItem
+    {
+        Text = "Private",
+        Value = "V"
+    });
+            }
+            @Html.DropDownListFor(model => model.PublicOffer, _offermailingmethods, new { @id = "cboOfferMailingMethods", @style = "width: 310px;height: 30px;", @disabled="disabled" })
+
+            @Html.ValidationMessageFor(model => model.PublicOffer)
+        </div>
+
+
+        <form id="form-dialog-offergroups" autocomplete="on">
+            <div id="offergroups-dialog-div" title="Select Offer Groups" class="displaynone">
+                <div id="offergroups-div">
+                    <fieldset>
+                        <legend>Select Offer Groups</legend>
+
+
+
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+
+
+        <div id="offergroupslistview" class="displaynone">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Offerees)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Offerees, new { @id = "txtOfferees", @style = "width: 310px;height: 30px;" })
+                @Html.ValidationMessageFor(model => model.Offerees)
+            </div>
+        </div>
+
+
+        @if (Model.ExpiryDate.ToString() == "1/1/0001 12:00:00 AM" || Model.ExpiryDate.ToString() == "1/1/01 12:00:00 AM" || Model.ExpiryDate.ToString() == "01/01/01 12:00:00 AM" || Model.ExpiryDate.ToString() == "01/01/0001 12:00:00 AM" || Model.ExpiryDate.ToString() == "01/01/01 12:00:00 AM" || Model.ExpiryDate.ToString() == "0001-01-01 12:00:00 AM" || Model.ExpiryDate.ToString() == "01-Jan-01 12:00:00 AM")
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ExpiryDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ExpiryDate, new { Value = @DateTime.Now.Date.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date", @disabled="disabled" })
+            </div>
+        }
+
+        else
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ExpiryDate)
+            </div>
+            <div class="editor-field">
+                @{
+            var dateAsString = Model.ExpiryDate; 
+            
+                    @Html.TextBoxFor(model => model.ExpiryDate, new { Value = dateAsString.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date" , @disabled="disabled"})
+                }
+            </div>
+        }
+
+
+
+        @if (Model.CreatedDate.ToString() == "1/1/0001 12:00:00 AM" || Model.CreatedDate.ToString() == "1/1/01 12:00:00 AM" || Model.CreatedDate.ToString() == "01/01/01 12:00:00 AM" || Model.CreatedDate.ToString() == "01/01/0001 12:00:00 AM" || Model.CreatedDate.ToString() == "01/01/01 12:00:00 AM" || Model.CreatedDate.ToString() == "0001-01-01 12:00:00 AM" || Model.CreatedDate.ToString() == "01-Jan-01 12:00:00 AM")
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreatedDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.CreatedDate, new { Value = @DateTime.Now.Date.ToString("yyyy-MM-dd"), @readonly = "readonly", @class = "datepicker", type = "date", @disabled="disabled" })
+            </div>
+        }
+
+        else
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreatedDate)
+            </div>
+            <div class="editor-field">
+                @{
+                    
+            var dateAsString = Model.CreatedDate; 
+            
+                    @Html.TextBoxFor(model => model.CreatedDate, new { Value = dateAsString.ToString("yyyy-MM-dd"), @class = "datepicker", type = "date", @disabled="disabled" })
+
+                }
+            </div>
+        }
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @{
+        List<SelectListItem> lstStatus = new List<SelectListItem>();
+        lstStatus.Add(new SelectListItem
+             {
+                 Text = "Open",
+                 Value = "Open",
+                 Selected = true
+             });
+        lstStatus.Add(new SelectListItem
+             {
+                 Text = "Closed",
+                 Value = "Closed"
+
+             });
+        lstStatus.Add(new SelectListItem
+        {
+            Text = "Processing",
+            Value = "Processing"
+
+        });
+            }
+
+            @Html.DropDownListFor(model => model.Status, lstStatus, "-- Select Status --", new { @id = "cboStatus", @style = "width: 310px;height: 30px;", @readonly = "readonly", @disabled="disabled" })
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferOwner)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OfferOwner, new { @readonly = "readonly", @disabled="disabled" })
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.PartialPay)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.PartialPay, new { @readonly = "readonly", @disabled="disabled" })
+        </div>
+
+
+
+    </fieldset>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+    </script>
+}

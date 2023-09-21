@@ -1,0 +1,5 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Framework.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Framework.pdb
+C:\My Projects\fanikiwa\ffWeb\Shared\ffWeb.Framework\obj\Release\ffWeb.Framework.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Shared\ffWeb.Framework\obj\Release\ffWeb.Framework.dll
+C:\My Projects\fanikiwa\ffWeb\Shared\ffWeb.Framework\obj\Release\ffWeb.Framework.pdb

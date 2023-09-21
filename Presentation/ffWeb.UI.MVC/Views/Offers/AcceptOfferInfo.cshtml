@@ -1,0 +1,35 @@
+﻿@model ffWeb.UI.MVC.Models.AcceptOfferInfo
+
+@{
+    ViewBag.Title = "Accept Borrow Offer";
+}
+
+
+<h2 class="page-title">Accept Borrow Offer</h2>
+
+ 
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+
+

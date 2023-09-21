@@ -1,0 +1,5 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Hosts.Web.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Hosts.Web.pdb
+C:\My Projects\fanikiwa\ffWeb\Hosts\ffWeb.Hosts.Web\obj\Release\ffWeb.Hosts.Web.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Hosts\ffWeb.Hosts.Web\obj\Release\ffWeb.Hosts.Web.dll
+C:\My Projects\fanikiwa\ffWeb\Hosts\ffWeb.Hosts.Web\obj\Release\ffWeb.Hosts.Web.pdb

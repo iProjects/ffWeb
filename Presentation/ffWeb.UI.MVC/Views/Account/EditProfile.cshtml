@@ -1,0 +1,431 @@
+﻿@model fPeerLending.Entities.Member
+
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<h2 class="page-title">Edit Profile </h2>
+
+
+
+<div class="content-wrapper">
+
+    <div class="floatleft">
+        @using (Html.BeginForm("MyAccounts", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-accounts-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitMyAccountsProfileForm" style="cursor: pointer;">My Accounts</a> |  
+                @*@Html.ActionLink("My Accounts", "MyAccounts", "Account")*@
+            </div>    
+        }
+    </div>
+
+    <div class="floatleft">
+        @using (Html.BeginForm("GetAllMailingGroups", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-offer-groups-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitGetAllMailingGroupsProfileForm" style="cursor: pointer;">My Offer Groups</a> |  
+                @*@Html.ActionLink("My Offer Groups", "GetAllMailingGroups", "Offers")*@
+            </div>    
+        }
+    </div>
+
+    <div class="floatleft">
+        @using (Html.BeginForm("Scores", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "offer-scores-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitScoresProfileForm" style="cursor: pointer;">My Offer Scores</a> |  
+                @*@Html.ActionLink("My Offer Scores", "Scores", "Account")*@
+            </div>    
+        }
+    </div>
+
+    <div class="floatleft">
+        @using (Html.BeginForm("Manage", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "change-password-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitChangePasswordProfileForm" style="cursor: pointer;">Change Password</a> |  
+                @*@Html.ActionLink("Change Password", "Manage", "Account")*@
+            </div>    
+        }
+    </div>
+
+    <div class="floatleft">
+        @using (Html.BeginForm("DeRegister", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "de-register-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitDeRegisterProfileForm" style="cursor: pointer;">DeRegister</a> |  
+                @*@Html.ActionLink("DeRegister", "DeRegister", "Account")*@
+            </div>    
+        }
+    </div>
+
+    <div class="floatleft">
+        @using (Html.BeginForm("WithDrawCash", "WithDraw", FormMethod.Get, new { enctype = "multipart/form-data", id = "withdraw-profile-form" }))
+        { 
+            <div>
+                <a id="btnSubmitWithDrawCashProfileForm" style="cursor: pointer;">WithDraw</a>
+                @*@Html.ActionLink("WithDraw", "WithDrawCash", "WithDraw")*@
+            </div>    
+        }
+    </div>
+
+
+</div>
+
+<br />
+<br />
+
+
+
+@using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "edit-profile-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Edit Profile</legend>
+
+
+        <article class="col1">
+            <div class="pad">
+
+                <div class="editor-label">
+                    @Html.HiddenFor(model => model.MemberId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.HiddenFor(model => model.Email)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Surname)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Surname, new { @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(model => model.Surname)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.OtherNames)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.OtherNames)
+                    @Html.ValidationMessageFor(model => model.OtherNames)
+                </div>
+
+                @if (Model.DateOfBirth.ToString() == "1/1/0001 12:00:00 AM" || Model.DateOfBirth.ToString() == "1/1/01 12:00:00 AM" || Model.DateOfBirth.ToString() == "01/01/01 12:00:00 AM" || Model.DateOfBirth.ToString() == "01/01/0001 12:00:00 AM" || Model.DateOfBirth.ToString() == "01/01/01 12:00:00 AM" || Model.DateOfBirth.ToString() == "0001-01-01 12:00:00 AM" || Model.DateOfBirth.ToString() == "01-Jan-01 12:00:00 AM")
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DateOfBirth, new { Value = @DateTime.Now.Date.ToString("yyyy-MM-dd"), @class = "datepicker", type = "date" })
+                        @Html.ValidationMessageFor(model => model.DateOfBirth)
+                    </div>
+                }
+
+                else
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                    </div>
+                    <div class="editor-field">
+                        @{
+                    var dateAsString = Model.DateOfBirth; 
+            
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { Value = dateAsString.ToString("yyyy-MM-dd"), @class = "datepicker", type = "date" })
+                        }
+
+                        @Html.ValidationMessageFor(model => model.DateOfBirth)
+                    </div>
+                }
+                 
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Gender)
+                </div>
+                <div class="editor-field">
+                    @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                     {
+                         Text = "Male",
+                         Value = "M"
+                     });
+                listItems.Add(new SelectListItem
+                     {
+                         Text = "Female",
+                         Value = "F",
+                     });
+                    }
+
+                    @Html.DropDownListFor(model => model.Gender, listItems, "-- Select Gender --", new { @id = "cboGender", @style = "width: 310px;height: 30px;" })
+
+                    @Html.ValidationMessageFor(model => model.Gender)
+                </div>
+
+
+            </div>
+        </article>
+
+        <article class="col2">
+            <div class="pad">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.InformBy)
+                </div>
+                <div class="editor-field">
+                    @{
+                List<SelectListItem> infmlistItems = new List<SelectListItem>();
+                infmlistItems.Add(new SelectListItem
+                     {
+                         Text = "SMS",
+                         Value = "SMS"
+                     });
+                infmlistItems.Add(new SelectListItem
+                     {
+                         Text = "EMAIL",
+                         Value = "EMAIL"
+                     });
+                    }
+
+                    @Html.DropDownListFor(model => model.InformBy, infmlistItems, "-- Select Inform By--", new { @id = "cboInformBy", @style = "width: 310px;height: 30px;" })
+
+                    @Html.ValidationMessageFor(model => model.InformBy)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Telephone)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Telephone, new { type = "tel", placeholder = "254717769329" })
+                    @Html.ValidationMessageFor(model => model.Telephone)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.RefferedBy)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.RefferedBy)
+                    @Html.ValidationMessageFor(model => model.RefferedBy)
+                </div>
+
+                 <div class="editor-label">
+                    @Html.LabelFor(model => model.NationalID)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.NationalID)
+                    @Html.ValidationMessageFor(model => model.NationalID)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MaxRecordsToDisplay)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.MaxRecordsToDisplay, new { min = "0", type = "number" })
+                    @Html.ValidationMessageFor(model => model.MaxRecordsToDisplay)
+                </div>
+
+
+            </div>
+        </article>
+
+        <p>
+            <input type="submit" value="Save" id="btnSubmitEditProfileForm" />
+        </p>
+
+
+    </fieldset>
+}
+
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Photo)
+</div>
+<div class="editor-field">
+
+    @if (Model.Photo != null)
+    {               
+        <div class="editor-label">
+            <div>
+                @using (Html.BeginForm("UploadMemberImage_Edit", "Account", new { id = Model.MemberId }, FormMethod.Get, new { enctype = "multipart/form-data", id = "change-photo-form" }))
+                { 
+                    <div>
+                        <a id="btnSubmitChangePhotoForm" style="cursor: pointer;">Change Photo</a>
+                        @*@Html.ActionLink("Change Photo", "UploadMemberImage_Edit", new { id = Model.MemberId, @style = "font-weight: bolder;font-size: 20px;" })*@
+                    </div>    
+                }
+            </div>
+
+        </div>
+                
+        <br />
+                
+        <div class="editor-label">
+            <img src="~/Images/@Model.Photo" alt="Photo" width="310" height="100" />
+        </div>
+    }
+
+    @if (Model.Photo == null)
+    {
+        <div class="editor-label">
+            <div>
+                @using (Html.BeginForm("UploadMemberImage_Edit", "Account", new { id = Model.MemberId }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload-photo-form" }))
+                { 
+                    <div>
+                        <a id="btnSubmitUploadPhotoForm" style="cursor: pointer;">Upload Photo</a>
+                        @*@Html.ActionLink("Upload Photo", "UploadMemberImage_Edit", new { id = Model.MemberId, @style = "font-weight: bolder;font-size: 20px;" })*@
+                    </div>    
+                }
+            </div>
+
+        </div> 
+                 
+        <br />
+                
+        <div class="editor-label">
+            <img src="~/Images/defaultphoto.jpg" alt="Photo" width="310" height="100" />
+        </div>
+                
+    }
+
+</div>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitEditProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#edit-profile-form").submit();
+
+        });
+
+        $("#btnSubmitMyAccountsProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#my-accounts-profile-form").submit();
+
+        });
+
+        $("#btnSubmitGetAllMailingGroupsProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#my-offer-groups-profile-form").submit();
+
+        });
+
+        $("#btnSubmitScoresProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#offer-scores-profile-form").submit();
+
+        });
+
+        $("#btnSubmitChangePasswordProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#change-password-profile-form").submit();
+
+        });
+
+        $("#btnSubmitDeRegisterProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#de-register-profile-form").submit();
+
+        });
+
+        $("#btnSubmitWithDrawCashProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#withdraw-profile-form").submit();
+
+        });
+
+        $("#btnSubmitGetAllAccountsProfileForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#fanikiwa-accounts-profile-form").submit();
+
+        });
+
+        $("#btnSubmitChangePhotoForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#change-photo-form").submit();
+
+        });
+
+        $("#btnSubmitUploadPhotoForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#upload-photo-form").submit();
+
+        });
+
+    </script>
+}

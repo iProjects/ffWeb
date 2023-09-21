@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = "Help";
+}
+
+<h2 class="page-title">Frequently asked questions</h2>
+@*<p>Please view our FAQs below for any questions you have about Fanikiwa.</p>*@
+
+
+
+<div id="helpnav">
+    <ul id="helpmenu">
+
+        <li><a>Lending at Fanikiwa</a>
+            <ul class="submenu">
+                <li><a id="WhocanlendatFanikiwa" style="cursor: pointer;">Who can lend at Fanikiwa?</a></li>
+                <li><a id="HowdoIlendmymoneyout" style="cursor: pointer;">How do I lend my money out?</a> </li>
+                <li><a id="Howsafeismymoney" style="cursor: pointer;">How safe is my money?</a> </li>
+                <li><a id="DoIhavetopayafeetolend" style="cursor: pointer;">Do I have to pay a fee to lend?</a> </li>
+                <li><a id="Howlongwillittaketogetmymoneylentout" style="cursor: pointer;">How long will it take to get my money lent out?</a> </li>
+            </ul>
+        </li>
+
+        <li><a>Borrowing at Fanikiwa</a>
+            <ul class="submenu">
+                <li>@Html.ActionLink("How much can I borrow?", "EditProfile", "Account")</li>
+                <li>@Html.ActionLink("Over what time frame can I borrow?", "MyAccounts", "Account")</li>
+                <li>@Html.ActionLink(" Can I get a personal quote before I apply?", "GetAllMailingGroups", "Offers")</li>
+                <li>@Html.ActionLink("I've applied for a loan - what happens now?", "Scores", "Account")</li>
+                <li>@Html.ActionLink("Can I repay my loan early if I like?", "Manage", "Account")</li>
+            </ul>
+        </li>
+
+        <li><a>My Account</a>
+            <ul class="submenu">
+                <li>@Html.ActionLink("I'm locked out of my account - what do I do?", "EditProfile", "Account")</li>
+                <li>@Html.ActionLink("How do I close my account?", "MyAccounts", "Account")</li>
+                <li>@Html.ActionLink("How do I unsubscribe from emails?", "GetAllMailingGroups", "Offers")</li>
+                <li>@Html.ActionLink("How do I change my contact details?", "Scores", "Account")</li>
+                <li>@Html.ActionLink("How do I change my password?", "Manage", "Account")</li>
+            </ul>
+        </li>
+
+        <li><a>My Lending Account</a>
+            <ul class="submenu">
+                <li>@Html.ActionLink("My Profile", "EditProfile", "Account")</li>
+                <li>@Html.ActionLink("My Accounts", "MyAccounts", "Account")</li>
+                <li>@Html.ActionLink("My Offer Groups", "GetAllMailingGroups", "Offers")</li>
+                <li>@Html.ActionLink("My Scores", "Scores", "Account")</li>
+                <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+                <li>@Html.ActionLink("DeRegister", "DeRegister", "Account")</li>
+            </ul>
+        </li>
+
+        <li><a>About Fanikiwa</a>
+            <ul class="submenu">
+                <li>@Html.ActionLink("Who is behind Fanikiwa?", "EditProfile", "Account")</li>
+                <li>@Html.ActionLink("What does 'Fanikiwa' mean?", "MyAccounts", "Account")</li>
+                <li>@Html.ActionLink("How long has Fanikiwa been around?", "GetAllMailingGroups", "Offers")</li>
+                <li>@Html.ActionLink("Is Fanikiwa regulated?", "Scores", "Account")</li>
+                <li>@Html.ActionLink("What are the requirements for joining Fanikiwa?", "Manage", "Account")</li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+ <div id="Container">
+        </div>
+
+
+@using (Html.BeginForm())
+{ 
+
+    <fieldset>
+        <legend>Offer</legend>
+
+
+
+       
+
+
+        <div id="WhocanlendatFanikiwadiv" class="displaynone helpdiv">
+            <h1>Who can lend at Zopa?</h1>
+            <p>
+                Anyone aged 18 or above can lend at Zopa without restriction.
+            </p>
+            <p>
+                To register go to Lend your money and select Start now.
+            </p>
+            <p>
+                If you're looking to lend via a Self Invested Personal Pension (SIPP) I'm afraid we currently do not have the administrative or legal means for this. However if you would like to lend via a Small Self Administered Scheme (SASS) please contact us.
+            </p>
+            ​
+     <p>
+         Channel Islands and Isle of Man residents
+HMRC have granted Zopa dispensation from withholding tax on lenders' returns - this means they can be paid gross, and it is the lender's responsibility to declare it. This applies to lending and borrowing that occurs within the UK.
+     </p>
+            <p>
+                For tax purposes, HMRC consider the Crown dependencies (this includes the Channel Islands and the Isle of Man) as a non-UK residency. HMRC have advised us that in such circumstances, either the person paying the interest (i.e. the borrower) or Zopa itself must withhold tax. Unfortunately, logistical limitations prevent Zopa being able to permit off-shore lending at this time.  
+
+            </p>
+
+        </div>
+
+        <div id="HowdoIlendmymoneyoutdiv" class="displaynone helpdiv">
+            <h1>do I lend my money out?</h1>
+            <p>To get started lending at Zopa you’ll need to register by selecting the Start now button in the Lend your money section.</p>
+            <p>
+                You’ll be asked for your details so that we can identify you and set up your Zopa lending account.
+            </p>
+            <p>
+                Once you've successfully created your account, you will see the Safeguard offer screen:
+            </p>
+            ​​
+
+            <ol>
+                <li>1. Enter the amount of money you would like to start lending.</li>
+
+                <li>2. Select the term you would like to lend for – up to 3 or up to 5 years.</li>
+
+                <li>3. View the projected return you can expect; choose the show details option to see the latest tracker rates for each loan market</li>
+
+                <li>4. Once you’re happy with your choices, you’ll need to agree to the loan conditions and  then select the Confirm and Save button.</li>
+
+                <li>5. You’ll then be prompted to transfer money into your Zopa account so you can start earning great returns!</li>
+            </ol>
+
+        </div>
+
+        <div id="Howsafeismymoneydiv" class="displaynone helpdiv">
+        </div>
+
+        <div id="DoIhavetopayafeetolenddiv" class="displaynone helpdiv">
+        </div>
+
+        <div id="Howlongwillittaketogetmymoneylentoutdiv" class="displaynone helpdiv">
+        </div>
+
+        <div class="displaynone">
+            <h2>Lending at Fanikiwa</h2>
+
+            Who can lend at Fanikiwa?
+    How do I lend my money out?
+    How safe is my money?
+    Do I have to pay a fee to lend?
+    How long will it take to get my money lent out?
+
+    <h2>Borrowing at Fanikiwa</h2>
+
+            How much can I borrow?
+    Over what time frame can I borrow?
+    Can I get a personal quote before I apply?
+    I've applied for a loan - what happens now?
+    Can I repay my loan early if I like?
+
+    <h2>About Fanikiwa</h2>
+
+            Who is behind Fanikiwa?
+    What does 'Fanikiwa' mean?
+    How long has Fanikiwa been around?
+    Is Fanikiwa regulated?
+    What are the requirements for joining Fanikiwa?
+
+    <h2>My Account</h2>
+
+            I'm locked out of my account - what do I do?
+    How do I close my account?
+    How do I unsubscribe from emails?
+    How do I change my contact details?
+    How do I change my password?           
+        </div>
+
+    </fieldset>
+}
+
+
+
+
+<div class="clearboth">
+    @*<a href="javascript:history.back()">Back</a>*@
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript"> 
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+            //$("#WhocanlendatFanikiwa").on("click", function (e) {
+            //    e.preventDefault();
+            //    $("#WhocanlendatFanikiwadiv").removeClass('displaynone');
+            //    $("#WhocanlendatFanikiwadiv").addClass('displayblock');
+            //    $("#HowdoIlendmymoneyoutdiv").addClass('displaynone');
+            //    $("#Container").empty();
+            //    $("#WhocanlendatFanikiwadiv").appendTo("#Container");
+            //    //$("#Container").append("#WhocanlendatFanikiwadiv");
+            //    return false;
+            //});
+
+            //$("#HowdoIlendmymoneyout").on("click", function (e) {
+            //    e.preventDefault();
+            //    $("#HowdoIlendmymoneyoutdiv").removeClass('displaynone');
+            //    $("#HowdoIlendmymoneyoutdiv").addClass('displayblock');
+            //    $("#WhocanlendatFanikiwadiv").addClass('displaynone');
+            //    $("#Container").empty();
+            //    $("#HowdoIlendmymoneyoutdiv").appendTo("#Container");
+            //    //$("#Container").append("#HowdoIlendmymoneyoutdiv");
+            //    return false;
+            //});
+
+
+
+        });
+
+
+        $("#WhocanlendatFanikiwa").on("click", function (e) {
+            e.preventDefault();
+            $("#WhocanlendatFanikiwadiv").removeClass('displaynone');
+            $("#WhocanlendatFanikiwadiv").addClass('displayblock');
+            $("#HowdoIlendmymoneyoutdiv").addClass('displaynone');
+            $("#Container").empty();
+            $("#WhocanlendatFanikiwadiv").appendTo("#Container");
+            //$("#Container").append("#WhocanlendatFanikiwadiv");
+            return false;
+        });
+
+        $("#HowdoIlendmymoneyout").on("click", function (e) {
+            e.preventDefault();
+            $("#HowdoIlendmymoneyoutdiv").removeClass('displaynone');
+            $("#HowdoIlendmymoneyoutdiv").addClass('displayblock');
+            $("#WhocanlendatFanikiwadiv").addClass('displaynone');
+            $("#Container").empty();
+            $("#HowdoIlendmymoneyoutdiv").appendTo("#Container");
+            //$("#Container").append("#HowdoIlendmymoneyoutdiv");
+            return false;
+        });
+
+        $("#Howsafeismymoney").on("click", function (e) {
+            e.preventDefault();
+            $("#Howsafeismymoneydiv").removeClass('displaynone');
+            $("#Howsafeismymoneydiv").addClass('displayblock');
+            return false;
+        });
+
+        $("#DoIhavetopayafeetolend").on("click", function (e) {
+            e.preventDefault();
+            $("#DoIhavetopayafeetolenddiv").removeClass('displaynone');
+            $("#DoIhavetopayafeetolenddiv").addClass('displayblock');
+            return false;
+        });
+
+        $("#Howlongwillittaketogetmymoneylentout").on("click", function (e) {
+            e.preventDefault();
+            $("#Howlongwillittaketogetmymoneylentoutdiv").removeClass('displaynone');
+            $("#Howlongwillittaketogetmymoneylentoutdiv").addClass('displayblock');
+            return false;
+        });
+
+
+    </script>
+}

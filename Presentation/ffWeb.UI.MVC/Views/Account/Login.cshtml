@@ -1,0 +1,201 @@
+﻿@model ffWeb.UI.MVC.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h2 class="page-title">@ViewBag.Title.</h2>
+</hgroup>
+
+<section id="loginForm">
+
+    <h2 class="page-title">Use a local account to log in.</h2>
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", id = "login-main-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Log in</legend>
+            <ol>
+                <li>
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+                <li>
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+            </ol>
+
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @autofocus = "autofocus", placeholder = "username@domain.co.ke", type = "email", @autocomplete = "autocomplete" }) 
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "password" }) 
+                </li>
+                <li>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </li>
+            </ol>
+
+            <input type="submit" value="Log in" id="btnSubmitMainLoginForm" />
+
+        </fieldset>
+         
+    }
+
+
+    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { enctype = "multipart/form-data", id = "register-from-login-form" }))
+    { 
+        <p>
+            <a id="btnSubmitRegisterFromLoginForm" style="cursor: pointer;">Register</a> if you don't have an account.
+          @*@Html.ActionLink("Register", "Register") *@
+        </p> 
+         
+    }
+
+</section>
+
+
+
+
+<section class="social" id="socialLoginForm">
+
+    <h2 class="page-title">Use another service to log in.</h2>
+
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+
+</section>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        //$("#btnSubmitMainLoginForm").on("click", function (e) {
+
+        //    e.preventDefault();
+
+        //    $("#login-main-form").validate()
+
+        //    //if (!$("#login-main-form").valid()) {
+        //    //    return false;
+        //    //}
+
+        //    //if ($("#login-main-form").valid()) {
+
+        //        $("#progress").removeClass('displaynone');
+        //        $("#progress").addClass('displayblock');
+        //        $("#progress").show();
+
+        //        $("#login-main-form").submit();
+        //    //}
+
+        //});
+
+        //$("#btnSubmitLoginForm").on("click", function (e) {
+
+        //    e.preventDefault();
+
+        //    $("#login-main-form").validate().form();
+
+        //    if (!$("#login-main-form").valid()) {
+
+        //        //alert("Not Valid");
+
+        //        //return false;
+        //    }
+
+        //    //$("#login-main-form").unbind("validate", false);
+
+        //    if ($("#login-main-form").valid()) {
+
+        //        alert("Valid");
+
+        //        $("#progress").removeClass('displaynone');
+        //        $("#progress").addClass('displayblock');
+        //        $("#progress").show();
+
+        //        $("#login-main-form").submit();
+
+        //        //return true;
+        //    }
+
+        //});
+
+
+        //// Handle form submit ...
+        //$("#login-main-form").on('submit', function (e) {
+
+        //    e.preventDefault();
+
+        //    //$("#login-main-form").validate().form();
+
+        //    //if ($("#login-main-form").valid() == false) {
+        //    //    alert("Not Valid");
+        //    //    return false;
+        //    //}
+
+        //    //$("#login-main-form").unbind("validate", false);
+
+        //    if ($("#login-main-form").validate().form()) {
+        //        //alert("Valid");
+        //        $("#progress").removeClass('displaynone');
+        //        $("#progress").addClass('displayblock');
+        //        $("#progress").show();
+
+        //        $("#login-main-form").submit();
+
+        //        return true;
+        //    }
+
+        //    return false;
+
+        //});
+
+        $("#btnSubmitRegisterFromLoginForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#register-from-login-form").submit();
+
+        });
+
+        $("#btnSubmitExternalLoginForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#external-login-form").submit();
+
+        });
+
+    </script>
+
+}

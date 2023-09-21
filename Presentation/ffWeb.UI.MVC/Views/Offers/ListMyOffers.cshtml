@@ -1,0 +1,161 @@
+﻿@model IEnumerable<fPeerLending.Entities.Offer>
+@using ffWeb.UI.MVC.Helpers
+
+@{
+    ViewBag.Title = "My Offers";
+    int Offers = Model.Count();
+}
+
+<h2 class="page-title">My Offers [ @Offers ]  </h2>
+
+<div>
+    @using (Html.BeginForm("CreateLendOffer", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "create-lend-offer-form" }))
+    { 
+        <p>
+            <a id="btnSubmitCreateLendOfferForm" style="cursor: pointer;" title="I want to lend money to somebody">I want to lend money to somebody</a>
+        </p> 
+         
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("Create", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "create-offer-form" }))
+    { 
+        <p>
+            <a id="btnSubmitCreateOfferForm" style="cursor: pointer;" title="I want to create an offer">I want to create an offer</a>
+        </p> 
+         
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("CreateBorrowOffer", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "create-borrow-offer-form" }))
+    {         
+        <p>
+            <a id="btnSubmitCreateBorrowOfferForm" style="cursor: pointer;" title="I want to borrow some money">I want to borrow some money</a>
+        </p> 
+         
+    }
+</div>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Term)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicOffer)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if (item.PublicOffer.Equals("B"))
+                {               
+                    <text>Public</text>
+                }
+                @if (item.PublicOffer.Equals("V"))
+                {               
+                    <text>Private</text>
+                }
+            </td>
+            <td>
+                @* @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil'></span>", "Edit", "Edit", "Offers", routeValues: new { id = item.Id }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" })*@
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, title = "Edit" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id, title = "Details" })
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "Offers", routeValues: new { id = item.Id, description = item.Description }, htmlAttributes: new { data_modal = "", @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+
+        $("#btnSubmitCreateLendOfferForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#create-lend-offer-form").submit();
+
+        });
+
+        $("#btnSubmitCreateBorrowOfferForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#create-borrow-offer-form").submit();
+
+        });
+
+        $("#btnSubmitCreateOfferForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#create-offer-form").submit();
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+

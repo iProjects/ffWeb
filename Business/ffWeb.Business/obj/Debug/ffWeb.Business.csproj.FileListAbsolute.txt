@@ -1,0 +1,5 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Business.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Business.pdb
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Business\obj\Debug\ffWeb.Business.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Business\obj\Debug\ffWeb.Business.dll
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Business\obj\Debug\ffWeb.Business.pdb

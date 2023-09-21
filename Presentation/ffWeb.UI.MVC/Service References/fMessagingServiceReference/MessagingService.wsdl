@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MessagingService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6040/FmessagingService?xsd=xsd2" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6040/FmessagingService?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6040/FmessagingService?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/fMessagingSystem.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMessagingService_SendListMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendListMessage" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendListMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendListMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSms" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendSMSMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSMessage" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendSMSMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmailMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailMessage" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmailMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmailExt_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailExt" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_SendEmailExt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailExtResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_ReadMessageFromModem_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadMessageFromModem" />
+  </wsdl:message>
+  <wsdl:message name="IMessagingService_ReadMessageFromModem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadMessageFromModemResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMessagingService">
+    <wsdl:operation name="SendListMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendListMessage" message="tns:IMessagingService_SendListMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendListMessageResponse" message="tns:IMessagingService_SendListMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendMessage" message="tns:IMessagingService_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendMessageResponse" message="tns:IMessagingService_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendSms" message="tns:IMessagingService_SendSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendSmsResponse" message="tns:IMessagingService_SendSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSMSMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendSMSMessage" message="tns:IMessagingService_SendSMSMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendSMSMessageResponse" message="tns:IMessagingService_SendSMSMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendEmailMessage" message="tns:IMessagingService_SendEmailMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendEmailMessageResponse" message="tns:IMessagingService_SendEmailMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendEmail" message="tns:IMessagingService_SendEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendEmailResponse" message="tns:IMessagingService_SendEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailExt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/SendEmailExt" message="tns:IMessagingService_SendEmailExt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/SendEmailExtResponse" message="tns:IMessagingService_SendEmailExt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMessageFromModem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessagingService/ReadMessageFromModem" message="tns:IMessagingService_ReadMessageFromModem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessagingService/ReadMessageFromModemResponse" message="tns:IMessagingService_ReadMessageFromModem_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMessagingService" type="tns:IMessagingService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendListMessage">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendListMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMSMessage">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendSMSMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailMessage">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendEmailMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailExt">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/SendEmailExt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMessageFromModem">
+      <soap:operation soapAction="http://tempuri.org/IMessagingService/ReadMessageFromModem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessagingService">
+    <wsdl:port name="BasicHttpBinding_IMessagingService" binding="tns:BasicHttpBinding_IMessagingService">
+      <soap:address location="http://localhost:6040/FmessagingService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

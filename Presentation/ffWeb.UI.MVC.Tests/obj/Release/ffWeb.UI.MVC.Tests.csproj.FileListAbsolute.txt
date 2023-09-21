@@ -1,0 +1,7 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.dll.config
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.pdb
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Release\ffWeb.UI.MVC.Tests.csproj.App.config
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Release\ffWeb.UI.MVC.Tests.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Release\ffWeb.UI.MVC.Tests.dll
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Release\ffWeb.UI.MVC.Tests.pdb

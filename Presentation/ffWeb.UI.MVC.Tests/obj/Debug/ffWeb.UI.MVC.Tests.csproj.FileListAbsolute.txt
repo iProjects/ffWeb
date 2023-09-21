@@ -1,0 +1,14 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.dll.config
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.UI.MVC.Tests.pdb
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.csproj.App.config
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.dll
+C:\My Projects\fanikiwa\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.UI.MVC.Tests.dll.config
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.UI.MVC.Tests.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.UI.MVC.Tests.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.csproj.App.config
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.csprojResolveAssemblyReference.cache
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC.Tests\obj\Debug\ffWeb.UI.MVC.Tests.pdb

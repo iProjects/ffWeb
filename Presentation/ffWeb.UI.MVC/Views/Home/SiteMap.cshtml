@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "SiteMap";
+}
+
+<h2 class="page-title">SiteMap</h2>
+
+<div class="content-wrapper">
+    <div class="float-left">
+
+        <ul>
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("Get A loan", "ListLendOffers", "Offers")</li>
+            <li>@Html.ActionLink("Make An Investement", "ListBorrowOffers", "Offers")</li>
+            <li>@Html.ActionLink("Make An Offer", "ListMyOffers", "Offers")</li>
+            <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+            <li>@Html.ActionLink("My Profile", "EditProfile", "Account")</li>
+            <li>@Html.ActionLink("Register", "Register", "Account")</li>
+            <li>@Html.ActionLink("DeRegister", "DeRegister", "Account")</li>
+            <li>@Html.ActionLink("Deposit", "DepositCash", "Deposit")</li>
+            <li>@Html.ActionLink("WithDraw", "WithDrawCash", "WithDraw")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("Contact Us", "ContactUs", "Contact")</li>
+            <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Help", "Help", "Home")</li>
+            <li>@Html.ActionLink("Scores", "Scores", "Account")</li>
+            <li>@Html.ActionLink("My Accounts", "MyAccounts", "Account")</li>
+            <li>@Html.ActionLink("Received SMS", "GSMMessages", "Deposit")</li>
+            <li>@Html.ActionLink("Registered Members", "GetAllRegisteredMembers", "Deposit")</li>
+            <li>@Html.ActionLink("Groups", "GetAllMailingGroups", "Offers")</li>
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+

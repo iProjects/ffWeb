@@ -1,0 +1,66 @@
+﻿@model ICollection<ffWeb.UI.MVC.Models.ExternalLogin>
+
+@if (Model.Count > 0)
+{
+    <h2 class="page-title">Registered external logins</h2>
+    <table>
+        <tbody>
+            @foreach (ffWeb.UI.MVC.Models.ExternalLogin externalLogin in Model)
+            {
+                <tr>
+                    <td>@externalLogin.ProviderDisplayName</td>
+                    <td>
+                        @if (ViewBag.ShowRemoveButton)
+                        {
+                            using (Html.BeginForm("Disassociate", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "dis-associate-form" }))
+                            {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <fieldset>
+                                <legend>Disassociate</legend>
+
+                                @Html.Hidden("provider", externalLogin.Provider)
+                                @Html.Hidden("providerUserId", externalLogin.ProviderUserId)
+
+                                <input type="submit" id="btnSubmitDisassociateForm" value="Remove" title="Remove this @externalLogin.ProviderDisplayName credential from your account" />
+
+                            </fieldset>
+                            }
+                        }
+                        else
+                        {
+                            @: &nbsp;
+                    }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+    </script>
+
+}
+
+
+
+
+
+
+

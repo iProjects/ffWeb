@@ -1,0 +1,29 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 class="error">Generic Error.</h1>
+    <h2 class="error">An error occurred while processing your request.</h2> 
+</hgroup>
+
+<p>
+    Controller: @Model.ControllerName
+</p>
+
+<p>
+    Action: @Model.ActionName
+
+</p>
+
+<p>
+    Message: @Model.Exception.Message
+
+</p>
+
+<p>
+    Stack Trace: @Model.Exception.StackTrace
+</p>

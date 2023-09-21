@@ -1,0 +1,67 @@
+﻿@model IEnumerable<fanikiwaGL.Entities.Account>
+
+@{
+    ViewBag.Title = "MyAccounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">My Accounts </h2>
+<p>
+</p>
+
+<table>
+    <tr>
+        <th>
+            Account ID
+        </th>
+        <th>
+            Account Name
+        </th>
+        <th>
+            Book Balance
+        </th>
+        <th>
+            Cleared Balance
+        </th>
+        <th>
+            Limit
+        </th>
+        <th>
+            Available Balance
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+               @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.BookBalance)  
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.ClearedBalance) 
+            </td>
+            <td>
+                @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", item.Limit) 
+            </td>
+            <td>
+                @{var bal = item.ClearedBalance - item.Limit;}
+               @string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N2}", bal)  
+            </td>
+            <td>
+                @Html.ActionLink("Mini Statememnt", "MiniStatemement", new { AccountID = item.AccountID }) |
+             @Html.ActionLink("Statement", "Statement", new { AccountID = item.AccountID }) |
+            @Html.ActionLink("Details", "Details", new { AccountID = item.AccountID })
+
+            </td>
+        </tr>
+    }
+
+</table>
+

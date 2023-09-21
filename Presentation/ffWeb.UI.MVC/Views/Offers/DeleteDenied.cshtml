@@ -1,0 +1,39 @@
+﻿@model fPeerLending.Entities.Offer
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">Delete</h2>
+
+Cannot delete an offer whose status is not Open.
+  
+
+ @Html.ActionLink("Back to My Offers List","ListMyOffers", "Offers")
+
+  
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () { 
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+        });
+        </script>
+ 
+}
+
+
+
+
+
+
+
+
+

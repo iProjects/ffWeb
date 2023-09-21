@@ -1,0 +1,5 @@
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Entities.dll
+C:\My Projects\fanikiwa\ffWeb\bin\ffWeb.Entities.pdb
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Entities\obj\Debug\ffWeb.Entities.csprojResolveAssemblyReference.cache
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Entities\obj\Debug\ffWeb.Entities.dll
+C:\My Projects\fanikiwa\ffWeb\Business\ffWeb.Entities\obj\Debug\ffWeb.Entities.pdb

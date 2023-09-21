@@ -1,0 +1,104 @@
+﻿@model ffWeb.UI.MVC.Models.PartialBorrowOfferModel
+
+@{
+    ViewBag.Title = "Accept Partial Borrow Offer";
+}
+
+
+<h2 class="page-title">Accept Partial Borrow Offer</h2>
+
+ @using (Html.BeginForm("AcceptPartialBorrowOffer", "Offers", FormMethod.Post, new { enctype = "multipart/form-data", id = "accept-partial-borrow-offer-form" }))
+{
+   @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Accept Partial Borrow Offer</legend>
+
+        @Html.HiddenFor(model => model.MemberEmail)
+
+        @Html.HiddenFor(model => model.OfferId)
+         
+        <br />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TotalOfferAmount)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.TotalOfferAmount, new { @id = "txtTotalOfferAmount", @readonly = "readonly", @style="border:none;background:inherit;" }) 
+        </div>
+        
+        <br />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+           @Html.TextBoxFor(model => model.Amount, new { @id = "txtOfferAmount", @min = "0", @type = "number", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <br />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfferBalance)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OfferBalance, new { @id = "txtOfferBalance", @readonly = "readonly", @style="border:none;background:inherit;" }) 
+        </div>
+
+        <p>
+            <input  id="btnSubmitAcceptPartialBorrowOfferForm" type="submit" value="Accept Partial Borrow Offer" />
+        </p>
+    </fieldset>
+}
+
+ 
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#progress").hide();
+
+            $.ajaxSetup({ cache: false });
+
+            $('#txtOfferBalance').val(Number($('#txtTotalOfferAmount').val()) - Number($('#txtOfferAmount').val()));
+
+        });
+
+        $("#txtOfferAmount").on('change keyup paste mouseup', function () {
+            $("#txtOfferBalance").val(Number($('#txtTotalOfferAmount').val()) - Number($('#txtOfferAmount').val()));
+        });
+
+        $("#btnSubmitAcceptPartialBorrowOfferForm").on("click", function (e) {
+
+            e.preventDefault();
+
+            $("#progress").removeClass('displaynone');
+            $("#progress").addClass('displayblock');
+            $("#progress").show();
+
+            $("#accept-partial-borrow-offer-form").submit();
+
+        });
+
+        </script>
+ 
+}
+
+
+
+
+
+
+
+
+
