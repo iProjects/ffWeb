@@ -3,7 +3,6 @@ using fCommon.Utility;
 using ffWeb.UI.MVC.Models;
 using fPeerLending.Business;
 using fPeerLending.Entities;
-using Microsoft.Practices.EnterpriseLibrary.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,13 +12,36 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
+using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+using log4net;
 
 namespace ffWeb.UI.MVC.Controllers
 {
     [HandleError]
     public class OffersController : Controller
     {
+        static ILog log;
+        static LogWriter ent_logger;
 
+        public OffersController()
+        {
+            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(), false);
+
+            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            ExceptionPolicyFactory factory = new ExceptionPolicyFactory(config);
+            Logger.SetLogWriter(new LogWriterFactory(config).Create(), false);
+            //ExceptionManager exManager = factory.CreateManager();
+            //ExceptionPolicy.SetExceptionManager(factory.CreateManager(), false);
+
+            log4net.Config.BasicConfigurator.Configure();
+            log = log4net.LogManager.GetLogger(typeof(OffersController));
+
+            ent_logger = new LogWriterFactory().Create();
+            Logger.SetLogWriter(ent_logger, false);
+        }
         // GET: /Offers/
         [Authorize]
         public ActionResult ListLendOffers()
@@ -191,41 +213,50 @@ namespace ffWeb.UI.MVC.Controllers
         [HandleError(View = "StaticPostingException", ExceptionType = typeof(StaticPostingException))] //
         public ActionResult Create([Bind] OfferModel offerModel)
         {
-            MakeOfferComponent mk = new MakeOfferComponent();
-            RegistrationComponent rg = new RegistrationComponent();
-
-
-            // TODO: Add insert logic here
-            string email = User.Identity.Name;
-            Member member = rg.GetMemberByEmail(email);
-            offerModel.MemberId = member.MemberId;
-
-            offerModel.Status = OfferStatus.Open.ToString();
-            offerModel.CreatedDate = DateTime.Today;
-            offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
-
-            //Create the offer in the database
-            Offer returnedOffer;
-            if (offerModel.OfferType.Equals("L"))
+            try
             {
-                returnedOffer = mk.MakeLendOffer(offerModel);
+                MakeOfferComponent mk = new MakeOfferComponent();
+                RegistrationComponent rg = new RegistrationComponent();
+
+
+                // TODO: Add insert logic here
+                string email = User.Identity.Name;
+                Member member = rg.GetMemberByEmail(email);
+                offerModel.MemberId = member.MemberId;
+
+                offerModel.Status = OfferStatus.Open.ToString();
+                offerModel.CreatedDate = DateTime.Today;
+                offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
+
+                //Create the offer in the database
+                Offer returnedOffer;
+                if (offerModel.OfferType.Equals("L"))
+                {
+                    returnedOffer = mk.MakeLendOffer(offerModel);
+                }
+                else if (offerModel.OfferType.Equals("B"))
+                {
+                    returnedOffer = mk.MakeBorrowOffer(offerModel);
+                }
+                else
+                {
+                    throw new ArgumentException("OfferType not known [" + offerModel.OfferType + "]");
+                }
+
+                if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
+                {
+                    return RedirectToAction("Edit", new { id = returnedOffer.Id });
+                }
+                else
+                {
+                    return View("Successful");
+                }
             }
-            else if (offerModel.OfferType.Equals("B"))
+            catch (Exception ex)
             {
-                returnedOffer = mk.MakeBorrowOffer(offerModel);
-            }
-            else
-            {
-                throw new ArgumentException("OfferType not known [" + offerModel.OfferType + "]");
-            }
-
-            if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
-            {
-                return RedirectToAction("Edit", new { id = returnedOffer.Id });
-            }
-            else
-            {
-                return View("Successful");
+                ent_logger.Write(ex.ToString());
+                log.Info(ex.ToString());
+                return View("Error", ex);
             }
         }
 
@@ -239,30 +270,39 @@ namespace ffWeb.UI.MVC.Controllers
         [HandleError(View = "StaticPostingException", ExceptionType = typeof(StaticPostingException))]
         public ActionResult CreateBorrowOffer([Bind] OfferModel offerModel)
         {
-            MakeOfferComponent mk = new MakeOfferComponent();
-            RegistrationComponent rg = new RegistrationComponent();
-
-
-            // TODO: Add insert logic here
-            string email = User.Identity.Name;
-            Member member = rg.GetMemberByEmail(email);
-            offerModel.MemberId = member.MemberId;
-
-            offerModel.Status = OfferStatus.Open.ToString();
-            offerModel.CreatedDate = DateTime.Today;
-            offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
-            offerModel.OfferType = "B";
-
-            //Create the offer in the database
-            Offer returnedOffer = mk.MakeBorrowOffer(offerModel);
-
-            if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
+            try
             {
-                return RedirectToAction("Edit", new { id = returnedOffer.Id });
+                MakeOfferComponent mk = new MakeOfferComponent();
+                RegistrationComponent rg = new RegistrationComponent();
+
+
+                // TODO: Add insert logic here
+                string email = User.Identity.Name;
+                Member member = rg.GetMemberByEmail(email);
+                offerModel.MemberId = member.MemberId;
+
+                offerModel.Status = OfferStatus.Open.ToString();
+                offerModel.CreatedDate = DateTime.Today;
+                offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
+                offerModel.OfferType = "B";
+
+                //Create the offer in the database
+                Offer returnedOffer = mk.MakeBorrowOffer(offerModel);
+
+                if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
+                {
+                    return RedirectToAction("Edit", new { id = returnedOffer.Id });
+                }
+                else
+                {
+                    return View("Successful");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View("Successful");
+                ent_logger.Write(ex.ToString());
+                log.Info(ex.ToString());
+                return View("Error", ex);
             }
         }
 
@@ -277,30 +317,41 @@ namespace ffWeb.UI.MVC.Controllers
         [HandleError(View = "StaticPostingException", ExceptionType = typeof(StaticPostingException))]
         public ActionResult CreateLendOffer([Bind] OfferModel offerModel)
         {
-            MakeOfferComponent mk = new MakeOfferComponent();
-            RegistrationComponent rg = new RegistrationComponent();
-
-
-            // TODO: Add insert logic here
-            string email = User.Identity.Name;
-            Member member = rg.GetMemberByEmail(email);
-            offerModel.MemberId = member.MemberId;
-
-            offerModel.Status = OfferStatus.Open.ToString();
-            offerModel.CreatedDate = DateTime.Today;
-            offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
-            offerModel.OfferType = "L";
-
-            //Create the offer in the database
-            Offer returnedOffer = mk.MakeLendOffer(offerModel);
-
-            if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
+            try
             {
-                return RedirectToAction("Edit", new { id = returnedOffer.Id });
+                MakeOfferComponent mk = new MakeOfferComponent();
+                RegistrationComponent rg = new RegistrationComponent();
+
+
+                // TODO: Add insert logic here
+                string email = User.Identity.Name;
+                Member member = rg.GetMemberByEmail(email);
+                offerModel.MemberId = member.MemberId;
+
+                offerModel.Status = OfferStatus.Open.ToString();
+                offerModel.CreatedDate = DateTime.Today;
+                offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
+                offerModel.OfferType = "L";
+
+                //Create the offer in the database
+
+                Offer returnedOffer = mk.MakeLendOffer(offerModel);
+
+
+                if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
+                {
+                    return RedirectToAction("Edit", new { id = returnedOffer.Id });
+                }
+                else
+                {
+                    return View("Successful");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View("Successful");
+                ent_logger.Write(ex.ToString());
+                log.Info(ex.ToString());
+                return View("Error", ex);
             }
         }
 
@@ -369,7 +420,7 @@ namespace ffWeb.UI.MVC.Controllers
                 return View("ConfirmDeleteOfferView", model);
             }
             else
-            { 
+            {
                 return View("DeleteDenied", model);
             }
         }

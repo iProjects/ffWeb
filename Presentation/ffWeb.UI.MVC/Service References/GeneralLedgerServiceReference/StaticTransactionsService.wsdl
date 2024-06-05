@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="StaticTransactionsService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/fanikiwaGL.Entities" />
+      <xsd:import schemaLocation="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/fanikiwaGL.Framework" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IStaticTransactionsService_AvailableBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:AvailableBalance" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_AvailableBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AvailableBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAvailableBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableBalance" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAvailableBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLimitAmount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLimitAmount" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLimitAmount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLimitAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_BlockFunds_InputMessage">
+    <wsdl:part name="parameters" element="tns:BlockFunds" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_BlockFunds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BlockFundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_ClearEffects_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearEffects" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_ClearEffects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearEffectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CloseAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:CloseAccount" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CloseAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CloseAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CreateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CreateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccount" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLimitStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLimitStatus" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLimitStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLimitStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLockStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLockStatus" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountLockStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountLockStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountTransactionsByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountTransactionsByDate" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountTransactionsByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountTransactionsByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetCustomerByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetCustomerByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetCustomerByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByID" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetCustomerByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_MarkLimit_InputMessage">
+    <wsdl:part name="parameters" element="tns:MarkLimit" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_MarkLimit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MarkLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_OpenAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenAccount" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_OpenAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpenAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SetAccountLimitStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountLimitStatus" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SetAccountLimitStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountLimitStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SetAccountLockStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountLockStatus" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SetAccountLockStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountLockStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UnBlockFunds_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnBlockFunds" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UnBlockFunds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnBlockFundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAccounts" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetOpenAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOpenAccounts" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetOpenAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOpenAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetClosedAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClosedAccounts" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetClosedAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClosedAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllTransactionTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionTypes" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllTransactionTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetTransactionType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionType" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetTransactionType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetTieredTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTieredTable" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetTieredTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTieredTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_IsAccountClosed_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAccountClosed" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_IsAccountClosed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAccountClosedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAllCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountViewTransactionsByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountViewTransactionsByDate" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_GetAccountViewTransactionsByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountViewTransactionsByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CreateTransactionType_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTransactionType" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_CreateTransactionType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTransactionTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateTransactionType_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTransactionType" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_UpdateTransactionType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTransactionTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_AccountExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountExists" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_AccountExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SelectLastTranscations_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectLastTranscations" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SelectLastTranscations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectLastTranscationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SelectByAccountDateRange_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectByAccountDateRange" />
+  </wsdl:message>
+  <wsdl:message name="IStaticTransactionsService_SelectByAccountDateRange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectByAccountDateRangeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IStaticTransactionsService">
+    <wsdl:operation name="AvailableBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/AvailableBalance" message="tns:IStaticTransactionsService_AvailableBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/AvailableBalanceResponse" message="tns:IStaticTransactionsService_AvailableBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAvailableBalance" message="tns:IStaticTransactionsService_GetAvailableBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAvailableBalanceResponse" message="tns:IStaticTransactionsService_GetAvailableBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLimitAmount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLimitAmount" message="tns:IStaticTransactionsService_GetAccountLimitAmount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLimitAmountResponse" message="tns:IStaticTransactionsService_GetAccountLimitAmount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockFunds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/BlockFunds" message="tns:IStaticTransactionsService_BlockFunds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/BlockFundsResponse" message="tns:IStaticTransactionsService_BlockFunds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearEffects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/ClearEffects" message="tns:IStaticTransactionsService_ClearEffects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/ClearEffectsResponse" message="tns:IStaticTransactionsService_ClearEffects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/CloseAccount" message="tns:IStaticTransactionsService_CloseAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/CloseAccountResponse" message="tns:IStaticTransactionsService_CloseAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/CreateCustomer" message="tns:IStaticTransactionsService_CreateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/CreateCustomerResponse" message="tns:IStaticTransactionsService_CreateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccount" message="tns:IStaticTransactionsService_GetAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountResponse" message="tns:IStaticTransactionsService_GetAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLimitStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLimitStatus" message="tns:IStaticTransactionsService_GetAccountLimitStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLimitStatusResponse" message="tns:IStaticTransactionsService_GetAccountLimitStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLockStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLockStatus" message="tns:IStaticTransactionsService_GetAccountLockStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountLockStatusResponse" message="tns:IStaticTransactionsService_GetAccountLockStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountTransactionsByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountTransactionsByDate" message="tns:IStaticTransactionsService_GetAccountTransactionsByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountTransactionsByDateResponse" message="tns:IStaticTransactionsService_GetAccountTransactionsByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetCustomerByEmail" message="tns:IStaticTransactionsService_GetCustomerByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetCustomerByEmailResponse" message="tns:IStaticTransactionsService_GetCustomerByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetCustomerByID" message="tns:IStaticTransactionsService_GetCustomerByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetCustomerByIDResponse" message="tns:IStaticTransactionsService_GetCustomerByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkLimit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/MarkLimit" message="tns:IStaticTransactionsService_MarkLimit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/MarkLimitResponse" message="tns:IStaticTransactionsService_MarkLimit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/OpenAccount" message="tns:IStaticTransactionsService_OpenAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/OpenAccountResponse" message="tns:IStaticTransactionsService_OpenAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountLimitStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/SetAccountLimitStatus" message="tns:IStaticTransactionsService_SetAccountLimitStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/SetAccountLimitStatusResponse" message="tns:IStaticTransactionsService_SetAccountLimitStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountLockStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/SetAccountLockStatus" message="tns:IStaticTransactionsService_SetAccountLockStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/SetAccountLockStatusResponse" message="tns:IStaticTransactionsService_SetAccountLockStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnBlockFunds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/UnBlockFunds" message="tns:IStaticTransactionsService_UnBlockFunds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/UnBlockFundsResponse" message="tns:IStaticTransactionsService_UnBlockFunds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateAccount" message="tns:IStaticTransactionsService_UpdateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateAccountResponse" message="tns:IStaticTransactionsService_UpdateAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateCustomer" message="tns:IStaticTransactionsService_UpdateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateCustomerResponse" message="tns:IStaticTransactionsService_UpdateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllAccounts" message="tns:IStaticTransactionsService_GetAllAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllAccountsResponse" message="tns:IStaticTransactionsService_GetAllAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetOpenAccounts" message="tns:IStaticTransactionsService_GetOpenAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetOpenAccountsResponse" message="tns:IStaticTransactionsService_GetOpenAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClosedAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetClosedAccounts" message="tns:IStaticTransactionsService_GetClosedAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetClosedAccountsResponse" message="tns:IStaticTransactionsService_GetClosedAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllTransactionTypes" message="tns:IStaticTransactionsService_GetAllTransactionTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllTransactionTypesResponse" message="tns:IStaticTransactionsService_GetAllTransactionTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetTransactionType" message="tns:IStaticTransactionsService_GetTransactionType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetTransactionTypeResponse" message="tns:IStaticTransactionsService_GetTransactionType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTieredTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetTieredTable" message="tns:IStaticTransactionsService_GetTieredTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetTieredTableResponse" message="tns:IStaticTransactionsService_GetTieredTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAccountClosed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/IsAccountClosed" message="tns:IStaticTransactionsService_IsAccountClosed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/IsAccountClosedResponse" message="tns:IStaticTransactionsService_IsAccountClosed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllTransactions" message="tns:IStaticTransactionsService_GetAllTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllTransactionsResponse" message="tns:IStaticTransactionsService_GetAllTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountTransactions" message="tns:IStaticTransactionsService_GetAccountTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountTransactionsResponse" message="tns:IStaticTransactionsService_GetAccountTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllCustomers" message="tns:IStaticTransactionsService_GetAllCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAllCustomersResponse" message="tns:IStaticTransactionsService_GetAllCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountViewTransactionsByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountViewTransactionsByDate" message="tns:IStaticTransactionsService_GetAccountViewTransactionsByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/GetAccountViewTransactionsByDateResponse" message="tns:IStaticTransactionsService_GetAccountViewTransactionsByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTransactionType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/CreateTransactionType" message="tns:IStaticTransactionsService_CreateTransactionType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/CreateTransactionTypeResponse" message="tns:IStaticTransactionsService_CreateTransactionType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTransactionType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateTransactionType" message="tns:IStaticTransactionsService_UpdateTransactionType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/UpdateTransactionTypeResponse" message="tns:IStaticTransactionsService_UpdateTransactionType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/AccountExists" message="tns:IStaticTransactionsService_AccountExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/AccountExistsResponse" message="tns:IStaticTransactionsService_AccountExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectLastTranscations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/SelectLastTranscations" message="tns:IStaticTransactionsService_SelectLastTranscations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/SelectLastTranscationsResponse" message="tns:IStaticTransactionsService_SelectLastTranscations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByAccountDateRange">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStaticTransactionsService/SelectByAccountDateRange" message="tns:IStaticTransactionsService_SelectByAccountDateRange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStaticTransactionsService/SelectByAccountDateRangeResponse" message="tns:IStaticTransactionsService_SelectByAccountDateRange_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IStaticTransactionsService" type="tns:IStaticTransactionsService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AvailableBalance">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/AvailableBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableBalance">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAvailableBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLimitAmount">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountLimitAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockFunds">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/BlockFunds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearEffects">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/ClearEffects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseAccount">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/CloseAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/CreateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLimitStatus">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountLimitStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountLockStatus">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountLockStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountTransactionsByDate">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountTransactionsByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByEmail">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetCustomerByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByID">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetCustomerByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkLimit">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/MarkLimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenAccount">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/OpenAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountLimitStatus">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/SetAccountLimitStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountLockStatus">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/SetAccountLockStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnBlockFunds">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/UnBlockFunds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAccounts">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAllAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAccounts">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetOpenAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClosedAccounts">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetClosedAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionTypes">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAllTransactionTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionType">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetTransactionType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTieredTable">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetTieredTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAccountClosed">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/IsAccountClosed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactions">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAllTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountTransactions">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAllCustomers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountViewTransactionsByDate">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/GetAccountViewTransactionsByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTransactionType">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/CreateTransactionType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTransactionType">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/UpdateTransactionType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountExists">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/AccountExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectLastTranscations">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/SelectLastTranscations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByAccountDateRange">
+      <soap:operation soapAction="http://tempuri.org/IStaticTransactionsService/SelectByAccountDateRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StaticTransactionsService">
+    <wsdl:port name="BasicHttpBinding_IStaticTransactionsService" binding="tns:BasicHttpBinding_IStaticTransactionsService">
+      <soap:address location="http://localhost:6500/GeneralLedgerService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

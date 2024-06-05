@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/fPeerLending.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/fPeerLending.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="OfferModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpiryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Interest" type="xs:double" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:int" />
+      <xs:element minOccurs="0" name="OfferOwner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OfferType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartialPay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PublicOffer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reciepients" nillable="true" type="tns:ArrayOfOfferee" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Term" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OfferModel" nillable="true" type="tns:OfferModel" />
+  <xs:complexType name="ArrayOfOfferee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offeree" nillable="true" type="tns:Offeree" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOfferee" nillable="true" type="tns:ArrayOfOfferee" />
+  <xs:complexType name="Offeree">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IconSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Offeree" nillable="true" type="tns:Offeree" />
+  <xs:complexType name="Offer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpiryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Interest" type="xs:double" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:int" />
+      <xs:element minOccurs="0" name="OfferType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Offerees" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartialPay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PublicOffer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Term" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Offer" nillable="true" type="tns:Offer" />
+  <xs:complexType name="ArrayOfOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Offer" nillable="true" type="tns:Offer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOffer" nillable="true" type="tns:ArrayOfOffer" />
+</xs:schema>

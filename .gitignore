@@ -1,0 +1,6 @@
+bin
+Presentation\ffWeb.UI.MVC\bin
+Presentation\ffWeb.UI.MVC\obj
+Presentation\ffWeb.UI.MVC.Tests\obj
+Hosts\ffWeb.Hosts.Web\obj
+Tests\ffWeb.Test\obj

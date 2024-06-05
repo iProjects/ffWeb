@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4613f10a-c1d5-4f81-bac6-d4b9e0079e94" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6500/GeneralLedgerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GeneralLedgerService.xsd" MetadataType="Schema" ID="2a6bb657-b928-4cfa-a5f9-40d2db84623e" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="GeneralLedgerService.disco" MetadataType="Disco" ID="a367ba50-3d02-4570-afac-3d0a0099c6c5" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?disco" />
+    <MetadataFile FileName="GeneralLedgerService1.xsd" MetadataType="Schema" ID="52813547-a81e-4590-9a77-89afaffa383b" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="GeneralLedgerService2.xsd" MetadataType="Schema" ID="e48aa349-247d-433e-938f-8ad9e011c381" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="StaticTransactionsService.wsdl" MetadataType="Wsdl" ID="1bec874f-a79d-4b4c-ad2f-8cb36e538c2c" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?wsdl" />
+    <MetadataFile FileName="GeneralLedgerService3.xsd" MetadataType="Schema" ID="0a834044-9721-4035-865c-fb18c845b76a" SourceId="1" SourceUrl="http://localhost:6500/GeneralLedgerService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

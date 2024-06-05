@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/fanikiwaGL.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/fanikiwaGL.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Account">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" type="xs:int" />
+      <xs:element minOccurs="0" name="AccountName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AccountNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AccountTypeId" type="xs:int" />
+      <xs:element minOccurs="0" name="AccruedInt" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Bal30" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Bal60" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Bal90" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BalOver90" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BookBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Branch" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="COAId" type="xs:int" />
+      <xs:element minOccurs="0" name="ClearedBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Closed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" name="IntRate30" type="xs:double" />
+      <xs:element minOccurs="0" name="IntRate60" type="xs:double" />
+      <xs:element minOccurs="0" name="IntRate90" type="xs:double" />
+      <xs:element minOccurs="0" name="IntRateOver90" type="xs:double" />
+      <xs:element minOccurs="0" name="InterestRate" type="xs:double" />
+      <xs:element minOccurs="0" name="Limit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LimitCheckFlag" type="xs:short" />
+      <xs:element minOccurs="0" name="LimitFlag" type="xs:short" />
+      <xs:element minOccurs="0" name="PassFlag" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Account" nillable="true" type="tns:Account" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillToAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillToEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillToName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillToTelephone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Branch" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MemberId" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telephone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfTransaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Transaction" nillable="true" type="tns:Transaction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransaction" nillable="true" type="tns:ArrayOfTransaction" />
+  <xs:complexType name="Transaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" type="xs:int" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Authorizer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContraReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ForcePostFlag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Narrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RecordDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatementFlag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionID" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionTypeId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValueDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Transaction" nillable="true" type="tns:Transaction" />
+  <xs:complexType name="ArrayOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Account" nillable="true" type="tns:Account" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAccount" nillable="true" type="tns:ArrayOfAccount" />
+  <xs:complexType name="ArrayOfTransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionType" nillable="true" type="tns:TransactionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionType" nillable="true" type="tns:ArrayOfTransactionType" />
+  <xs:complexType name="TransactionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Absolute" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AmountExpression" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CanSuspend" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ChargeCommission" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ChargeCommissionToTransaction" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ChargeWho" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommComputationMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommissionAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CommissionAmountExpression" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommissionContraNarrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommissionCrAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="CommissionDrAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="CommissionDrAnotherAccount" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CommissionMainNarrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommissionNarrativeFlag" type="xs:short" />
+      <xs:element minOccurs="0" name="CommissionTransactionType" type="xs:int" />
+      <xs:element minOccurs="0" name="CrCommCalcMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DebitCredit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DefaultContraAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="DefaultContraNarrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultMainAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="DefaultMainNarrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DialogFlag" type="xs:short" />
+      <xs:element minOccurs="0" name="DrCommCalcMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ForcePost" type="xs:boolean" />
+      <xs:element minOccurs="0" name="NarrativeFlag" type="xs:short" />
+      <xs:element minOccurs="0" name="PrintReceipt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PrintReceiptPrompt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReceiptLayout" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Screen" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShortCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatFlag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SuspenseCrAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="SuspenseDrAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="TieredTableId" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionTypeID" type="xs:int" />
+      <xs:element minOccurs="0" name="TxnClass" type="xs:short" />
+      <xs:element minOccurs="0" name="TxnTypeView" type="xs:short" />
+      <xs:element minOccurs="0" name="ValueDateOffset" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionType" nillable="true" type="tns:TransactionType" />
+  <xs:complexType name="ArrayOfTieredDet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TieredDet" nillable="true" type="tns:TieredDet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTieredDet" nillable="true" type="tns:ArrayOfTieredDet" />
+  <xs:complexType name="TieredDet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Absolute" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Max" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Min" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TieredID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TieredDet" nillable="true" type="tns:TieredDet" />
+  <xs:complexType name="ArrayOfCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
+  <xs:complexType name="ArrayOfTransactionModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionModel" nillable="true" type="tns:TransactionModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionModel" nillable="true" type="tns:ArrayOfTransactionModel" />
+  <xs:complexType name="TransactionModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ContraReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Credit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Debit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Narrative" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TransactionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionModel" nillable="true" type="tns:TransactionModel" />
+</xs:schema>

@@ -1,0 +1,153 @@
+﻿@model fPeerLending.Entities.OfferModel
+
+@{
+    ViewBag.Title = "Create Borrow Offer";
+}
+
+<h2 class="page-title">Create Borrow Offer</h2>
+
+@using (Html.BeginForm("CreateBorrowOffer", "Offers", FormMethod.Post, new { id = "create-borrow-offer-form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend>Create Offer</legend>
+
+
+        <article class="col1">
+            <div class="pad">
+
+
+                <ol>
+
+                    <li>
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.PublicOffer)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.OfferType)
+                    </li>
+
+                </ol>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Description, new { style = "width: 310px;height: 50px;", placeholder = "offer description", @autofocus = "autofocus", @autocomplete = "autocomplete", @required = "required" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PublicOffer)
+                </div>
+                <div class="editor-field">
+                    @{
+    List<SelectListItem> _offermailingmethods = new List<SelectListItem>();
+    _offermailingmethods.Add(new SelectListItem
+    {
+        Text = "Public",
+        Value = "B",
+        Selected = true
+    });
+    _offermailingmethods.Add(new SelectListItem
+    {
+        Text = "Private",
+        Value = "V"
+    });
+                    }
+                    @Html.DropDownListFor(model => model.PublicOffer, _offermailingmethods, "-- Select Mailing Method --", new { id = "cboOfferMailingMethods", style = "width: 310px;height: 30px;", @required = "required" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.OfferType)
+                </div>
+                <div class="editor-field">
+                    @{
+    List<SelectListItem> _offerTypes = new List<SelectListItem>();
+    _offerTypes.Add(new SelectListItem
+    {
+        Text = "Borrow",
+        Value = "B",
+        Selected = true
+    });
+    _offerTypes.Add(new SelectListItem
+    {
+        Text = "Lend",
+        Value = "L"
+    });
+                    }
+                    @Html.DropDownListFor(model => model.OfferType, _offerTypes, "-- Select Offer Type --", new { id = "cboOfferTypes", style = "width: 310px;height: 30px;", @required = "required", @disabled = "disabled" })
+                </div>
+
+            </div>
+        </article>
+
+        <article class="col2">
+            <div class="pad">
+
+
+                <ol>
+
+                    <li>
+                        @Html.ValidationMessageFor(model => model.Amount)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.Term)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.Interest)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.PartialPay)
+                    </li>
+
+                </ol>
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Amount)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Amount, new { type = "number", @required = "required" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Term)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Term, new { type = "number", @required = "required" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Interest)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Interest, new { type = "number", @required = "required" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PartialPay)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PartialPay)
+                </div>
+
+            </div>
+        </article>
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

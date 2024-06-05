@@ -143,11 +143,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Unity.Mvc4.README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\ffWeb.Data\ffWeb.Data.csproj">
+      <Project>{7b9885fb-c888-4e00-967d-eae14cdea140}</Project>
+      <Name>ffWeb.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\ffWeb.UI.MVC\ffWeb.UI.MVC.csproj">
+      <Project>{328b4a8e-3857-43d8-b2b1-671a74c7df53}</Project>
+      <Name>ffWeb.UI.MVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\ffWeb.Framework\ffWeb.Framework.csproj">
+      <Project>{3f257661-09e9-42f6-b9c0-89422480ff47}</Project>
+      <Name>ffWeb.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

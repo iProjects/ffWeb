@@ -41,6 +41,7 @@
       <Objects>
       </Objects>
     </PublishDatabaseSettings>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -285,12 +286,14 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Enterprise_logger.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
     <Compile Include="Controllers\MailingGroupsController.cs" />
     <Compile Include="Controllers\MyProfileController.cs" />
     <Compile Include="Controllers\OffereesController.cs" />
+    <Compile Include="Controllers\WithdrawController.cs" />
     <Compile Include="Controllers\OffersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -318,6 +321,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service References\fMessagingServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\fPeerLendingServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GeneralLedgerServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -427,6 +440,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.Account.datasource" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.Customer.datasource" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.TieredDet.datasource" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.Transaction.datasource" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.TransactionModel.datasource" />
+    <Content Include="Properties\DataSources\fanikiwaGL.Entities.TransactionType.datasource" />
+    <Content Include="Properties\DataSources\fPeerLending.Entities.Offer.datasource" />
+    <None Include="Properties\PublishProfiles\2023_ffweb.pubxml" />
     <None Include="Properties\PublishProfiles\fanikiwa_web_deployment_package.pubxml" />
     <None Include="Properties\PublishProfiles\iis_file_system_deploy.pubxml" />
     <None Include="Properties\PublishProfiles\iis_web_deploy.pubxml" />
@@ -462,10 +483,43 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\npm.js" />
-    <None Include="Service References\fMessagingServiceReference\FmessagingService.disco" />
     <None Include="Service References\fMessagingServiceReference\configuration91.svcinfo" />
     <None Include="Service References\fMessagingServiceReference\configuration.svcinfo" />
+    <None Include="Service References\fMessagingServiceReference\fMessagingService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fMessagingServiceReference\fMessagingService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fMessagingServiceReference\fMessagingService32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fMessagingServiceReference\MessagingService1.wsdl" />
     <None Include="Service References\fMessagingServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\fMessagingServiceReference\fMessagingService1.disco" />
+    <None Include="Service References\fPeerLendingServiceReference\fPeerLendingMobileService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fPeerLendingServiceReference\fPeerLendingMobileService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fPeerLendingServiceReference\fPeerLendingMobileService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\fPeerLendingServiceReference\MobileService.wsdl" />
+    <None Include="Service References\GeneralLedgerServiceReference\GeneralLedgerService.disco" />
+    <None Include="Service References\GeneralLedgerServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\GeneralLedgerServiceReference\configuration.svcinfo" />
+    <None Include="Service References\GeneralLedgerServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\fPeerLendingServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\fPeerLendingServiceReference\configuration.svcinfo" />
+    <None Include="Service References\fPeerLendingServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -562,19 +616,23 @@
     <Content Include="Views\Account\ManageProfile.cshtml" />
     <Content Include="Views\Account\MyAccounts.cshtml" />
     <Content Include="Views\Loans\ListMyLoans.cshtml" />
-    <None Include="Service References\fMessagingServiceReference\FmessagingService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\fMessagingServiceReference\FmessagingService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\fMessagingServiceReference\FmessagingService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\fMessagingServiceReference\MessagingService.wsdl" />
     <Content Include="Views\Account\Statement.cshtml" />
     <Content Include="Views\Account\MiniStatemement.cshtml" />
     <Content Include="Views\Offers\ListMyInvestMents.cshtml" />
+    <Content Include="Views\Withdraw\Withdraw.cshtml" />
+    <None Include="Service References\GeneralLedgerServiceReference\GeneralLedgerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GeneralLedgerServiceReference\GeneralLedgerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GeneralLedgerServiceReference\GeneralLedgerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GeneralLedgerServiceReference\GeneralLedgerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GeneralLedgerServiceReference\StaticTransactionsService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -591,6 +649,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\fMessagingServiceReference\" />
+    <WCFMetadataStorage Include="Service References\fPeerLendingServiceReference\" />
+    <WCFMetadataStorage Include="Service References\GeneralLedgerServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
