@@ -9,3 +9,13 @@ D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.csprojResolveAssemblyReference.cache
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Tests\ffWeb.Test\obj\Debug\ffWeb.Test.pdb
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\EntityFramework.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\EntityFramework.SqlServer.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\SQLite.Interop.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\System.Data.SQLite.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\System.Data.SQLite.EF6.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x64\System.Data.SQLite.Linq.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x86\SQLite.Interop.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\x86\System.Data.SQLite.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\App_Data\fanikiwa_db_2026.db
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\App_Data\fanikiwa db_schema.txt

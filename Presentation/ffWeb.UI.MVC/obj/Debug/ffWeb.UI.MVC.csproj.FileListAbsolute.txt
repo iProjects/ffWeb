@@ -50,6 +50,7 @@ D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentat
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\WebGrease.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\WebMatrix.Data.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\WebMatrix.WebData.dll
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Entities.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fPeerLending.Framework.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fanikiwaGL.Business.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fCommissions.Commission.Business.dll
@@ -96,6 +97,7 @@ D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentat
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\DotNetOpenAuth.OpenId.xml
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\WebMatrix.WebData.xml
+D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Entities.pdb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fPeerLending.Framework.pdb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fanikiwaGL.Business.pdb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fCommissions.Commission.Business.pdb
@@ -129,12 +131,3 @@ D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentat
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\zh-Hant\System.Spatial.resources.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\obj\Debug\ffWeb.UI.MVC.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\obj\Debug\ffWeb.UI.MVC.pdb
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Business.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\GSMCommunication.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\PDUConverter.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Data.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\GSMCommShared.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Business.pdb
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Data.pdb
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Entities.dll
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Presentation\ffWeb.UI.MVC\Bin\fMessagingSystem.Entities.pdb

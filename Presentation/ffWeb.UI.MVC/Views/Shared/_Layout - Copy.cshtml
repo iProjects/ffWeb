@@ -1,0 +1,382 @@
+﻿@using ffWeb.UI.MVC.Controllers;
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Peer-to-Peer Lending</title>
+    <link href="~/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @Styles.Render("~/bundles/_AllStyles")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/MicrosoftAjax")
+    @Scripts.Render("~/bundles/CustomScripts")
+
+</head>
+
+
+<body>
+
+    <header>
+        <div class="content-wrapper">
+
+            <div class="float-left">
+                <p class="site-title" title="Fanikiwa - Peer - To - Peer Lending">
+                    Fanikiwa - Peer - To - Peer Lending
+                </p>
+            </div>
+
+
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+            </div>
+
+
+            <div id="progress" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: cornflowerblue; z-index: 30001; opacity: .8; filter: alpha(opacity=70);" class="displaynone">
+
+                <p style="position: absolute; top: 30%; left: 35%; color: White;">
+                    <img src="@Url.Content("~/Images/ajax-loader.gif")" width="50" height="50">
+                </p>
+
+            </div>
+
+
+            <div id="nav">
+                <ul id="menu">
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "home-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitIndexForm" style="cursor: pointer;">Home</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitListLendOffersForm" style="cursor: pointer;">Get A loan</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitListBorrowOffersForm" style="cursor: pointer;">Make An Investment</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("ListMyOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-my-offers-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitListMyOffersForm" style="cursor: pointer;">My Offers</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+
+
+                    @if (Request.IsAuthenticated)
+                    { 
+                        
+                        <li id="subMenuMyProfile">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-sub-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitEditProfileSubForm" style="cursor: pointer;">My Profile</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+
+                        <li id="subMenuMyAccounts">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("MyAccounts", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-accounts-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitMyAccountsForm" style="cursor: pointer;">My Accounts</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                         
+                     <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("ListMyInvestMents", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-investments-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitMyInvestMentsForm" style="cursor: pointer;">My InvestMents</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                        <li id="subMenuMyLoans">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("ListMyLoans", "Loans", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-loans-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitMyLoansForm" style="cursor: pointer;">My Loans</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                        
+                        <li id="subMenuOfferGroups">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("MailingGroups", "MailingGroups", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-offer-groups-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitGetMyMailingGroupsForm" style="cursor: pointer;">My Offer Groups</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                         
+                        <li id="subMenuScores">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("Scores", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "offer-scores-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitOfferScoresForm" style="cursor: pointer;">My Offer Scores</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                         
+                        <li id="subMenuChangePassword">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("Manage", "Account", new { Message = "ChangePasswordSuccess" }, FormMethod.Get, new { enctype = "multipart/form-data", id = "change-password-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitChangePasswordForm" style="cursor: pointer;">Change Password</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                        
+                        <li id="subMenuDeRegister">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("DeRegister", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "de-register-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitDeRegisterForm" style="cursor: pointer;">DeRegister</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                        
+                        <li id="subMenuWithDraw">
+
+                            <div class="floatleft">
+                                @using (Html.BeginForm("WithDrawCash", "WithDraw", FormMethod.Get, new { enctype = "multipart/form-data", id = "withdraw-form" }))
+                                { 
+                                    <div>
+                                        <a id="btnSubmitWithDrawCashForm" style="cursor: pointer;">WithDraw</a>
+                                    </div>    
+                                }
+                            </div>
+
+                        </li>
+                        
+
+
+                    }
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("Help", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "help-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitHelpForm" style="cursor: pointer;">Help</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("ContactUs", "Contact", FormMethod.Get, new { enctype = "multipart/form-data", id = "contact-us-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitContactUsForm" style="cursor: pointer;">Contact Us</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("Contact", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "contacts-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitContactsForm" style="cursor: pointer;">Contacts</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <div class="floatleft">
+                            @using (Html.BeginForm("About", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "about-form" }))
+                            { 
+                                <div>
+                                    <a id="btnSubmitAboutForm" style="cursor: pointer;">About</a>
+                                </div>    
+                            }
+                        </div>
+
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+
+    <div id="body">
+
+
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+
+            <div id="error-display-div" class="displaynone">
+            </div>
+
+            @RenderBody()
+
+        </section>
+
+
+    </div>
+
+
+
+
+    <footer>
+
+        <hr />
+
+        <div class="content-wrapper">
+            <div class="float-left">
+
+                @Html.ActionLink("Home", "Index", "Home")|
+                   @Html.ActionLink("About", "About", "Home")|
+                   @Html.ActionLink("Contacts", "Contact", "Home")|
+                   @Html.ActionLink("Contact Us", "ContactUs", "Contact")|
+                   @Html.ActionLink("Help", "Help", "Home")|
+                                 
+
+                  <a href="https://www.facebook.com/SoftwareProvidersLtd" title="Facebook" target="_blank">FaceBook</a>|
+                  <a href="http://twitter.com/" title="Twitter" target="_blank">Twitter</a>|
+                  <a href="https://plus.google.com/" title="Google+" target="_blank">Google+</a>|
+                  <a href="http://www.linkedin.com/" title="LinkedIn" target="_blank">LinkedIn</a>|
+                  <a href="#" title="Blog">Blog</a>|
+                  <a href="#" title="Discussion board">Discussion board</a> |
+                  <a href="#" title="Press">Press</a>|
+                  <a href="#" title="Terms">Terms</a>|                    
+                  <a href="#" title="Jobs">Jobs</a>|                    
+                  <a href="#" title="Privacy policy">Privacy policy</a>|
+                  <a href="#" title="Principles">Principles</a>
+
+
+            </div>
+        </div>
+
+
+        <div class="content-wrapper clearboth">
+            <div class="float-left">
+                <p style="font-size: 15px">Copyright &copy; @DateTime.Now.Year - Software Providers Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+
+
+        <div class="content-wrapper clearboth">
+            <div>
+
+                <img src="~/Images/fanikiwa_savings.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
+
+                <img src="~/Images/images.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
+
+                <img src="~/Images/savingsimg.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
+
+            </div>
+        </div>
+
+
+    </footer>
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+
+
+</html>

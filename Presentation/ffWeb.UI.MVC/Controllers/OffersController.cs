@@ -42,6 +42,7 @@ namespace ffWeb.UI.MVC.Controllers
             ent_logger = new LogWriterFactory().Create();
             Logger.SetLogWriter(ent_logger, false);
         }
+
         // GET: /Offers/
         [Authorize]
         public ActionResult ListLendOffers()
@@ -225,7 +226,7 @@ namespace ffWeb.UI.MVC.Controllers
                 offerModel.MemberId = member.MemberId;
 
                 offerModel.Status = OfferStatus.Open.ToString();
-                offerModel.CreatedDate = DateTime.Today;
+                offerModel.CreatedDate = DateTime.Now;
                 offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
 
                 //Create the offer in the database
@@ -282,7 +283,7 @@ namespace ffWeb.UI.MVC.Controllers
                 offerModel.MemberId = member.MemberId;
 
                 offerModel.Status = OfferStatus.Open.ToString();
-                offerModel.CreatedDate = DateTime.Today;
+                offerModel.CreatedDate = DateTime.Now;
                 offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
                 offerModel.OfferType = "B";
 
@@ -313,6 +314,7 @@ namespace ffWeb.UI.MVC.Controllers
             return View();
 
         }
+
         [HttpPost]
         [HandleError(View = "StaticPostingException", ExceptionType = typeof(StaticPostingException))]
         public ActionResult CreateLendOffer([Bind] OfferModel offerModel)
@@ -322,21 +324,18 @@ namespace ffWeb.UI.MVC.Controllers
                 MakeOfferComponent mk = new MakeOfferComponent();
                 RegistrationComponent rg = new RegistrationComponent();
 
-
                 // TODO: Add insert logic here
                 string email = User.Identity.Name;
                 Member member = rg.GetMemberByEmail(email);
                 offerModel.MemberId = member.MemberId;
 
                 offerModel.Status = OfferStatus.Open.ToString();
-                offerModel.CreatedDate = DateTime.Today;
+                offerModel.CreatedDate = DateTime.Now;
                 offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
                 offerModel.OfferType = "L";
 
                 //Create the offer in the database
-
                 Offer returnedOffer = mk.MakeLendOffer(offerModel);
-
 
                 if (offerModel.PublicOffer.Equals("V")) //for private offer, edit the offer 
                 {
@@ -357,7 +356,6 @@ namespace ffWeb.UI.MVC.Controllers
 
         //
         // GET: /Offers/Edit/5
-
         public ActionResult Edit(int id)
         {
             ListOffersComponent lc = new ListOffersComponent();

@@ -1,0 +1,69 @@
+﻿/* SVG Icon Sizing Utility */
+.svg-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    display: inline-block;
+}
+
+/* Global Body */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Auth Card Container */
+.card-auth {
+    background-color: #ffffff;
+}
+
+.auth-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Password Strength Bar */
+.progress-thin {
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.extra-small {
+    font-size: 0.75rem;
+}
+
+#password-strength-bar {
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Password Toggle Button Position */
+.btn-toggle-password {
+    z-index: 5;
+    background: transparent !important;
+}
+
+/* Global Loading Progress Overlay */
+#progress {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(33, 37, 41, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.displaynone {
+    display: none !important;
+}
+
+.displayblock {
+    display: flex !important;
+}

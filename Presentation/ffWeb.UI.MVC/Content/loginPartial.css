@@ -1,0 +1,46 @@
+﻿#loginPartial-div {
+    font-size: 0.875rem;
+}
+
+/* Online User Indicator Pulse Animation */
+.status-indicator-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #198754;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+    animation: status-pulse 2s infinite;
+}
+
+@keyframes status-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(25, 135, 84, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+    }
+}
+
+
+#loginPartial-div form {
+    margin: 0;
+    padding: 0;
+}
+
+#loginPartial-div .btn {
+    transition: all 0.2s ease-in-out;
+}
+
+    #loginPartial-div .btn:hover {
+        transform: translateY(-1px);
+    }

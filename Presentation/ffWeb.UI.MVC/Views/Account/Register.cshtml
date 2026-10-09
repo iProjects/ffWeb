@@ -3,170 +3,170 @@
     ViewBag.Title = "Register";
 }
 
+<link href="~/Content/register.css" rel="stylesheet" type="text/css" /> 
 
-<hgroup class="title">
-    <h2 class="page-title">@ViewBag.Title.</h2>
-    <h2 class="page-title">Create a new account.</h2>
-</hgroup>
+<div class="container py-4 py-lg-5">
+    <div class="row justify-content-center g-4">
+        <!-- Main Registration Form Card -->
+        <div class="col-12 col-lg-7 col-xl-6">
+            <div class="card card-auth shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-sm-5">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <div class="auth-icon-wrapper bg-primary-subtle text-primary rounded-circle mx-auto mb-3">
+                            <svg class="svg-icon fs-3 text-primary" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                        </div>
+                        <h2 class="h4 fw-bold text-dark">Create Your Account</h2>
+                        <p class="text-secondary small">Join Fanikiwa Peer-to-Peer Lending Platform</p>
+                    </div>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "register-form" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "register-form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Registration Form</legend>
-
-        <article class="col1">
-            <div class="pad">
-
-                <ol>
-
-                    <li>
-                        @Html.ValidationMessageFor(m => m.UserName)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.SurName)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.Password)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                    </li>
-
-
-                    <li>
-                        <h3>*UserName(Use Your Email):</h3>
-                        <span class="add-on"><i class="icon-envelope"></i></span>
-                        @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", type = "email", placeholder = "username@domain.co.ke" })
-                    </li>
-
-                    <li>
-                        <h3>*SurName:</h3>
-                        <span class="add-on"><i class="icon-key"></i></span>
-                        @Html.TextBoxFor(m => m.SurName, new { autofocus = "autofocus", placeholder = "SurName" })
-                    </li>
-
-                    <li>
-                        <h3>*Password:</h3>
-                        <span class="add-on"><i class="icon-key"></i></span>
-                        @Html.PasswordFor(m => m.Password, new { type = "password", minlength = "6", placeholder = "Password" })
-                    </li>
-
-                    <li>
-                        <h3>*ConfirmPassword:</h3>
-                        <span class="add-on"><i class="icon-key"></i></span>
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { type = "password", minlength = "6", placeholder = "Confirm Password" })
-                    </li>
-
-                </ol>
-
-            </div>
-        </article>
-
-        <article class="col2">
-            <div class="pad">
-
-                <ol>
-
-                    <li>
-                        @Html.ValidationMessageFor(model => model.InformBy)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.Telephone)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.TermsAccepted)
-                    </li>
-
-                    <li>
-                        <h3>*InformBy:</h3>
-                        <span class="add-on"><i class="icon-envelope"></i></span>
-                        @{
-    List<SelectListItem> lstinformby = new List<SelectListItem>();
-    lstinformby.Add(new SelectListItem
-         {
-             Text = "SMS",
-             Value = "SMS",
-
-         });
-    lstinformby.Add(new SelectListItem
-         {
-             Text = "EMAIL",
-             Value = "EMAIL",
-             Selected = true
-         });
+                        if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3 small mb-4" role="alert">
+                                @Html.ValidationSummary(true)
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         }
-                        @Html.DropDownListFor(model => model.InformBy, lstinformby, "-- Select Inform By --", new { id = "cboInformBy", style = "width: 310px;height: 30px;" })
-                    </li>
 
-                    <li>
-                        <h3>Phone: Must Conform to International format!</h3>
-                        <span class="add-on"><i class="icon-envelope"></i></span>
-                        @Html.TextBoxFor(m => m.Telephone, new { type = "tel", placeholder = "254717769329" })
-                    </li>
-
-                    <li>
-                        @Html.CheckBoxFor(m => m.TermsAccepted) I Accept the Terms and Conditions
-                    </li>
-
-                </ol>
-
+                        <div class="row g-3">
+                            <!-- Email / Username -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    @Html.TextBoxFor(m => m.UserName, new { id = "txtusername", @class = "form-control rounded-3", autofocus = "autofocus", type = "email", placeholder = "username@domain.co.ke", required = "required" })
+                                    @Html.LabelFor(m => m.UserName, "Email (Username)")
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Surname -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    @Html.TextBoxFor(m => m.SurName, new { id = "txtsurname", @class = "form-control rounded-3", placeholder = "Surname", required = "required" })
+                                    @Html.LabelFor(m => m.SurName, "Surname")
+                                    @Html.ValidationMessageFor(m => m.SurName, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Telephone -->
+                            <div class="col-12 col-sm-6">
+                                <div class="form-floating">
+                                    @Html.TextBoxFor(m => m.Telephone, new { id = "txttelephone", @class = "form-control rounded-3", type = "tel", placeholder = "254717769329" })
+                                    @Html.LabelFor(m => m.Telephone, "Phone (e.g. 2547...)")
+                                    @Html.ValidationMessageFor(m => m.Telephone, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Inform By Dropdown -->
+                            <div class="col-12 col-sm-6">
+                                <div class="form-floating">
+                                    @{
+                        List<SelectListItem> lstinformby = new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Text = "SMS", Value = "SMS" },
+                                            new SelectListItem { Text = "EMAIL", Value = "EMAIL", Selected = true }
+                                        };
+                                    }
+                                    @Html.DropDownListFor(model => model.InformBy, lstinformby, "-- Select --", new { id = "cboInformBy", @class = "form-select rounded-3" })
+                                    @Html.LabelFor(model => model.InformBy, "Notification Method")
+                                    @Html.ValidationMessageFor(model => model.InformBy, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Password Input with Toggle SVG -->
+                            <div class="col-12">
+                                <div class="form-floating position-relative">
+                                    @Html.PasswordFor(m => m.Password, new { id = "txtpassword", @class = "form-control rounded-3 pe-5", minlength = "6", placeholder = "Password" })
+                                    @Html.LabelFor(m => m.Password, "Password")
+                                    <button type="button" class="btn border-0 text-secondary position-absolute top-50 end-0 translate-middle-y me-2 btn-toggle-password" data-target="#txtpassword" title="Toggle Password Visibility">
+                                        <svg class="svg-icon fs-5 password-toggle-svg" viewBox="0 0 16 16">
+                                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.707z" />
+                                        </svg>
+                                    </button>
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                                <!-- Password Strength Meter -->
+                                <div id="password-strength-container" class="mt-2 d-none">
+                                    <div class="progress progress-thin mb-1">
+                                        <div id="password-strength-bar" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center extra-small">
+                                        <span id="password-strength-text" class="fw-semibold text-secondary">Strength</span>
+                                        <span id="password-strength-feedback" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Confirm Password Input -->
+                            <div class="col-12">
+                                <div class="form-floating position-relative">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { id = "txtconfirmpassword", @class = "form-control rounded-3 pe-5", minlength = "6", placeholder = "Confirm Password" })
+                                    @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
+                                    <button type="button" class="btn border-0 text-secondary position-absolute top-50 end-0 translate-middle-y me-2 btn-toggle-password" data-target="#txtconfirmpassword" title="Toggle Password Visibility">
+                                        <svg class="svg-icon fs-5 password-toggle-svg" viewBox="0 0 16 16">
+                                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.707z" />
+                                        </svg>
+                                    </button>
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Terms Accepted Checkbox -->
+                            <div class="col-12 mt-3">
+                                <div class="form-check">
+                                    @Html.CheckBoxFor(m => m.TermsAccepted, new { id = "chkterms", @class = "form-check-input", required = "required" })
+                                    <label class="form-check-label text-secondary small" for="chkterms">
+                                        I accept the <a href="#" class="text-primary text-decoration-none">Terms and Conditions</a>
+                                    </label>
+                                    @Html.ValidationMessageFor(m => m.TermsAccepted, "", new { @class = "invalid-feedback d-block" })
+                                </div>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button type="submit" id="btnSubmitRegisterForm" class="btn btn-primary btn-lg w-100 rounded-3 fw-semibold shadow-sm">
+                                    Create Account
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    <!-- Social / External Registration Divider -->
+                    <div class="d-flex align-items-center my-4">
+                        <hr class="flex-grow-1 my-0 text-secondary opacity-25">
+                        <span class="px-3 text-secondary extra-small text-uppercase fw-semibold">Or register with</span>
+                        <hr class="flex-grow-1 my-0 text-secondary opacity-25">
+                    </div>
+                    <!-- Google Authentication Option -->
+                    @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "google-register-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" name="provider" value="Google" class="btn btn-outline-secondary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 fw-medium shadow-sm">
+                            <svg class="svg-icon fs-5" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                            </svg>
+                            <span>Sign up with Google</span>
+                        </button>
+                    }
+                    <!-- Existing Account Link -->
+                    <div class="text-center pt-4 border-top mt-4">
+                        <p class="text-secondary small mb-0">
+                            Already have an account?
+                            <a href="@Url.Action("Login", "Account")" class="fw-semibold text-primary text-decoration-none">
+                                Log in here
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </article>
-
-        <input type="submit" value="Register" id="btnSubmitRegisterForm" style="float: left; clear: both" />
-
-    </fieldset>
-    
-     
-}
-
-
-
-
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $("#progress").hide();
-
-            $.ajaxSetup({ cache: false });
-
-        });
-
-        $("#btnSubmitRegisterForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#register-form").validate();
-
-            if (!$("#register-form").valid()) {
-                return false;
-            }
-
-            if ($("#register-form").valid()) {
-
-                $("#progress").removeClass('displaynone');
-                $("#progress").addClass('displayblock');
-                $("#progress").show();
-
-                $("#register-form").submit();
-            }
-
-        });
-
-    </script>
-
+    <script src="~/Scripts/register.js"></script>
 }
-
-
-
-
-
-
-

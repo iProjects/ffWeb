@@ -1,0 +1,14 @@
+﻿.progress-thin {
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.extra-small {
+    font-size: 0.75rem;
+}
+
+#password-strength-bar {
+    transition: width 0.3s ease, background-color 0.3s ease;
+}

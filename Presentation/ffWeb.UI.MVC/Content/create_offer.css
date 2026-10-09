@@ -1,0 +1,77 @@
+﻿/* Layout Variables */
+:root { 
+    --card-border-radius: 12px;
+}
+
+/* Base Body Adjustment for Fixed Headers */
+body {
+    padding-top: var(--fixed-header-height);
+    background-color: #f8f9fa;
+}
+
+/* Wrapper Container */
+.offer-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Modern Card Styling */
+.form-card {
+    border-radius: var(--card-border-radius);
+    background-color: #ffffff;
+}
+
+.icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+}
+
+.bg-primary-subtle {
+    background-color: #e7f1ff;
+}
+
+/* Custom Input Styling */
+.form-control:focus, 
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* ==========================================
+   Mobile-First Media Queries
+   ========================================== */
+
+/* Mobile Phones (default up to 575px) */
+@media (max-width: 575.98px) {
+    .offer-container {
+        padding: 2rem 0.75rem;
+    }
+
+    .d-flex.justify-content-end {
+        flex-direction: column-reverse;
+    }
+
+    .d-flex.justify-content-end .btn {
+        width: 100%;
+    }
+}
+
+/* Tablet Devices (576px to 991px) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .offer-container {
+        max-width: 720px;
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Desktop Devices (992px and up) */
+@media (min-width: 992px) {
+    .offer-container {
+        max-width: 960px;
+        padding: 2.5rem 0;
+    }
+}

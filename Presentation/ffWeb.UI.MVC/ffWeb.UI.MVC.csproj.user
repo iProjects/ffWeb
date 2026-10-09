@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <NameOfLastUsedPublishProfile>2023_ffweb</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>local_iis_2026</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

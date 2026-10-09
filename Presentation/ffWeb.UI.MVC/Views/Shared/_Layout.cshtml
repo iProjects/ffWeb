@@ -1,17 +1,15 @@
-﻿@using ffWeb.UI.MVC.Controllers;
-
+﻿@using ffWeb.UI.MVC.Controllers
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="en" class="h-100" data-bs-theme="light">
 <head>
-
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - Peer-to-Peer Lending</title>
-    <link href="~/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
-
-    @Styles.Render("~/bundles/_AllStyles")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Fanikiwa Peer-to-Peer Lending</title>
+    <link rel="shortcut icon" href="~/Dollar.ico" type="image/x-icon" />
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
@@ -21,362 +19,151 @@
     @Scripts.Render("~/bundles/MicrosoftAjax")
     @Scripts.Render("~/bundles/CustomScripts")
 
+    <link href="~/Content/bootstrap-icons-v5.3.3.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-icons-v1.11.3.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/layout.css" rel="stylesheet" type="text/css" />
+
+
 </head>
-
-
-<body>
-
-    <header>
-        <div class="content-wrapper">
-
-            <div class="float-left">
-                <p class="site-title" title="Fanikiwa - Peer - To - Peer Lending">
-                    Fanikiwa - Peer - To - Peer Lending
-                </p>
+<body class="d-flex flex-column h-100 bg-body-tertiary text-body">
+    <!-- Updated Global Progress Loading Overlay -->
+    <div id="progress" class="displaynone position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center z-3 bg-dark bg-opacity-50">
+        <div class="bg-white p-4 rounded-4 shadow-lg d-flex align-items-center gap-3">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-
-
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-            </div>
-
-
-            <div id="progress" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: cornflowerblue; z-index: 30001; opacity: .8; filter: alpha(opacity=70);" class="displaynone">
-
-                <p style="position: absolute; top: 30%; left: 35%; color: White;">
-                    <img src="@Url.Content("~/Images/ajax-loader.gif")" width="50" height="50">
-                </p>
-
-            </div>
-
-
-            <div id="nav">
-                <ul id="menu">
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "home-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitIndexForm" style="cursor: pointer;">Home</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitListLendOffersForm" style="cursor: pointer;">Get A loan</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitListBorrowOffersForm" style="cursor: pointer;">Make An Investment</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("ListMyOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-my-offers-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitListMyOffersForm" style="cursor: pointer;">My Offers</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-
-
-                    @if (Request.IsAuthenticated)
-                    { 
-                        
-                        <li id="subMenuMyProfile">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-sub-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitEditProfileSubForm" style="cursor: pointer;">My Profile</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-
-                        <li id="subMenuMyAccounts">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("MyAccounts", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-accounts-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitMyAccountsForm" style="cursor: pointer;">My Accounts</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                         
-                     <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("ListMyInvestMents", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-investments-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitMyInvestMentsForm" style="cursor: pointer;">My InvestMents</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                        <li id="subMenuMyLoans">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("ListMyLoans", "Loans", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-loans-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitMyLoansForm" style="cursor: pointer;">My Loans</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                        
-                        <li id="subMenuOfferGroups">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("MailingGroups", "MailingGroups", FormMethod.Get, new { enctype = "multipart/form-data", id = "my-offer-groups-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitGetMyMailingGroupsForm" style="cursor: pointer;">My Offer Groups</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                         
-                        <li id="subMenuScores">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("Scores", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "offer-scores-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitOfferScoresForm" style="cursor: pointer;">My Offer Scores</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                         
-                        <li id="subMenuChangePassword">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("Manage", "Account", new { Message = "ChangePasswordSuccess" }, FormMethod.Get, new { enctype = "multipart/form-data", id = "change-password-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitChangePasswordForm" style="cursor: pointer;">Change Password</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                        
-                        <li id="subMenuDeRegister">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("DeRegister", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "de-register-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitDeRegisterForm" style="cursor: pointer;">DeRegister</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                        
-                        <li id="subMenuWithDraw">
-
-                            <div class="floatleft">
-                                @using (Html.BeginForm("WithDrawCash", "WithDraw", FormMethod.Get, new { enctype = "multipart/form-data", id = "withdraw-form" }))
-                                { 
-                                    <div>
-                                        <a id="btnSubmitWithDrawCashForm" style="cursor: pointer;">WithDraw</a>
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-                        
-
-
-                    }
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("Help", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "help-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitHelpForm" style="cursor: pointer;">Help</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("ContactUs", "Contact", FormMethod.Get, new { enctype = "multipart/form-data", id = "contact-us-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitContactUsForm" style="cursor: pointer;">Contact Us</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("Contact", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "contacts-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitContactsForm" style="cursor: pointer;">Contacts</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-                    <li>
-
-                        <div class="floatleft">
-                            @using (Html.BeginForm("About", "Home", FormMethod.Get, new { enctype = "multipart/form-data", id = "about-form" }))
-                            { 
-                                <div>
-                                    <a id="btnSubmitAboutForm" style="cursor: pointer;">About</a>
-                                </div>    
-                            }
-                        </div>
-
-                    </li>
-
-
-
-                </ul>
-            </div>
-
-
+            <span class="fw-semibold text-secondary">Processing request...</span>
         </div>
-
-
-    </header>
-
-
-
-
-    <div id="body">
-
-
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-
-            <div id="error-display-div" class="displaynone">
-            </div>
-
-            @RenderBody()
-
-        </section>
-
-
     </div>
-
-
-
-
-    <footer>
-
-        <hr />
-
-        <div class="content-wrapper">
-            <div class="float-left">
-
-                @Html.ActionLink("Home", "Index", "Home")|
-                   @Html.ActionLink("About", "About", "Home")|
-                   @Html.ActionLink("Contacts", "Contact", "Home")|
-                   @Html.ActionLink("Contact Us", "ContactUs", "Contact")|
-                   @Html.ActionLink("Help", "Help", "Home")|
-                                 
-
-                  <a href="https://www.facebook.com/SoftwareProvidersLtd" title="Facebook" target="_blank">FaceBook</a>|
-                  <a href="http://twitter.com/" title="Twitter" target="_blank">Twitter</a>|
-                  <a href="https://plus.google.com/" title="Google+" target="_blank">Google+</a>|
-                  <a href="http://www.linkedin.com/" title="LinkedIn" target="_blank">LinkedIn</a>|
-                  <a href="#" title="Blog">Blog</a>|
-                  <a href="#" title="Discussion board">Discussion board</a> |
-                  <a href="#" title="Press">Press</a>|
-                  <a href="#" title="Terms">Terms</a>|                    
-                  <a href="#" title="Jobs">Jobs</a>|                    
-                  <a href="#" title="Privacy policy">Privacy policy</a>|
-                  <a href="#" title="Principles">Principles</a>
-
-
+    <!-- Global Loading Overlay -->
+    @*<div id="progress" class="progress-overlay d-none">
+        <div class="card border-0 shadow-lg p-4 text-center">
+            <div class="spinner-border text-primary mb-3 mx-auto" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="fw-semibold mb-0">Processing request...</p>
+        </div>
+         Inline Load SVG Sprite Definition*@ 
+        @Html.Partial("_SvgSprite")
+    @*</div>*@
+    <!-- Responsive Navbar -->
+    <header class="fixed-top bg-body border-bottom shadow-sm">
+        <nav class="navbar navbar-expand-lg py-2">
+            <div class="container-xl">
+                <!-- Brand -->
+                <a class="navbar-brand d-flex align-items-center gap-2" href="@Url.Action("Index", "Home")">
+                    <span class="brand-avatar">F</span>
+                    <span class="fw-bold tracking-tight">Fanikiwa</span>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill d-none d-sm-inline-block">P2P</span>
+                </a>
+                <div class="d-flex align-items-center gap-2 order-lg-last">
+                    <!-- Dark/Light Theme Toggle -->
+                    @*<button class="btn btn-icon btn-outline-secondary border-0" id="themeToggle" type="button" aria-label="Toggle Theme">
+                        <!-- Sun Icon -->
+                        <svg class="svg-icon theme-icon-sun d-none" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
+                        <!-- Moon Icon -->
+                        <svg class="svg-icon theme-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+                    </button>*@
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary border d-flex align-items-center gap-2 rounded-pill px-3 py-1" type="button" id="userMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg class="svg-icon text-primary" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                                <span class="fw-semibold small d-none d-md-inline">Account</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-4 mt-2" aria-labelledby="userMenuDropdown">
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("EditProfile", "Account")">Profile</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("MyAccounts", "Account")">My Accounts</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("ListMyInvestMents", "Offers")">My Investments</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("ListMyLoans", "Loans")">My Loans</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("WithDrawCash", "WithDraw")">Withdraw Cash</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("MailingGroups", "MailingGroups")">Offer Groups</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("Scores", "Account")">Offer Scores</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="@Url.Action("Manage", "Account")">Change Password</a></li>
+                            </ul>
+                        </div>
+                    }
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-1 mt-2 mt-lg-0">
+                        <li class="nav-item"><a class="nav-link px-3 rounded-3" href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 rounded-3" href="@Url.Action("ListLendOffers", "Offers")">Get A Loan</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 rounded-3" href="@Url.Action("ListBorrowOffers", "Offers")">Invest</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 rounded-3" href="@Url.Action("ListMyOffers", "Offers")">My Offers</a></li>
+                    </ul>
+                    <section id="login" class="mb-0">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Main Container -->
+    <main class="flex-shrink-0 flex-grow-1 main-content">
+        <div class="container-xl">
+            @RenderSection("featured", required: false)
+            <div id="error-display-div" class="alert alert-danger d-none rounded-3 shadow-sm my-3" role="alert"></div>
+            @RenderBody()
+        </div>
+    </main>
+    <!-- Modern Footer -->
+    <footer class="footer mt-auto py-5 bg-body border-top">
+        <div class="container-xl">
+            <div class="row g-4 mb-4">
+                <div class="col-6 col-md-3">
+                    <h6 class="fw-bold small text-uppercase mb-3">Platform</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="@Url.Action("Index", "Home")" class="text-secondary text-decoration-none">Home</a></li>
+                        <li><a href="@Url.Action("ListLendOffers", "Offers")" class="text-secondary text-decoration-none">Get a Loan</a></li>
+                        <li><a href="@Url.Action("ListBorrowOffers", "Offers")" class="text-secondary text-decoration-none">Make an Investment</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h6 class="fw-bold small text-uppercase mb-3">Company</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="@Url.Action("About", "Home")" class="text-secondary text-decoration-none">About Us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" class="text-secondary text-decoration-none">Contacts</a></li>
+                        <li><a href="@Url.Action("ContactUs", "Contact")" class="text-secondary text-decoration-none">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h6 class="fw-bold small text-uppercase mb-3">Legal</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="#" class="text-secondary text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h6 class="fw-bold small text-uppercase mb-3">Connect</h6>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.facebook.com/SoftwareProvidersLtd" target="_blank" class="text-secondary" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+                        </a>
+                        <a href="http://twitter.com/" target="_blank" class="text-secondary" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" /></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="opacity-10">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 small text-secondary">
+                <span>&copy; @DateTime.Now.Year Software Providers Limited</span>
+                <span class="d-flex align-items-center gap-1 text-success">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                    256-Bit Encrypted
+                </span>
             </div>
         </div>
-
-
-        <div class="content-wrapper clearboth">
-            <div class="float-left">
-                <p style="font-size: 15px">Copyright &copy; @DateTime.Now.Year - Software Providers Limited. All Rights Reserved.</p>
-            </div>
-        </div>
-
-
-        <div class="content-wrapper clearboth">
-            <div>
-
-                <img src="~/Images/fanikiwa_savings.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-                <img src="~/Images/images.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-                <img src="~/Images/savingsimg.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-            </div>
-        </div>
-
-
     </footer>
-
-
+    <!-- Bootstrap 5 JS -->n
+    <!-- Modern Script -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/layout.js"></script>
     @RenderSection("scripts", required: false)
-
-
 </body>
-
-
 </html>

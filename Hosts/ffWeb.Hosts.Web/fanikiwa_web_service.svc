@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ffWeb.Hosts.Web.fanikiwa_web_service" CodeBehind="fanikiwa_web_service.svc.cs" %>

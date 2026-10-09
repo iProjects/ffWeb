@@ -1,0 +1,483 @@
+DROP TABLE IF EXISTS [UserProfile];
+DROP TABLE IF EXISTS [webpages_Membership];
+DROP TABLE IF EXISTS [webpages_OAuthMembership];
+DROP TABLE IF EXISTS [webpages_Roles];
+DROP TABLE IF EXISTS [webpages_UsersInRoles];
+
+CREATE TABLE IF NOT EXISTS [webpages_UsersInRoles] (
+	[UserId] INT NOT NULL,
+	[RoleId] INT NOT NULL,
+	PRIMARY KEY ([UserId], [RoleId])
+);
+
+CREATE TABLE IF NOT EXISTS [webpages_Roles] (
+	[RoleId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[RoleName] TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [webpages_OAuthMembership] (
+	[Provider] TEXT NOT NULL,
+	[ProviderUserId] TEXT NOT NULL,
+	[UserId] INT NOT NULL,
+	PRIMARY KEY ([Provider], [ProviderUserId])
+);
+
+CREATE TABLE IF NOT EXISTS [webpages_Membership] (
+	[UserId] INTEGER PRIMARY KEY NOT NULL,
+	[CreateDate] TEXT NULL,
+	[ConfirmationToken] TEXT NULL,
+	[IsConfirmed] INT NULL,
+	[LastPasswordFailureDate] TEXT NULL,
+	[PasswordFailuresSinceLastSuccess] INT NOT NULL,
+	[Password] TEXT NOT NULL,
+	[PasswordChangedDate] TEXT NULL,
+	[PasswordSalt] TEXT NOT NULL,
+	[PasswordVerificationToken] TEXT NULL,
+	[PasswordVerificationTokenExpirationDate] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [UserProfile] (
+	[UserId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[UserName] TEXT NULL
+);
+
+DROP TABLE IF EXISTS [FanikiwaMessages];
+DROP TABLE IF EXISTS [GSMError];
+DROP TABLE IF EXISTS [InformDb];
+DROP TABLE IF EXISTS [MessageStore];
+
+CREATE TABLE IF NOT EXISTS [MessageStore] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[UserDataText] TEXT NULL,
+	[OriginatingAddress] TEXT NULL,
+	[SCTimestamp] TEXT NULL,
+	[MessageStatus] TEXT NULL,
+	[Storage] TEXT NULL,
+	[SmscAddressType] TEXT NULL,
+	[SmscAddress] TEXT NULL,
+	[OriginatingAddressType] TEXT NULL,
+	[MessageType] TEXT NULL,
+	[MessageIndex] TEXT NULL,
+	[MessageBody] TEXT NULL,
+	[Status] TEXT NULL,
+	[Processed] INT NULL,
+	[IsDeleted] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [InformDb] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[AddressFrom] TEXT NULL,
+	[AddressTo] TEXT NULL,
+	[MessageDate] TEXT NULL,
+	[Body] TEXT NULL,
+	[Status] TEXT NULL,
+	[MessageType] TEXT NULL,
+	[MessageInformType] TEXT NULL,
+	[Subject] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [GSMError] (
+	[ErrorCode] TEXT NOT NULL PRIMARY KEY,
+	[ErrorText] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [FanikiwaMessages] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[MemberId] INT NULL,
+	[SenderTelno] TEXT NULL,
+	[CustomerTelno] TEXT NULL,
+	[Command] TEXT NULL,
+	[MessageType] TEXT NULL,
+	[Status] TEXT NULL,
+	[Body] TEXT NULL,
+	[MessageDate] TEXT NULL,
+	[AccountId] TEXT NULL,
+	[StartDate] TEXT NULL,
+	[EndDate] TEXT NULL,
+	[Amount] DECIMAL NULL,
+	[HM_Param] TEXT NULL,
+	[BE_AccLabel] TEXT NULL,
+	[ST_StartDate] TEXT NULL,
+	[ST_EndDate] TEXT NULL,
+	[OfferId] INT NULL,
+	[Email] TEXT NULL,
+	[Pwd] TEXT NULL,
+	[NotificationMethod] TEXT NULL,
+	[MO_Term] INT NULL,
+	[MO_Interest] DECIMAL NULL,
+	[CP_NewPassword] TEXT NULL,
+	[CP_ConfirmPassword] TEXT NULL,
+	[NationalID] TEXT NULL,
+	[MpesaRef] TEXT NULL,
+	[MpesaSentDate] TEXT NULL,
+	[MpesaBal] DECIMAL NULL,
+	[Exception] TEXT NULL
+);
+
+DROP TABLE IF EXISTS [Transactions];
+DROP TABLE IF EXISTS [Tree];
+DROP TABLE IF EXISTS [TransactionChainTree];
+DROP TABLE IF EXISTS [Accounts];
+DROP TABLE IF EXISTS [AccountTypes];
+DROP TABLE IF EXISTS [COA];
+DROP TABLE IF EXISTS [Customers];
+DROP TABLE IF EXISTS [DiaryProgramControl];
+DROP TABLE IF EXISTS [Node];
+DROP TABLE IF EXISTS [Settings];
+DROP TABLE IF EXISTS [SettingsGroups];
+DROP TABLE IF EXISTS [STO];
+DROP TABLE IF EXISTS [TieredDet];
+DROP TABLE IF EXISTS [TieredTable];
+DROP TABLE IF EXISTS [TransactionChainNode];
+DROP TABLE IF EXISTS [ValueDatedTransactions];
+DROP TABLE IF EXISTS [TransactionTypes];
+
+CREATE TABLE IF NOT EXISTS [TransactionTypes] (
+	[TransactionTypeID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[DebitCredit] TEXT NOT NULL,
+	[ShortCode] TEXT NOT NULL,
+	[TxnClass] INT NULL,
+	[Description] TEXT NULL,
+	[DefaultAmount] DECIMAL NULL,
+	[AmountExpression] TEXT NULL,
+	[DefaultMainAccount] INT NULL,
+	[DefaultContraAccount] INT NULL,
+	[NarrativeFlag] INT NULL,
+	[DefaultMainNarrative] TEXT NULL,
+	[DefaultContraNarrative] TEXT NULL,
+	[TxnTypeView] INT NULL,
+	[ChargeCommission] INT NULL,
+	[ChargeCommissionToTransaction] INT NULL,
+	[CommissionAmountExpression] TEXT NULL,
+	[CommissionDrAnotherAccount] INT NULL,
+	[CommissionDrAccount] INT NULL,
+	[CommissionCrAccount] INT NULL,
+	[CommissionNarrativeFlag] INT NULL,
+	[CommissionMainNarrative] TEXT NULL,
+	[CommissionContraNarrative] TEXT NULL,
+	[CommComputationMethod] TEXT NULL,
+	[Absolute] INT NULL,
+	[TieredTableId] INT NULL,
+	[CommissionAmount] DECIMAL NULL,
+	[DialogFlag] INT NULL,
+	[ForcePost] INT NULL,
+	[Screen] TEXT NULL,
+	[ValueDateOffset] INT NULL,
+	[ChargeWho] TEXT NULL,
+	[DrCommCalcMethod] TEXT NULL,
+	[CrCommCalcMethod] TEXT NULL,
+	[CommissionTransactionType] INT NULL,
+	[StatFlag] TEXT NULL,
+	[CanSuspend] INT NULL,
+	[SuspenseCrAccount] INT NULL,
+	[SuspenseDrAccount] INT NULL,
+	[PrintReceiptPrompt] INT NULL,
+	[PrintReceipt] INT NULL,
+	[ReceiptLayout] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [ValueDatedTransactions] (
+	[TransactionID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[TransactionTypeId] INT NULL,
+	[AccountID] INT NULL,
+	[Amount] DECIMAL NULL,
+	[PostDate] TEXT NULL,
+	[RecordDate] TEXT NULL,
+	[ValueDate] TEXT NULL,
+	[Narrative] TEXT NULL,
+	[ForcePostFlag] INT NULL,
+	[StatementFlag] TEXT NULL,
+	[Authorizer] TEXT NULL,
+	[UserID] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [TransactionChainNode] (
+	[NodeId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[ParentId] INT NULL,
+	[Descripion] TEXT NULL,
+	[TransactionType] INT NOT NULL,
+	FOREIGN KEY ([ParentId]) REFERENCES [TransactionChainNode] ([NodeId])
+);
+
+CREATE TABLE IF NOT EXISTS [TieredTable] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Description] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [TieredDet] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[TieredID] INT NULL,
+	[Min] DECIMAL NULL,
+	[Max] DECIMAL NULL,
+	[Rate] DECIMAL NULL,
+	[Absolute] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [STO] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[NextPayDate] TEXT NOT NULL,
+	[Interval] TEXT NOT NULL,
+	[StartDate] TEXT NOT NULL,
+	[EndDate] TEXT NULL,
+	[STOType] INT NOT NULL,
+	[PartialPay] INT NULL,
+	[DrAccount] INT NOT NULL,
+	[CrAccount] INT NOT NULL,
+	[PayAmount] DECIMAL NOT NULL,
+	[NoOfPayments] INT NULL,
+	[TotalToPay] DECIMAL NULL,
+	[AmountPaid] DECIMAL NULL,
+	[FeesFlag] INT NULL,
+	[CreateDate] TEXT NULL,
+	[LimitFlag] INT NULL,
+	[DrTxnType] INT NULL,
+	[CrTxnType] INT NULL,
+	[NoOfPaymentsMade] INT NULL,
+	[NoOfDefaults] INT NULL,
+	[AmountDefaulted] DECIMAL NULL,
+	[ChargeCommFlag] INT NULL,
+	[CommFreqFlag] INT NULL,
+	[CommSourceFlag] INT NULL,
+	[ChargeWho] INT NULL,
+	[CommissionAccount] INT NULL,
+	[CommissionPaidFlag] INT NULL,
+	[CommissionAmount] DECIMAL NULL,
+	[LoanId] INT NULL,
+	[STOAccType] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [SettingsGroups] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[GroupName] TEXT NOT NULL,
+	[Parent] INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Settings] (
+	[SSKey] TEXT NOT NULL PRIMARY KEY,
+	[SSValue] TEXT NULL,
+	[SSValueType] TEXT NULL,
+	[Description] TEXT NULL,
+	[SGroup] INT NULL,
+	[SSSystem] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Node] (
+	[NodeId] INTEGER NOT NULL PRIMARY KEY,
+	[ParentId] INT NULL,
+	[NodeName] TEXT NOT NULL UNIQUE,
+	FOREIGN KEY ([ParentId]) REFERENCES [Node] ([NodeId])
+);
+
+CREATE TABLE IF NOT EXISTS [DiaryProgramControl] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[LastRun] TEXT NULL,
+	[NextRun] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Customers] (
+	[CustomerId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[CustomerNo] TEXT NULL,
+	[Name] TEXT NULL,
+	[Address] TEXT NULL,
+	[Telephone] TEXT NULL,
+	[Email] TEXT NULL,
+	[Branch] TEXT NULL,
+	[BillToName] TEXT NULL,
+	[BillToAddress] TEXT NULL,
+	[BillToTelephone] TEXT NULL,
+	[BillToEmail] TEXT NULL,
+	[MemberId] INT NULL,
+	[CreatedDate] TEXT DEFAULT (datetime('now'))
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS [IX_Customers] ON [Customers] ([Email]);
+
+CREATE TABLE IF NOT EXISTS [COA] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[ShortCode] TEXT NOT NULL,
+	[Description] TEXT NOT NULL,
+	[COALevel] INT NOT NULL,
+	[Parent] INT NOT NULL,
+	[Rorder] INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [AccountTypes] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[ShortCode] TEXT NULL,
+	[Description] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Accounts] (
+	[AccountID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[CustomerId] INT NOT NULL,
+	[AccountName] TEXT NOT NULL,
+	[AccountNo] TEXT NULL,
+	[AccountTypeId] INT NOT NULL,
+	[COAId] INT NOT NULL,
+	[Branch] TEXT NULL,
+	[BookBalance] DECIMAL NOT NULL,
+	[ClearedBalance] DECIMAL NOT NULL,
+	[InterestRate] DECIMAL NOT NULL,
+	[AccruedInt] DECIMAL NOT NULL,
+	[Limit_Amount] DECIMAL NOT NULL,
+	[LimitFlag] INT NULL,
+	[PassFlag] INT NULL,
+	[LimitCheckFlag] INT NULL,
+	[Bal30] DECIMAL NULL,
+	[Bal60] DECIMAL NULL,
+	[Bal90] DECIMAL NULL,
+	[BalOver90] DECIMAL NULL,
+	[IntRate30] DECIMAL NULL,
+	[IntRate60] DECIMAL NULL,
+	[IntRate90] DECIMAL NULL,
+	[IntRateOver90] DECIMAL NULL,
+	[Closed] INT NULL,
+	FOREIGN KEY ([AccountTypeId]) REFERENCES [AccountTypes] ([Id])
+);
+
+CREATE TABLE IF NOT EXISTS [TransactionChainTree] (
+	[NodeId] INT NOT NULL,
+	[ParentId] INT NOT NULL,
+	[Level] INT NOT NULL,
+	PRIMARY KEY ([NodeId], [ParentId]),
+	FOREIGN KEY ([NodeId]) REFERENCES [TransactionChainNode] ([NodeId]) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS [Tree] (
+	[NodeId] INT NOT NULL,
+	[ParentId] INT NOT NULL,
+	[Level] INT NOT NULL,
+	PRIMARY KEY ([NodeId], [ParentId]),
+	FOREIGN KEY ([NodeId]) REFERENCES [Node] ([NodeId]) ON DELETE CASCADE
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS [UK_Level] ON [Tree] ([NodeId], [Level]);
+
+CREATE TABLE IF NOT EXISTS [Transactions] (
+	[TransactionID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[TransactionTypeId] INT NOT NULL,
+	[AccountID] INT NOT NULL,
+	[Amount] DECIMAL NOT NULL,
+	[PostDate] TEXT NOT NULL,
+	[RecordDate] TEXT NOT NULL,
+	[ValueDate] TEXT NULL,
+	[Narrative] TEXT NULL,
+	[ForcePostFlag] INT NULL,
+	[StatementFlag] TEXT NULL,
+	[Authorizer] TEXT NULL,
+	[UserID] TEXT NULL,
+	[Reference] TEXT NULL,
+	[ContraReference] TEXT NULL,
+	FOREIGN KEY ([AccountID]) REFERENCES [Accounts] ([AccountID]),
+	FOREIGN KEY ([TransactionTypeId]) REFERENCES [TransactionTypes] ([TransactionTypeID])
+);
+
+DROP TABLE IF EXISTS [Users];
+DROP TABLE IF EXISTS [ContactUs];
+DROP TABLE IF EXISTS [Loans];
+DROP TABLE IF EXISTS [MailingGroupMembers];
+DROP TABLE IF EXISTS [MailingGroups];
+DROP TABLE IF EXISTS [Members];
+DROP TABLE IF EXISTS [OfferReceipients];
+DROP TABLE IF EXISTS [Offers];
+
+CREATE TABLE IF NOT EXISTS [Offers] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Offerees] TEXT NULL,
+	[OfferType] TEXT NOT NULL,
+	[ExpiryDate] TEXT NULL,
+	[CreatedDate] TEXT NULL,
+	[Amount] DECIMAL NULL,
+	[Term] INT NULL,
+	[Interest] DECIMAL NULL,
+	[MemberId] INT NOT NULL,
+	[Description] TEXT NULL,
+	[Status] TEXT NULL,
+	[PublicOffer] TEXT NULL,
+	[PartialPay] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [OfferReceipients] (
+	[OfferReceipientId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[OfferId] INT NOT NULL,
+	[MemberId] INT NOT NULL,
+	[IdType] TEXT NULL,
+	[MemberEmail] TEXT NULL,
+	[MemberTelno] TEXT NULL,
+	[MailingGroup] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Members] (
+	[MemberId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[Surname] TEXT NULL,
+	[OtherNames] TEXT NULL,
+	[DateOfBirth] TEXT NULL,
+	[Gender] TEXT NULL,
+	[Telephone] TEXT NULL,
+	[Email] TEXT NOT NULL UNIQUE,
+	[DateJoined] TEXT NULL,
+	[CustomerId] INT NULL,
+	[CurrentAccountId] INT NULL,
+	[LoanAccountId] INT NULL,
+	[InvestmentAccountId] INT NULL,
+	[Status] TEXT NULL,
+	[DateActivated] TEXT NULL,
+	[RefferedBy] INT NULL,
+	[InformBy] TEXT NULL,
+	[MaxRecordsToDisplay] INT NULL,
+	[Photo] TEXT NULL,
+	[NationalID] TEXT NULL,
+	[Pwd] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [MailingGroups] (
+	[GroupId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[ParentGroupId] INT NULL,
+	[ShortCode] TEXT NULL,
+	[Creator] INT NULL,
+	[CreatedOn] TEXT NULL,
+	[LastModified] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [MailingGroupMembers] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[GroupId] INT NULL,
+	[IdType] TEXT NULL,
+	[Member] INT NULL,
+	[Email] TEXT NULL,
+	[Telno] TEXT NULL,
+	[MailingGroup] TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Loans] (
+	[Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[MemberId] INT NOT NULL,
+	[OfferId] INT NOT NULL,
+	[Amount] DECIMAL NULL,
+	[Interest] DECIMAL NULL,
+	[Term] INT NULL,
+	[CreatedDate] TEXT NULL,
+	[MaturityDate] TEXT NULL,
+	[PartialPay] INT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [ContactUs] (
+	[Id] INT NOT NULL,
+	[FirstName] TEXT NOT NULL,
+	[LastName] TEXT NOT NULL,
+	[Telephone] TEXT NOT NULL,
+	[Email] TEXT NOT NULL,
+	[Subject] TEXT NOT NULL,
+	[Comment] TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS [Users] (
+	[UserId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	[UserName] TEXT NOT NULL,
+	[Email] TEXT NULL,
+	[Password] TEXT NOT NULL,
+	[ConfirmPassword] TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS [IX_Users] ON [Users] ([UserId]);
+

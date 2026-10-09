@@ -1,404 +1,293 @@
 ﻿@{
-    ViewBag.Title = "Fanikiwa";
+    ViewBag.Title = "Fanikiwa - Peer-to-Peer Lending Platform";
 }
+ 
+    <link rel="stylesheet" href="~/Content/dashboard.css" />
 
-
-@section featured {
-
-    <section class="featured">
-        <div class="content-wrapper">
-
-            <hgroup class="title">
-                <h1>Fanikiwa Peer-To-Peer Lending.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-
-            <hgroup class="title">
-                <h1>How peer-to-peer lending work.</h1>
-            </hgroup>
-
-            <div class="clearboth">
-
-                <p>
-                    Also known as social lending or lend-to-save, peer-to-peer lending works by individual lenders and borrowers coming together to get better rates.
-                <br />
-                    Fanikiwa's peer-to-peer loans offer borrowers competitive low rates and flexible terms. 
-                    <br />
-                    Lenders  earn higher returns by lending to borrowers. 
-                    <br />
-                    Peer-to-peer lending sites match up savers, who are willing to lend, with borrowers - either individuals or small businesses.
-                    <br />
-                    Rates can be better than those offered by banks - as high as about 16% for savers, and as low as about 5% for borrowers on a five-year loan.<br />
-                    Peer-To-Peer Lending, which is a concept that has been around for a very long time, but the method as to how it was carried out was not always efficient at all. It went a little something like this:<br />
-                    Friend #1: Hey best friend, can I borrow 100,000 to get a new car?<br />
-                    Friend #2: Do you promise to pay me back?<br />
-                    Friend #1: Of course, you know that I am good for it!<br />
-                    Friend #2: Ok fine, I will get the money to you by next week.<br />
-                    The truth is that these situations are very common.
-                    <br />
-                    We enter into lending/borrowing agreements with friends and families all the time, and the lender enters into a situation with unlimited risk and no reward for their risk.<br />
-                    This is where a website like Fanikiwa comes into play.
-                    <br />
-                    Fanikiwa  is a peer-to-peer lending network that brings investors and borrowers together to satisfy both parties needs by offering a secure, legal, and efficient service. Those people who wish to take more control of their investments can lend money to borrowers, and borrowers who are tired of having limited options for choosing a personal loan product can try Fanikiwa .
-
-                </p>
-
-            </div>
-
-            <div class="clearboth">
-
-                <hgroup class="title">
-                    <h2 class="title">Fanikiwa offers low rate loans with no early repayment fees. </h2>
-                </hgroup>
-
-                <label for="DashBoardAmountrange">Select Amount Range To See Loan APR</label>
-                <input type="range" name="DashBoardAmountrange" value="Amount" min="1000" max="100000" step="1000" id="DashBoardAmountrange" class="text ui-widget-content ui-corner-all">
-
-                <label for="DashBoardAmountValue">Loan APR</label>
-                <input type="text" name="DashBoardAmountValue" id="DashBoardAmountValue" value="" class="text ui-widget-content ui-corner-all">
-            </div>
-
-            @if (Request.IsAuthenticated)
-            { 
-
-                <div class="clearboth">
-                    <ol class="round">
-
-                        <li class="one">
-                            <h5>Complete Your Profile</h5>
-
-                            <div>
-                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-loggedin-form" }))
-                                { 
-                                    <div>
-                                        Complete your Profile by Clicking
-                        <a id="btnSubmitEditProfileLoggedInForm" style="cursor: pointer;">My Profile</a>
-                                        @*@Html.ActionLink("My Profile", "EditProfile", "Account")*@
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-
-                        <li class="two">
-                            <h5>Make An Investement</h5>
-
-                            <div>
-                                @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-loggedin-form" }))
-                                { 
-                                    <div>
-                                        You can make an investment by making a lend offer 
-                                         <a id="btnSubmitListBorrowOffersLoggedInForm" style="cursor: pointer;">Make An Investement</a>
-                                        @*@Html.ActionLink("Make An Investement", "ListBorrowOffers", "Offers")*@
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-
-                        <li class="three">
-                            <h5>Get A loan</h5>
-
-                            <div>
-                                @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-loggedin-form" }))
-                                { 
-                                    <div>
-                                        You can get a loan by making a borrow offer 
-                                        <a id="btnSubmitListLendOffersLoggedInForm" style="cursor: pointer;">Get A loan</a>
-                                        @* @Html.ActionLink("Get A loan", "ListLendOffers", "Offers")*@
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-
-                    </ol>
-                </div> 
-                
-            }
-            else
-            {
-                <div class="clearboth">
-                    <ol class="round">
-
-                        <li class="one">
-                            <h5>Join Fanikiwa!</h5>
-
-                            <div>
-
-                                @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "register-index-form" }))
-                                { 
-                                    <div>
-                                        Enter your details on the register screen by clicking 
-                <a id="btnSubmitRegisterIndexForm" style="cursor: pointer;">Register</a>
-                                        @*@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })*@
-                                    </div>    
-                                }
-
-                            </div>
-
-                        </li>
-
-                        <li class="two">
-                            <h5>Complete Your Profile</h5>
-
-                            <div>
-
-                                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-index-form" }))
-                                { 
-                                    <div>
-                                        After clicking register you will automatically be redirected to the home page. Click on
-                <a id="btnSubmitEditProfileIndexForm" style="cursor: pointer;">My Profile</a>
-                                        @*@Html.ActionLink("My Profile", "EditProfile", "Account")*@
-                                        and Complete your Profile.
-                                    </div>    
-                                }
-
-                            </div>
-
-                        </li>
-
-                        <li class="three">
-                            <h5>Make An Investement</h5>
-
-                            <div>
-
-                                @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-index-form" }))
-                                { 
-                                    <div>
-                                        You can make an investment by making a lend offer 
-                <a id="btnSubmitListBorrowOffersIndexForm" style="cursor: pointer;">Make An Investement</a>
-                                        @*@Html.ActionLink("Make An Investement", "ListBorrowOffers", "Offers")*@
-                                    </div>    
-                                }
-
-                            </div>
-
-                        </li>
-
-                        <li class="four">
-                            <h5>Get A loan</h5>
-
-                            <div>
-
-                                @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-index-form" }))
-                                { 
-                                    <div>
-                                        You can get a loan by making a borrow offer   
-                <a id="btnSubmitListLendOffersIndexForm" style="cursor: pointer;">Get A loan</a>
-                                        @*@Html.ActionLink("Get A loan", "ListLendOffers", "Offers")*@
-                                    </div>    
-                                }
-                            </div>
-
-                        </li>
-
-
-                    </ol>
-                </div>    
-            }
-
-            <div class="clearboth">
-
-                <hgroup class="title">
-                    <h2 class="title">Why Fanikiwa</h2>
-                </hgroup>
-
-                <ul>
-                    <li>
-                        <h5>Low fixed rates</h5>
-                    </li>
-                    <li>
-                        <h5>Fast and easy online application</h5>
-                    </li>
-                    <li>
-                        <h5>No teaser rates or hidden fees</h5>
-                    </li>
-                    <li>
-                        <h5>Rates from 5% to 20% APR</h5>
-                    </li>
-                    <li>
-                        <h5>No early repayment fees
-                            <br />
-                            (flexibility to repay loan early or make extra payments)</h5>
-                    </li>
-                    <li>
-                        <h5>Borrow between Ksh1,000 and Ksh100,000</h5>
-                    </li>
-                    <li>
-                        <h5>Loans available over 1, 2, 3, 4 or 5 years</h5>
-                    </li>
-                </ul>
-
-            </div>
-
-            <div class="clearboth">
-
-                <hgroup class="title">
-                    <h2 class="title">How to apply for Fanikiwa loans</h2>
-                </hgroup>
-
-                <ul class="round">
-                    <li class="one">
-                        <h5>Check the rates</h5>
-                    </li>
-
-                    <li class="two">
-                        <h5>Get a quote</h5>
-                    </li>
-
-                    <li class="three">
-                        <h5>Accept the quote and apply online</h5>
-                    </li>
-
-                    <li class="four">
-                        <h5>Approval within 24 hours (Mon to Fri)</h5>
-                    </li>
-
-                    <li class="five">
-                        <h5>Money transferred on approval</h5>
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <div class="clearboth">
-
- @*                 @{
-    var myChart = new Chart(width: 200, height: 200)
-        .AddTitle("Chart Title")
-        .AddSeries(
-            name: "Employee",
-            xValue: new[] {  "Peter", "Andrew", "Julie", "Mary", "Dave" },
-            yValues: new[] { "2", "6", "4", "5", "3" })
-        .Write();
-}*@
-
-            </div>
-
+<div class="dashboard-container container-fluid py-4 px-md-4">
+    <!-- Hero Header -->
+    <div class="row align-items-center mb-4 bg-primary bg-gradient text-white p-4 rounded-3 shadow-sm">
+        <div class="col-lg-8">
+            <span class="badge bg-light text-primary mb-2 fw-semibold px-3 py-2 rounded-pill">Peer-To-Peer Lending Network</span>
+            <h1 class="display-5 fw-bold mb-2">Fanikiwa Peer-To-Peer Lending</h1>
+            <p class="lead mb-0 text-white-50">
+                @(string.IsNullOrEmpty(ViewBag.Message) ? "Connecting borrowers with smart investors for better rates, zero hidden fees, and transparent terms." : ViewBag.Message)
+            </p>
         </div>
-
-    </section>
-
-}
-
-
-
-
-
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            @if (!Request.IsAuthenticated)
+            {
+                <button type="button" class="btn btn-light btn-lg fw-bold px-4 text-primary rounded-pill me-2 btn-submit-form" data-form="register-index-form">
+                    Get Started
+                </button>
+            }
+            <button type="button" class="btn btn-outline-light btn-lg fw-bold px-4 rounded-pill btn-submit-form" data-form="@(Request.IsAuthenticated ? "list-borrow-offers-loggedin-form" : "list-borrow-offers-index-form")">
+                Invest Now
+            </button>
+        </div>
+    </div>
+    <!-- Main Content Area -->
+    <div class="row g-4 mb-4">
+        <!-- Loan Calculator -->
+        <div class="col-lg-5">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <div class="d-flex align-items-center">
+                        <div class="p-2 bg-primary bg-opacity-10 text-primary rounded-3 me-3">
+                            <svg class="svg-icon svg-icon-lg"><use href="#icon-calculator"></use></svg>
+                        </div>
+                        <div>
+                            <h5 class="card-title fw-bold mb-0">Loan & APR Estimator</h5>
+                            <small class="text-muted">Low rates with no early repayment fees</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-4">
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <label for="DashBoardAmountrange" class="form-label fw-semibold text-secondary">Desired Loan Amount</label>
+                            <span class="fw-bold text-primary fs-5" id="AmountDisplay">Ksh 1,000</span>
+                        </div>
+                        <input type="range" class="form-range custom-range" name="DashBoardAmountrange" min="1000" max="100000" step="1000" value="1000" id="DashBoardAmountrange">
+                        <div class="d-flex justify-content-between text-muted fs-7">
+                            <span>Ksh 1,000</span>
+                            <span>Ksh 100,000</span>
+                        </div>
+                    </div>
+                    <div class="bg-light p-3 rounded-3 mb-3">
+                        <div class="row text-center">
+                            <div class="col-6 border-end">
+                                <small class="text-muted d-block mb-1">Loan Range</small>
+                                <span class="fw-bold text-dark fs-6">1 - 5 Years</span>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted d-block mb-1">Estimated APR</small>
+                                <span class="fw-bold text-success fs-6" id="EstimatedAPR">5% - 20%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="DashBoardAmountValue" class="form-label fw-semibold text-secondary">Selected Value (Ksh)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">Ksh</span>
+                            <input type="number" name="DashBoardAmountValue" id="DashBoardAmountValue" class="form-control border-start-0" value="1000" min="1000" max="100000" step="1000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Action Card Matrix -->
+        <div class="col-lg-7">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="card-title fw-bold mb-0">
+                        @(Request.IsAuthenticated ? "Dashboard Quick Actions" : "Getting Started with Fanikiwa")
+                    </h5>
+                    <span class="badge bg-secondary-subtle text-secondary rounded-pill px-3 py-1">
+                        @(Request.IsAuthenticated ? "Authenticated" : "Guest Mode")
+                    </span>
+                </div>
+                <div class="card-body px-4">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded-3 bg-body-tertiary h-100 text-center d-flex flex-column justify-content-between">
+                                    <div>
+                                        <div class="text-primary mb-2">
+                                            <svg class="svg-icon svg-icon-xl"><use href="#icon-profile"></use></svg>
+                                        </div>
+                                        <h6 class="fw-bold">My Profile</h6>
+                                        <p class="small text-muted mb-3">Complete or edit your personal profile information.</p>
+                                    </div>
+                                    @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-loggedin-form" }))
+                                    {
+                                        <button type="button" class="btn btn-outline-primary btn-sm w-100 rounded-pill btn-submit-form" data-form="edit-profile-loggedin-form">
+                                            Manage Profile
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded-3 bg-body-tertiary h-100 text-center d-flex flex-column justify-content-between">
+                                    <div>
+                                        <div class="text-success mb-2">
+                                            <svg class="svg-icon svg-icon-xl"><use href="#icon-invest"></use></svg>
+                                        </div>
+                                        <h6 class="fw-bold">Invest Funds</h6>
+                                        <p class="small text-muted mb-3">Make lend offers to active borrower requests.</p>
+                                    </div>
+                                    @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-loggedin-form" }))
+                                    {
+                                        <button type="button" class="btn btn-success btn-sm w-100 rounded-pill btn-submit-form" data-form="list-borrow-offers-loggedin-form">
+                                            Make Offer
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded-3 bg-body-tertiary h-100 text-center d-flex flex-column justify-content-between">
+                                    <div>
+                                        <div class="text-info mb-2">
+                                            <svg class="svg-icon svg-icon-xl"><use href="#icon-loan"></use></svg>
+                                        </div>
+                                        <h6 class="fw-bold">Get a Loan</h6>
+                                        <p class="small text-muted mb-3">Create borrow requests to obtain loans quickly.</p>
+                                    </div>
+                                    @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-loggedin-form" }))
+                                    {
+                                        <button type="button" class="btn btn-info text-white btn-sm w-100 rounded-pill btn-submit-form" data-form="list-lend-offers-loggedin-form">
+                                            Borrow Funds
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row g-3">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="p-3 border rounded-3 text-center h-100 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <span class="badge bg-primary rounded-circle step-badge mb-2">1</span>
+                                        <h6 class="fw-bold mt-1">Join</h6>
+                                        <p class="small text-muted mb-2">Create your account</p>
+                                    </div>
+                                    @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "register-index-form" }))
+                                    {
+                                        <button type="button" class="btn btn-primary btn-sm w-100 btn-submit-form" data-form="register-index-form">Register</button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="p-3 border rounded-3 text-center h-100 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <span class="badge bg-secondary rounded-circle step-badge mb-2">2</span>
+                                        <h6 class="fw-bold mt-1">Profile</h6>
+                                        <p class="small text-muted mb-2">Complete details</p>
+                                    </div>
+                                    @using (Html.BeginForm("EditProfile", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "edit-profile-index-form" }))
+                                    {
+                                        <button type="button" class="btn btn-outline-secondary btn-sm w-100 btn-submit-form" data-form="edit-profile-index-form">Profile</button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="p-3 border rounded-3 text-center h-100 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <span class="badge bg-secondary rounded-circle step-badge mb-2">3</span>
+                                        <h6 class="fw-bold mt-1">Invest</h6>
+                                        <p class="small text-muted mb-2">Lend to borrowers</p>
+                                    </div>
+                                    @using (Html.BeginForm("ListBorrowOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-borrow-offers-index-form" }))
+                                    {
+                                        <button type="button" class="btn btn-outline-success btn-sm w-100 btn-submit-form" data-form="list-borrow-offers-index-form">Invest</button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="p-3 border rounded-3 text-center h-100 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <span class="badge bg-secondary rounded-circle step-badge mb-2">4</span>
+                                        <h6 class="fw-bold mt-1">Borrow</h6>
+                                        <p class="small text-muted mb-2">Get a loan</p>
+                                    </div>
+                                    @using (Html.BeginForm("ListLendOffers", "Offers", FormMethod.Get, new { enctype = "multipart/form-data", id = "list-lend-offers-index-form" }))
+                                    {
+                                        <button type="button" class="btn btn-outline-info btn-sm w-100 btn-submit-form" data-form="list-lend-offers-index-form">Borrow</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features & Workflow -->
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100 rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold text-dark mb-3 d-flex align-items-center">
+                        <svg class="svg-icon text-success me-2"><use href="#icon-shield-check"></use></svg>
+                        Why Choose Fanikiwa
+                    </h5>
+                    <ul class="list-group list-group-flush border-top-0">
+                        <li class="list-group-item d-flex align-items-center px-0 bg-transparent border-bottom">
+                            <svg class="svg-icon text-primary me-3"><use href="#icon-check-circle"></use></svg>
+                            <span><strong>Low fixed rates:</strong> From 5% to 20% APR</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center px-0 bg-transparent border-bottom">
+                            <svg class="svg-icon text-primary me-3"><use href="#icon-check-circle"></use></svg>
+                            <span><strong>Fast & Flexible:</strong> Applications completed online in minutes</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center px-0 bg-transparent border-bottom">
+                            <svg class="svg-icon text-primary me-3"><use href="#icon-check-circle"></use></svg>
+                            <span><strong>Transparent Pricing:</strong> No teaser rates, zero hidden fees</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center px-0 bg-transparent border-bottom">
+                            <svg class="svg-icon text-primary me-3"><use href="#icon-check-circle"></use></svg>
+                            <span><strong>Flexible Repayments:</strong> No penalties for early repayment</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center px-0 bg-transparent border-0">
+                            <svg class="svg-icon text-primary me-3"><use href="#icon-check-circle"></use></svg>
+                            <span><strong>Tailored Financing:</strong> Borrow between Ksh 1,000 and Ksh 100,000 over 1–5 years</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100 rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold text-dark mb-4 d-flex align-items-center">
+                        <svg class="svg-icon text-warning me-2"><use href="#icon-lightning"></use></svg>
+                        How to Apply
+                    </h5>
+                    <div class="timeline position-relative ps-3">
+                        <div class="d-flex mb-3">
+                            <span class="badge bg-primary rounded-circle step-badge me-3 align-self-start">01</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Check the Rates</h6>
+                                <small class="text-muted">Use our interactive tool to calculate costs.</small>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <span class="badge bg-primary rounded-circle step-badge me-3 align-self-start">02</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Get a Quote</h6>
+                                <small class="text-muted">Receive a personalized offer tailored to your need.</small>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <span class="badge bg-primary rounded-circle step-badge me-3 align-self-start">03</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Accept & Apply</h6>
+                                <small class="text-muted">Submit required profile documents completely online.</small>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="badge bg-success rounded-circle step-badge me-3 align-self-start">04</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Approval & Transfer</h6>
+                                <small class="text-muted">Approval within 24 hours (Mon-Fri) with instant funds transfer.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Progress Indicator Overlay -->
+<div id="progress" class="dashboard-progress-overlay d-none">
+    <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $("#progress").hide();
-
-            $.ajaxSetup({ cache: false });
-
-            $("#DashBoardAmountValue").val($("#DashBoardAmountrange").val());
-
-        });
-
-        $("#DashBoardAmountrange").on('change keyup paste mouseup mousemove click mouseleave mouseout mouseenter mousedown keydown keypress hover focusin focusout', '', '', function () {
-            $("#DashBoardAmountValue").val($("#DashBoardAmountrange").val());
-        });
-
-        $("#DashBoardAmountValue").on('change keyup paste mouseup mousemove click mouseleave mouseout mouseenter mousedown keydown keypress hover focusin focusout', '', '', function () {
-            $("#DashBoardAmountrange").val($("#DashBoardAmountValue").val());
-        });
-
-        $("#btnSubmitRegisterIndexForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#register-index-form").submit();
-
-        });
-
-        $("#btnSubmitEditProfileLoggedInForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#edit-profile-loggedin-form").submit();
-
-        });
-
-        $("#btnSubmitListBorrowOffersLoggedInForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#list-borrow-offers-loggedin-form").submit();
-
-        });
-
-        $("#btnSubmitListLendOffersLoggedInForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#list-lend-offers-loggedin-form").submit();
-
-        });
-
-        $("#btnSubmitEditProfileIndexForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#edit-profile-index-form").submit();
-
-        });
-
-        $("#btnSubmitListBorrowOffersIndexForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#list-borrow-offers-index-form").submit();
-
-        });
-
-        $("#btnSubmitListLendOffersIndexForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#list-lend-offers-index-form").submit();
-
-        });
-
-
-    </script>
-
+    <script src="~/Scripts/dashboard.js"></script>
 }
-
-
-
-
-

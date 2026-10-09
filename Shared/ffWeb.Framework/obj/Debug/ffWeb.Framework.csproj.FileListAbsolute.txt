@@ -7,4 +7,3 @@ D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\bin\ffWeb.Framework.pdb
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Shared\ffWeb.Framework\obj\Debug\ffWeb.Framework.dll
 D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Shared\ffWeb.Framework\obj\Debug\ffWeb.Framework.pdb
-D:\wakxpx\csharp\visualstudio\2013\fanikiwa peer to peer lending\ffWeb\Shared\ffWeb.Framework\obj\Debug\ffWeb.Framework.csprojResolveAssemblyReference.cache

@@ -1,169 +1,441 @@
-﻿using fPeerLending.Business;
-using fPeerLending.Entities;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Logging; 
-using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Logging.Formatters; 
-using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration.Install;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
 using System.Linq;
-using System.Threading;
-using System.Web;
-using System.Web.Mvc;
+using System.Text;
+using System.Configuration;
+using System.IO;
+using fCommon.Utility;
 
 namespace ffWeb.UI.MVC.Models
 {
-
-
-    [EventSource(Name = "fanikiwa-ffweb")]
-    public class BasicErrorLogger : EventSource
+    public class Log
     {
-        public static readonly BasicErrorLogger Log = new BasicErrorLogger();
+        public static string logFileName;
+        public static string errorLogFileName;
 
-        [Event(1, Message = "{0}", Level = EventLevel.Critical)]
-        public void Critical(string message)
+        /// <summary>
+        /// Static Constructor
+        /// </summary>
+        static Log()
         {
-            if (IsEnabled())
-            WriteEvent(1, message);
+
+            logFileName = GetSetting("LOGFILENAME");
+            errorLogFileName = GetSetting("ERRORLOGFILENAME");
+
+            if (logFileName == null) logFileName = "C:\\SBlog.log";
+            if (errorLogFileName == null) logFileName = "C:\\SBerrlog.log";
+
+            IsDirectoryPresent(StripDirectoryName(logFileName), true);
+            IsDirectoryPresent(StripDirectoryName(errorLogFileName), true);
         }
 
-        [Event(2, Message = "{0}", Level = EventLevel.Error)]
-        public void Error(string message)
+
+        /// <summary>
+        /// Gets The File Name From Specified Path
+        /// </summary>
+        public static string GetFileNameFromPath(string path)
         {
-            if (IsEnabled()) 
-                WriteEvent(2, message);
+            string fileName = @"";
+            int indexOfLastSlash = 0;
+            try
+            {
+                indexOfLastSlash = path.LastIndexOf(@"\");
+                fileName = path.Substring(indexOfLastSlash + 1);
+                return fileName;
+            }
+            catch (Exception ex)
+            {
+                WriteToErrorLogFile(ex);
+                return "";
+            }
+            finally
+            {
+            }
         }
 
-        [Event(3, Message = "{0}", Level = EventLevel.Warning)]
-        public void Warning(string message)
+        /// <summary>
+        /// Gets The Directory Path from the FilePath
+        /// </summary>
+        public static string StripDirectoryName(string path)
         {
-            if (IsEnabled())
-                WriteEvent(3, message);
+            string direcoryPath = @"";
+            int indexOfLastSlash = 0;
+
+            try
+            {
+                indexOfLastSlash = path.LastIndexOf(@"\");
+                direcoryPath = path.Substring(0, indexOfLastSlash);
+                return direcoryPath;
+            }
+            catch (Exception ex)
+            {
+                WriteToErrorLogFile(ex);
+                return "";
+            }
+            finally
+            {
+            }
         }
+
+
+        /// <summary>
+        /// Gets Values From The Config File.
+        /// </summary>
+        public static bool IsDirectoryPresent(string directory, bool create)
+        {
+            try
+            {
+                if (!Directory.Exists(directory))
+                {
+                    if (create == true)
+                    {
+                        Directory.CreateDirectory(directory);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteToErrorLogFile(ex);
+                return false;
+            }
+            finally
+            {
+            }
+        }
+
+
+        /// <summary>
+        /// Gets Values From The Config File.
+        /// </summary>
+        public static string GetSetting(string val)
+        {
+            try
+            {
+                return System.Configuration.ConfigurationManager.AppSettings[val];
+            }
+            catch (Exception ex)
+            {
+                WriteToErrorLogFile(ex);
+                return "";
+            }
+            finally
+            {
+            }
+        }
+
+
+        /// <summary>
+        /// Writes the message to the XX Log File
+        /// </summary>
+        public static void WriteToLogFile(string fKey, string message)
+        {
+            string log = GetSetting(fKey);
+            if (log == null) return;
+
+            if (IsDirectoryPresent(StripDirectoryName(log), true))
+            {
+                FileStream fs = null;
+                StreamWriter sw = null;
+                string fileName;
+
+                try
+                {
+                    fileName = log;
+                    message = DateTime.Now.ToString() + " - " + message;
+                    fs = new FileStream(fileName, FileMode.Append, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine(message);
+                }
+                catch (Exception ex)
+                {
+                    WriteToErrorLogFile(ex);
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the message to the FileSystem Watcher Log File
+        /// </summary>
+        public static void WriteToLogFile(string message)
+        {
+            if (IsDirectoryPresent(StripDirectoryName(logFileName), true))
+            {
+                FileStream fs = null;
+                StreamWriter sw = null;
+                string fileName;
+
+                try
+                {
+                    fileName = logFileName;
+                    message = DateTime.Now.ToString() + " - " + message;
+                    fs = new FileStream(fileName, FileMode.Append, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine(message);
+                }
+                catch (Exception ex)
+                {
+                    WriteToErrorLogFile(ex);
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the Exception to the Error Log File
+        /// </summary>
+        public static bool WriteToErrorLogFile(Exception sourceException)
+        {
+            if (Utils.LogEventViewer(sourceException)) { }
+            if (Write_To_Log_File_temp_dir(sourceException)) { }
+
+            if (IsDirectoryPresent(StripDirectoryName(errorLogFileName), true))
+            {
+                FileStream fs = null;
+                StreamWriter sw = null;
+                try
+                {
+                    fs = new FileStream(errorLogFileName, FileMode.Append, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("ERROR OCCOURED AT :" + DateTime.Now.ToString());
+                    sw.WriteLine("SOURCE:" + sourceException.Source);
+                    sw.WriteLine("MESSAGE:" + sourceException.Message);
+                    sw.WriteLine("Whole Exception:" + sourceException.ToString());
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("");
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Writes the Exception to the Error Log File
+        /// </summary>
+        public static bool WriteToErrorLogFile_and_EventViewer(Exception sourceException)
+        {
+            if (Utils.LogEventViewer(sourceException)) { }
+            if (Write_To_Log_File_temp_dir(sourceException)) { }
+
+            if (IsDirectoryPresent(StripDirectoryName(errorLogFileName), true))
+            {
+                FileStream fs = null;
+                StreamWriter sw = null;
+                try
+                {
+                    fs = new FileStream(errorLogFileName, FileMode.Append, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("ERROR OCCOURED AT :" + DateTime.Now.ToString());
+                    sw.WriteLine("SOURCE:" + sourceException.Source);
+                    sw.WriteLine("MESSAGE:" + sourceException.Message);
+                    sw.WriteLine("Whole Exception:" + sourceException.ToString());
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("");
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool Write_To_Log_File(Exception sourceException)
+        {
+            if (Utils.LogEventViewer(sourceException)) { }
+            if (Write_To_Log_File_temp_dir(sourceException)) { }
+
+            if (IsDirectoryPresent(StripDirectoryName(errorLogFileName), true))
+            {
+                FileStream fs = null;
+                StreamWriter sw = null;
+                try
+                {
+                    fs = new FileStream(errorLogFileName, FileMode.Append, FileAccess.Write);
+                    sw = new StreamWriter(fs);
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("ERROR OCCOURED AT :" + DateTime.Now.ToString());
+                    sw.WriteLine("SOURCE:" + sourceException.Source);
+                    sw.WriteLine("MESSAGE:" + sourceException.Message);
+                    sw.WriteLine("Whole Exception:" + sourceException.ToString());
+                    sw.WriteLine("==================================================================");
+                    sw.WriteLine("");
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool Write_To_Log_File_temp_dir(Exception sourceException)
+        {
+            string temp_path = Path.GetTempPath();
+            string app_name = System.Configuration.ConfigurationManager.AppSettings["APP_NAME"];
+            string log_file_name = app_name + ".log";
+            var _temp_file = Path.Combine(temp_path, log_file_name);
+
+            FileStream fs = null;
+            StreamWriter sw = null;
+            try
+            {
+                fs = new FileStream(_temp_file, FileMode.Append, FileAccess.Write);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("==================================================================");
+                sw.WriteLine("ERROR OCCOURED AT :" + DateTime.Now.ToString());
+                sw.WriteLine("SOURCE:" + sourceException.Source);
+                sw.WriteLine("MESSAGE:" + sourceException.Message);
+                sw.WriteLine("Whole Exception:" + sourceException.ToString());
+                sw.WriteLine("==================================================================");
+                sw.WriteLine("");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sw != null)
+                {
+                    sw.Close();
+                }
+
+                if (fs != null)
+                {
+                    fs.Close();
+                }
+            }
+        }
+
+        public static bool Write_To_Log_File_web(Exception sourceException)
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log", "log.txt");
+
+            Console.WriteLine(filePath);
+
+            var directory = Path.GetDirectoryName(filePath);
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Create(filePath);
+            }
+
+            FileStream fs = null;
+            StreamWriter sw = null;
+            try
+            {
+                fs = new FileStream(filePath, FileMode.Append, FileAccess.Write);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("==================================================================");
+                sw.WriteLine("ERROR OCCOURED AT :" + DateTime.Now.ToString());
+                sw.WriteLine("SOURCE:" + sourceException.Source);
+                sw.WriteLine("MESSAGE:" + sourceException.Message);
+                sw.WriteLine("Whole Exception:" + sourceException.ToString());
+                sw.WriteLine("==================================================================");
+                sw.WriteLine("");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (sw != null)
+                {
+                    sw.Close();
+                }
+
+                if (fs != null)
+                {
+                    fs.Close();
+                }
+            }
+        }
+
+
 
     }
-
-
-
-    [EventSource(Name = "fanikiwa-ffweb")]
-    internal sealed class LogErrorEventSource : EventSource
-    {
-        [Event(1, Level = EventLevel.Informational, Keywords = Keywords.Loader | Keywords.Critical)]
-        public void Load(long ImageBase, string Name)
-        { 
-            if (IsEnabled()) WriteEvent(1, ImageBase, Name);
-        }
-
-        [Event(2, Level = EventLevel.Verbose, Keywords = Keywords.Loader)]
-        public void Unload(long ImageBase) 
-        {
-            if (IsEnabled()) WriteEvent(2, ImageBase);
-        }
-
-        public class Keywords
-        {
-            public const EventKeywords Loader = (EventKeywords)0x0001;
-            public const EventKeywords Critical = (EventKeywords)0x0002;
-        }
-    }
-
-
-    enum MyColor { Red, Yellow, Blue };
-
-    [EventSource(Name = "fanikiwa-ffweb")]
-    public class MyCompanyEventSource : EventSource
-    {
-        public class Keywords
-        {
-            public const EventKeywords Page = (EventKeywords)1;
-            public const EventKeywords DataBase = (EventKeywords)2;
-            public const EventKeywords Diagnostic = (EventKeywords)4;
-            public const EventKeywords Perf = (EventKeywords)8;
-        }
-
-        public class Tasks
-        {
-            public const EventTask Page = (EventTask)1;
-            public const EventTask DBQuery = (EventTask)2;
-        }
-
-        [Event(1, Message = "Application Falure: {0}", Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
-        public void Failure(string message)
-        {
-            WriteEvent(1, message); 
-        }
-
-        [Event(2, Message = "Starting up.", Keywords = Keywords.Perf, Level = EventLevel.Informational)]
-        public void Startup() 
-        {
-            WriteEvent(2); 
-        }
-
-        [Event(3, Message = "loading page {1} activityID={0}", Opcode = EventOpcode.Start,
-            Task = Tasks.Page, Keywords = Keywords.Page, Level = EventLevel.Informational)]
-        public void PageStart(int ID, string url) 
-        {
-            if (IsEnabled()) WriteEvent(3, ID, url); 
-        }
-
-        [Event(4, Opcode = EventOpcode.Stop, Task = Tasks.Page, Keywords = Keywords.Page, Level = EventLevel.Informational)]
-        public void PageStop(int ID)
-        {
-            if (IsEnabled()) WriteEvent(4, ID); 
-        }
-
-        [Event(5, Opcode = EventOpcode.Start, Task = Tasks.DBQuery, Keywords = Keywords.DataBase, Level = EventLevel.Informational)]
-        public void DBQueryStart(string sqlQuery)
-        {
-            WriteEvent(5, sqlQuery); 
-        }
-
-        [Event(6, Opcode = EventOpcode.Stop, Task = Tasks.DBQuery, Keywords = Keywords.DataBase, Level = EventLevel.Informational)]
-        public void DBQueryStop()
-        {
-            WriteEvent(6); 
-        }
-
-        [Event(7, Level = EventLevel.Verbose, Keywords = Keywords.DataBase)]
-        public void Mark(int ID)
-        {
-            if (IsEnabled()) WriteEvent(7, ID); 
-        }
-
-        //[Event(8)]
-        //public void LogColor(MyColor color) { WriteEvent(8, (int)color); }
-
-        public static MyCompanyEventSource Log = new MyCompanyEventSource();
-    }
-
-
-    [RunInstaller(true)]
-    public class MyEventLogInstaller : Installer
-    {
-        private EventLogInstaller myEventLogInstaller;
-
-        public MyEventLogInstaller()
-        {
-            // Create an instance of an EventLogInstaller.
-            myEventLogInstaller = new EventLogInstaller();
-
-            // Set the source name of the event log.
-            myEventLogInstaller.Source = "NewLogSource";
-
-            // Set the event log that the source writes entries to.
-            myEventLogInstaller.Log = "MyNewLog";
-
-            // Add myEventLogInstaller to the Installer collection.
-            Installers.Add(myEventLogInstaller);
-        }
-
-        public static MyEventLogInstaller Log = new MyEventLogInstaller();
-    }
-
 }

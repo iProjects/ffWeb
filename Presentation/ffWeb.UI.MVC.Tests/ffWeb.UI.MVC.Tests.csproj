@@ -70,11 +70,23 @@
     <Reference Include="fanikiwaGL.Data">
       <HintPath>..\..\..\fanikiwaGL\bin\fanikiwaGL.Data.dll</HintPath>
     </Reference>
+    <Reference Include="fanikiwaGL.Entities, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\fanikiwaGL\bin\fanikiwaGL.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="fCommon, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\fCommon\bin\fCommon.dll</HintPath>
+    </Reference>
     <Reference Include="fPeerLending.Business">
       <HintPath>..\..\..\fPeerLending\bin\fPeerLending.Business.dll</HintPath>
     </Reference>
     <Reference Include="fPeerLending.Entities">
       <HintPath>..\..\..\fPeerLending\bin\fPeerLending.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ffWeb.UI.MVC\libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -92,6 +104,10 @@
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\library\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ffWeb.UI.MVC\libs\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

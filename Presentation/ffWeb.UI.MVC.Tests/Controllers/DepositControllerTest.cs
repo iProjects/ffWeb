@@ -1,4 +1,5 @@
 ﻿using DotNetOpenAuth.AspNet;
+using fCommon.Utility;
 using ffWeb.UI.MVC.Filters;
 using ffWeb.UI.MVC.Models;
 using fPeerLending.Business;
@@ -34,33 +35,40 @@ using WebMatrix.WebData;
 
 namespace ffWeb.UI.MVC.Tests.Controllers
 {
-    
+
     [TestClass]
     public class DepositControllerTest
     {
 
-        //[TestMethod]
-        //public void DepositCash()
-        //{
-        //    DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
+        [TestMethod]
+        public void DepositCash()
+        {
+            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
 
-        //    DepositComponent dc = new DepositComponent();
-        //    RegistrationComponent rc = new RegistrationComponent();
-        //    DepositModel model = new DepositModel();
+            DepositComponent dc = new DepositComponent();
+            RegistrationComponent rc = new RegistrationComponent();
+            DepositModel model = new DepositModel();
 
 
-        //    string email = "kevin@softwareproviders.co.ke";
-        //    bool _exists = rc.MemberExists(email);
-        //    if (_exists == true)
-        //    {
-        //        Member member = rc.GetMemberByEmail(email);
-        //        if (member != null)
-        //        {
-        //            dc.DepositOverTheCounter(9500, member);
+            string email = "softwareproviders254@gmail.com";
+            bool _exists = rc.MemberExists(email);
+            if (_exists == true)
+            {
+                Member member = rc.GetMemberByEmail(email);
+                if (member != null)
+                {
+                    int TransactionType = Config.GetInt("MPESADEPOSITTRANSACTIONTYPE");
+                    int DraccountID = member.CurrentAccountId;
+                    int CrAccountID = Config.GetInt("MPESACASHACCOUNT");
+                    decimal Amount = 0M;
+                    string Narr = "Mpesa Deposit";
+                    string reference = "Deposit";
 
-        //        }
-        //    }
-        //}
+                    dc.DepositOverTheCounter(TransactionType, DraccountID, CrAccountID, Amount, Narr, reference);
+
+                }
+            }
+        }
 
 
 

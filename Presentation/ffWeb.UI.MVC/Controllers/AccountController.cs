@@ -36,7 +36,7 @@ namespace ffWeb.UI.MVC.Controllers
         // POST: /Account/Login 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid && model.UserName != null)
@@ -50,12 +50,22 @@ namespace ffWeb.UI.MVC.Controllers
                     {
                         // If we got this far, the user is deregistered 
                         ModelState.AddModelError("", "Sorry looks like you are already DeRegistered. Register first.");
-                        return View(model); 
+                        return View(model);
                     }
                 }
             }
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+
+            // Custom Login Validation via Component/DAC layers
+            spUser authenticatedUser = ValidateUser(model.UserName, model.Password);
+
+            if (authenticatedUser != null)
             {
+                // Set Forms Authentication Cookie
+                FormsAuthentication.SetAuthCookie(authenticatedUser.UserName, model.RememberMe);
+
+                // Store logged-in user details in Session
+                SetLoggedInUserSession(authenticatedUser);
+
                 return RedirectToLocal(returnUrl);
             }
 
@@ -81,7 +91,10 @@ namespace ffWeb.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            // Clear custom session and sign out
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
@@ -122,19 +135,17 @@ namespace ffWeb.UI.MVC.Controllers
                     return View(model);
                 }
 
-
-
                 /*
-     * Register to Fanikiwa via web
-     * 1. If (the member is registered via sms)
-     * 2.   Update the registration to include web
-     * 3. Else Register for web
-     */
-                 
+                * Register to Fanikiwa via web
+                * 1. If (the member is registered via sms)
+                * 2.   Update the registration to include web
+                * 3. Else Register for web
+                */
+
                 RegistrationComponent rc = new RegistrationComponent();
 
-                WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                WebSecurity.Login(model.UserName, model.Password);
+                //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                //WebSecurity.Login(model.UserName, model.Password);
 
                 //register in Fanikiwa
                 Member member = new Member();
@@ -155,10 +166,66 @@ namespace ffWeb.UI.MVC.Controllers
 
                 ffWeb.UI.MVC.Helpers.Messager.Inform(_registeredMember, msg);
 
+                spUser_Model _user = new spUser_Model();
+                _user.UserName = model.UserName;
+                _user.Password = model.Password;
+                _user.InformBy = model.InformBy;
+                _user.Telephone = model.Telephone;
+                _user.Email = model.UserName;
+
+                spUser returnedUser = CreateUser(_user);
+
+                // Auto login user after registration using custom session method
+                FormsAuthentication.SetAuthCookie(returnedUser.UserName, false);
+                SetLoggedInUserSession(returnedUser);
+
                 return RedirectToAction("Index", "Home");
 
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private spUser CreateUser(spUser_Model model)
+        {
+            UsersComponents ac = new UsersComponents();
+            spUser _user = new spUser();
+            _user.UserName = model.UserName;
+            _user.Password = model.Password;
+            _user.Surname = model.Surname;
+            _user.OtherNames = model.OtherNames;
+            _user.InformBy = model.InformBy;
+            _user.Gender = model.Gender;
+            _user.Telephone = model.Telephone;
+            _user.Email = model.UserName;
+            _user.NationalID = model.NationalID;
+            _user.DateOfBirth = model.DateOfBirth;
+            _user.Photo = model.Photo;
+
+            _user.DateJoined = DateTime.Now;
+            _user.RoleId = int.Parse(System.Configuration.ConfigurationManager.AppSettings["DEFAULTROLEID"]);
+            _user.Status = "A";
+            _user.IsDeleted = false;
+            _user.Locked = false;
+            _user.SystemId = "web";
+
+            string salt = Utils.create_random_salt();
+            string salted_password = salt + _user.Password;
+            string password_salt_hash = Utils.get_SHA512_hash(salted_password);
+
+            _user.password_hash = password_salt_hash;
+            _user.password_salt = salt;
+
+            _user.Password = Utils.encrypt_string(_user.Password);
+
+            spUser UserReturned = ac.CreateUser(_user);
+
+            spUsersInRole user_role = new spUsersInRole();
+            user_role.UserId = UserReturned.Id;
+            user_role.RoleId = UserReturned.RoleId;
+
+            ac.CreateUSerRole(user_role);
+
+            return UserReturned;
         }
 
         //
@@ -323,7 +390,7 @@ namespace ffWeb.UI.MVC.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
-        { 
+        {
             RegistrationComponent rg = new RegistrationComponent();
 
             switch (model.InformBy)
@@ -373,7 +440,7 @@ namespace ffWeb.UI.MVC.Controllers
                         member.Telephone = Utils.ConvertFirstLetterToUpper(model.Telephone);
 
                         Member _registeredMember = rg.Register(member);
-                         
+
                         return RedirectToLocal(returnUrl);
                     }
                     else
@@ -439,7 +506,7 @@ namespace ffWeb.UI.MVC.Controllers
             {
                 model.DateOfBirth = DateTime.Now;
             }
-            return View( model);
+            return View(model);
 
         }
 
@@ -466,22 +533,22 @@ namespace ffWeb.UI.MVC.Controllers
                         return View("EditProfile", model);
                     }
                     break;
-            } 
-                //update the member
-                RegistrationComponent rc = new RegistrationComponent();
+            }
+            //update the member
+            RegistrationComponent rc = new RegistrationComponent();
 
-                Member member = rc.GetMemberByEmail(model.Email);
-                member.Surname = Utils.ConvertFirstLetterToUpper(model.Surname);
-                member.OtherNames = Utils.ConvertFirstLetterToUpper(model.OtherNames);
-                member.DateOfBirth = model.DateOfBirth;
-                member.Gender = model.Gender;
-                member.Telephone = Utils.ConvertFirstLetterToUpper(model.Telephone);
-                member.RefferedBy = model.RefferedBy;
-                member.InformBy = model.InformBy;
+            Member member = rc.GetMemberByEmail(model.Email);
+            member.Surname = Utils.ConvertFirstLetterToUpper(model.Surname);
+            member.OtherNames = Utils.ConvertFirstLetterToUpper(model.OtherNames);
+            member.DateOfBirth = model.DateOfBirth;
+            member.Gender = model.Gender;
+            member.Telephone = Utils.ConvertFirstLetterToUpper(model.Telephone);
+            member.RefferedBy = model.RefferedBy;
+            member.InformBy = model.InformBy;
 
-                rc.UpdateMember(member);
+            rc.UpdateMember(member);
 
-                return View("_ManageProfileSucess"); 
+            return View("_ManageProfileSucess");
         }
         //[Authorize]
         public ActionResult UploadMemberImage_Edit(int id)
@@ -538,17 +605,17 @@ namespace ffWeb.UI.MVC.Controllers
             AccountsComponent ac = new AccountsComponent();
             List<Account> accounts = ac.GetMemberAccounts(member.MemberId);
             return View(accounts);
-        } 
+        }
         [Authorize]
         public ActionResult Statement(int AccountID)
-        { 
-            TransactionsComponent tc=new TransactionsComponent();
-             
+        {
+            TransactionsComponent tc = new TransactionsComponent();
+
             DateTime _startdate = DateTime.Now.Date.AddMonths(-3);
             DateTime _enddate = DateTime.Now.Date;
 
             List<TransactionModel> model = tc.GetAccountViewStatement(AccountID, _startdate, _enddate);
-            return View(model); 
+            return View(model);
         }
         [Authorize]
         public ActionResult MiniStatemement(int AccountID)
@@ -637,7 +704,7 @@ namespace ffWeb.UI.MVC.Controllers
 
             return RedirectToAction("Register");
         }
-         
+
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
@@ -715,6 +782,46 @@ namespace ffWeb.UI.MVC.Controllers
             }
         }
         #endregion
-        
+
+
+
+
+
+
+
+
+
+        public spUser ValidateUser(string userName, string rawPassword)
+        {
+            UsersComponents cd = new UsersComponents();
+            spUser user = cd.SelectByUserName(userName);
+
+            if (user == null || user.Locked || user.IsDeleted)
+            {
+                return null;
+            }
+
+            // Salt and verify hash
+            string computedHash = Utils.get_SHA512_hash(user.password_salt + rawPassword);
+            if (user.password_hash == computedHash)
+            {
+                return user;
+            }
+
+            return null;
+        }
+
+        // Helper method to set session variables for current logged-in user
+        private void SetLoggedInUserSession(spUser user)
+        {
+            Session["UserId"] = user.Id;
+            Session["UserName"] = user.UserName;
+            Session["CurrentUser"] = user;
+        }
+
+
+
+
+
     }
 }

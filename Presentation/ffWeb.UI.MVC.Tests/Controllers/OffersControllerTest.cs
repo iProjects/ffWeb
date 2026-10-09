@@ -1,13 +1,16 @@
 ﻿using DotNetOpenAuth.AspNet;
+using fCommon.Utility;
 using ffWeb.UI.MVC.Filters;
 using ffWeb.UI.MVC.Models;
 using fPeerLending.Business;
 using fPeerLending.Entities;
+using log4net;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql.Configuration;
+using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Logging.ExtraInformation;
@@ -36,14 +39,136 @@ namespace ffWeb.UI.MVC.Tests.Controllers
 {
 
     [TestClass]
-    public class OffersController
+    public class OffersControllerTest
     {
+        static ILog log;
+        static LogWriter ent_logger;
+
+        public OffersControllerTest()
+        {
+            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(), false);
+
+            IConfigurationSource config = ConfigurationSourceFactory.Create();
+            ExceptionPolicyFactory factory = new ExceptionPolicyFactory(config);
+            Logger.SetLogWriter(new LogWriterFactory(config).Create(), false);
+            //ExceptionManager exManager = factory.CreateManager();
+            //ExceptionPolicy.SetExceptionManager(factory.CreateManager(), false);
+
+            log4net.Config.BasicConfigurator.Configure();
+            log = log4net.LogManager.GetLogger(typeof(OffersControllerTest));
+
+            ent_logger = new LogWriterFactory().Create();
+            Logger.SetLogWriter(ent_logger, false);
+        }
+
+        [TestMethod]
+        public void CreateLendOffer()
+        {
+            try
+            {
+                MakeOfferComponent mk = new MakeOfferComponent();
+                RegistrationComponent rg = new RegistrationComponent();
+
+                // TODO: Add insert logic here
+                string email = "fanikiwa254@gmail.com";
+                Member member = rg.GetMemberByEmail(email);
+
+                OfferModel offerModel = new OfferModel();
+                offerModel.MemberId = member.MemberId;
+
+                offerModel.Status = OfferStatus.Open.ToString();
+                offerModel.CreatedDate = DateTime.Now;
+                offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
+                offerModel.OfferType = "L";
+
+                offerModel.Amount = 6000;
+                offerModel.Description = "school fees";
+                offerModel.Interest = 6.0;
+                offerModel.OfferType = "L";
+                offerModel.PartialPay = true;
+                offerModel.PublicOffer = "B";
+                offerModel.Term = 9;
+
+                //Create the offer in the database
+                Offer returnedOffer = mk.MakeLendOffer(offerModel);
+
+            }
+            catch (Exception ex)
+            {
+                ent_logger.Write(ex.ToString());
+                log.Info(ex.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void ListLendOffers()
+        {
+            try
+            {
+                ListOffersComponent lo = new ListOffersComponent();
+                RegistrationComponent rg = new RegistrationComponent();
+
+                List<Offer> offers = (from of in lo.GetAllOffers()
+                                      //where of.Status == OfferStatus.Open.ToString()
+                                      select of).ToList();
+
+                //Display the offers
+                foreach (Offer offer in offers)
+                {
+                    Member member = rg.GetMemberByID(offer.MemberId);
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(member.Email);
+                    sb.AppendLine(member.OtherNames + " " + member.Surname);
+                    sb.AppendLine(offer.Amount.ToString());
+                    sb.AppendLine(offer.CreatedDate.ToString("dd-MM-yyyy HH:mm:ss ttt"));
+                    sb.AppendLine(offer.ExpiryDate.ToString("dd-MM-yyyy HH:mm:ss ttt"));
+                    sb.AppendLine(offer.OfferType);
+
+                    Console.WriteLine(sb.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ent_logger.Write(ex.ToString());
+                log.Info(ex.ToString());
+            }
+        }
+
+        //[TestMethod]
+        //public void CreateBorrowOffer()
+        //{
+        //    try
+        //    { 
+        //        MakeOfferComponent mk = new MakeOfferComponent();
+        //        RegistrationComponent rg = new RegistrationComponent();
+
+        //        // TODO: Add insert logic here
+        //        string email = "fanikiwa254@gmail.com";
+        //        Member member = rg.GetMemberByEmail(email);
+
+        //        OfferModel offerModel = new OfferModel();
+        //        offerModel.MemberId = member.MemberId;
+
+        //        offerModel.Status = OfferStatus.Open.ToString();
+        //        offerModel.CreatedDate = DateTime.Today;
+        //        offerModel.ExpiryDate = offerModel.CreatedDate.AddMonths(Config.GetInt("OFFEREXPIRYTIMESPANINMONTHS"));
+        //        offerModel.OfferType = "B";
+
+        //        //Create the offer in the database
+        //        Offer returnedOffer = mk.MakeBorrowOffer(offerModel);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ent_logger.Write(ex.ToString());
+        //        log.Info(ex.ToString());
+        //    }
+        //}
+
 
         //[TestMethod]
         //public void AcceptLendOffer()
-        //{
-        //    DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
-
+        //{ 
         //    //Get borrower 
         //    RegistrationComponent rc = new RegistrationComponent();
         //    AcceptOfferComponent ac = new AcceptOfferComponent();
@@ -65,9 +190,7 @@ namespace ffWeb.UI.MVC.Tests.Controllers
 
         //[TestMethod]
         //public void AcceptBorrowOffer()
-        //{
-        //    DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
-
+        //{ 
         //    //Get Lender 
         //    RegistrationComponent rc = new RegistrationComponent();
         //    AcceptOfferComponent ac = new AcceptOfferComponent();
@@ -90,8 +213,6 @@ namespace ffWeb.UI.MVC.Tests.Controllers
         //[TestMethod]
         //public void AcceptPartialBorrowOffer()
         //{
-        //    DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
-
         //    //Get borrower 
         //    RegistrationComponent rc = new RegistrationComponent();
         //    AcceptOfferComponent ac = new AcceptOfferComponent();

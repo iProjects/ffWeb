@@ -1,0 +1,10 @@
+﻿
+--
+-- Table structure and data for table 'TieredTable'
+--
+
+INSERT INTO 'TieredTable' ('Id', 'Description') VALUES (1, 'Loan Establish Rule');
+INSERT INTO 'TieredTable' ('Id', 'Description') VALUES (2, 'Cash Deposit Rule');
+INSERT INTO 'TieredTable' ('Id', 'Description') VALUES (3, 'Cash Withdraw Rule');
+INSERT INTO 'TieredTable' ('Id', 'Description') VALUES (4, 'Transfer Rule');
+INSERT INTO 'TieredTable' ('Id', 'Description') VALUES (5, 'Transfer Rule');

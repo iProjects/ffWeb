@@ -1,0 +1,82 @@
+﻿/* ==========================================================================
+   Global Design Tokens & Dark / Light Mode Palette
+   ========================================================================== */
+:root {
+  /* Site Layout Dynamics */
+  --site-header-height: 70px;
+  --card-border-radius: 12px;
+  --transition-speed: 0.2s ease-in-out;
+
+  /* Color Palette - Light Mode Default */
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-soft: rgba(59, 130, 246, 0.1);
+
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --border-color: #e2e8f0;
+  --input-bg: #ffffff;
+  --input-disabled-bg: #f1f5f9;
+  
+  --avatar-bg: #e2e8f0;
+  --avatar-text: #334155;
+
+  --loading-bg: rgba(255, 255, 255, 0.85);
+  --overlay-backdrop: rgba(15, 23, 42, 0.5);
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Mode Preference Overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #60a5fa;
+    --primary-hover: #3b82f6;
+    --primary-soft: rgba(96, 165, 250, 0.15);
+
+    --bg-page: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-subtle: #334155;
+
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+
+    --border-color: #334155;
+    --input-bg: #0f172a;
+    --input-disabled-bg: #1e293b;
+
+    --avatar-bg: #334155;
+    --avatar-text: #e2e8f0;
+
+    --loading-bg: rgba(15, 23, 42, 0.85);
+    --overlay-backdrop: rgba(0, 0, 0, 0.7);
+    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Attribute Toggle Override Support (e.g. data-theme="dark" or Bootstrap 5.3+ [data-bs-theme="dark"]) */
+[data-theme="dark"],
+[data-bs-theme="dark"] {
+  --primary-color: #60a5fa;
+  --primary-hover: #3b82f6;
+  --primary-soft: rgba(96, 165, 250, 0.15);
+  --bg-page: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-subtle: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --input-bg: #0f172a;
+  --input-disabled-bg: #1e293b;
+  --avatar-bg: #334155;
+  --avatar-text: #e2e8f0;
+  --loading-bg: rgba(15, 23, 42, 0.85);
+  --overlay-backdrop: rgba(0, 0, 0, 0.7);
+}

@@ -5,6 +5,8 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using System;
+using System.Security.Claims;
+using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -22,6 +24,8 @@ namespace ffWeb.UI.MVC
 
         public MvcApplication()
         {
+            var ensure_sqlserver_dll_is_copied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+
             DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory(), false);
 
             IConfigurationSource config = ConfigurationSourceFactory.Create();
@@ -53,6 +57,9 @@ namespace ffWeb.UI.MVC
 
                 // Code that runs on application startup
                 Application["OnlineUsers"] = 0;
+
+                AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+
             }
             catch (Exception ex)
             {

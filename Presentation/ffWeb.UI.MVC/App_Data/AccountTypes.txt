@@ -1,0 +1,10 @@
+﻿
+--
+-- Table structure and data for table 'AccountTypes'
+--
+
+INSERT INTO 'AccountTypes' ('Id', 'ShortCode', 'Description') VALUES (1, 'MCA       ', 'Members Current Account');
+INSERT INTO 'AccountTypes' ('Id', 'ShortCode', 'Description') VALUES (2, 'MLA       ', 'Members Loan Account');
+INSERT INTO 'AccountTypes' ('Id', 'ShortCode', 'Description') VALUES (3, 'MIA       ', 'Members Investment Accounts');
+INSERT INTO 'AccountTypes' ('Id', 'ShortCode', 'Description') VALUES (4, 'Lra       ', 'Loan Repayment Account');
+INSERT INTO 'AccountTypes' ('Id', 'ShortCode', 'Description') VALUES (5, 'SLR       ', 'Salary Account');

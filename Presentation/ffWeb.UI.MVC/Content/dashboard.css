@@ -1,0 +1,134 @@
+﻿
+.dashboard-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.fs-7 {
+    font-size: 0.75rem;
+}
+
+.step-badge {
+    width: 28px;
+    height: 28px;
+    line-height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-range::-webkit-slider-thumb {
+    background: #0d6efd;
+}
+
+.custom-range::-moz-range-thumb {
+    background: #0d6efd;
+}
+
+/* Timeline Custom Styling */
+.timeline {
+    border-left: 2px solid #e9ecef;
+}
+
+.timeline .d-flex {
+    position: relative;
+    left: -15px;
+}
+
+/* Loading Overlay */
+.dashboard-progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1055;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.fs-7 {
+    font-size: 0.75rem;
+}
+
+/* SVG Icon Sizing Utilities */
+.svg-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.svg-icon-lg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.svg-icon-xl {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.step-badge {
+    width: 28px;
+    height: 28px;
+    line-height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-range::-webkit-slider-thumb {
+    background: #0d6efd;
+}
+
+.custom-range::-moz-range-thumb {
+    background: #0d6efd;
+}
+
+.timeline {
+    border-left: 2px solid #e9ecef;
+}
+
+.timeline .d-flex {
+    position: relative;
+    left: -15px;
+}
+
+.dashboard-progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1055;
+    justify-content: center;
+    align-items: center;
+}
+
+

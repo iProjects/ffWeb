@@ -1,0 +1,125 @@
+﻿
+:root { 
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --bg-surface: #f8fafc;
+}
+
+body {
+    background-color: var(--bg-surface);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Account for fixed header so content isn't cut off */
+    padding-top: var(--header-height);
+}
+
+/* Header Styling */
+.app-header {
+    height: var(--header-height);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1030;
+}
+
+.bg-primary-soft {
+    background-color: rgba(79, 70, 229, 0.1);
+}
+
+/* Main Content Spacing */
+.main-content {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* Card Styling */
+.form-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+}
+
+.bg-white-20 {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Modern Controls Styling */
+.input-group-text {
+    color: #64748b;
+    border-color: #cbd5e1;
+}
+
+.form-control, .form-select {
+    border-color: #cbd5e1;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.15);
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Custom Switch Styling */
+.custom-switch .form-check-input {
+    width: 2.75em;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+.custom-switch .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Validation Styling */
+.field-validation-error {
+    font-size: 0.85rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+}
+
+/* Responsive Media Queries */
+@media (min-width: 768px) {
+    .border-end-md {
+        border-right: 1px solid #e2e8f0;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    .main-content {
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .card-body {
+        padding: 1.5rem !important;
+    }
+}

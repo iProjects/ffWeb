@@ -1,90 +1,48 @@
-﻿<div id="loginPartial-div">
-
+﻿<div id="loginPartial-div" class="d-flex align-items-center gap-3">
+    <!-- Active Online Indicator -->
+    <div class="d-none d-lg-flex align-items-center gap-1.5 px-2.5 py-1 rounded-pill bg-light border text-muted small" title="Current Active Users">
+        <span class="status-indicator-dot"></span>
+        <span class="fw-medium text-dark ms-1">@Context.ApplicationInstance.Application["OnlineUsers"].ToString()</span>
+        <span class="text-secondary">online</span>
+    </div>
     @if (Request.IsAuthenticated)
     {
-        <text>
-
-        <b>No of Users Online:</b>
-        <b>@Context.ApplicationInstance.Application["OnlineUsers"].ToString()</b><br />
-        <br />
-
-
-
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "log-off-partial-form" }))
-        {
-            @Html.AntiForgeryToken()
-            <text>
-            Welcome To Fanikiwa,  @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage Profile" }) !
-<a  id="btnSubmitLogOffPartialForm" style="cursor: pointer;" title="Log Off">Log off</a>
-     </text>
-        }
-
-        </text>
+        <div class="d-flex align-items-center gap-2">
+            <!-- User Manage Profile -->
+            <a href="@Url.Action("Manage", "Account")" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2 rounded-3 border-0 bg-light text-dark fw-semibold" title="Manage Profile">
+                <svg class="svg-icon text-primary fs-5" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" /></svg>
+                <span>@User.Identity.Name</span>
+            </a>
+            <!-- Log Off Form -->
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "log-off-partial-form", @class = "d-inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" id="btnSubmitLogOffPartialForm" class="btn btn-light btn-sm text-danger border rounded-3 d-flex align-items-center gap-1" title="Log Off">
+                    <svg class="svg-icon text-danger" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" /><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" /></svg>
+                    <span class="d-none d-sm-inline">Log off</span>
+                </button>
+            }
+        </div>
     }
-
-
     else
     {
-        <text>
-        <b>No of Users Online:</b>
-        <b>@Context.ApplicationInstance.Application["OnlineUsers"].ToString()</b><br />
-        <br />
-        </text>
-    
-        <ul>
-
-            <li>
-                <div class="floatleft">
-                    @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { enctype = "multipart/form-data", id = "register-partial-form" }))
-                    { 
-                        <div>
-                            <a id="btnSubmitRegisterPartialForm" style="cursor: pointer;" title="Register">Register</a>
-                        </div>    
-                    }
-                </div>
-            </li>
-
-            <li>
-                <div class="floatleft">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { enctype = "multipart/form-data", id = "login-partial-form" }))
-                    { 
-                        <div>
-                            <a id="btnSubmitLoginPartialForm" style="cursor: pointer;" title="Log In">Log in</a>
-                        </div>    
-                    }
-                </div>
-            </li>
-
-        </ul>
-     
+        <div class="d-flex align-items-center gap-2">
+            <!-- Separate Login Form -->
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { id = "login-partial-form", @class = "d-inline" }))
+            {
+                <button type="submit" id="btnSubmitLoginPartialForm" class="btn btn-light text-primary border rounded-3 btn-sm fw-medium px-3" title="Log In">
+                    Log in
+                </button>
+            }
+            <!-- Separate Register Form -->
+            @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { id = "register-partial-form", @class = "d-inline" }))
+            {
+                <button type="submit" id="btnSubmitRegisterPartialForm" class="btn btn-primary rounded-3 btn-sm fw-medium px-3 shadow-sm" title="Register">
+                    Register
+                </button>
+            }
+        </div>
     }
-
-
 </div>
 
-
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $("#progress").hide();
-
-            $.ajaxSetup({ cache: false });
-
-        });
-    </script>
-
-}
-
-
-
-
-
-
-
-
-
+<script src="~/Scripts/loginPartial.js"></script>

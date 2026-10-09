@@ -1,0 +1,49 @@
+﻿
+CREATE TABLE IF NOT EXISTS "spUsersInRoles" (
+	"UserId" INT NOT NULL,
+	"RoleId" INT NOT NULL,
+	PRIMARY KEY ("UserId", "RoleId")
+);
+
+CREATE TABLE IF NOT EXISTS "spUsers" (
+	"Id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"RoleId" INT NOT NULL,
+	"UserName" TEXT NOT NULL,
+	"Password" TEXT NOT NULL,
+	"Status" TEXT NOT NULL,
+	"Locked" BOOLEAN NOT NULL,
+	"IsDeleted" BOOLEAN NOT NULL,
+	"SystemId" TEXT NOT NULL,
+	"Surname" TEXT NULL,
+	"OtherNames" TEXT NULL,
+	"NationalID" TEXT NULL,
+	"DateOfBirth" TEXT NULL,
+	"Gender" TEXT NULL,
+	"Telephone" TEXT NULL,
+	"Email" TEXT NULL,
+	"DateJoined" TEXT NULL,
+	"InformBy" TEXT NULL,
+	"Photo" TEXT NULL,
+	"password_hash" TEXT NULL,
+	"password_salt" TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "spRoles" (
+	"Id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"ShortCode" TEXT NOT NULL,
+	"Description" TEXT NOT NULL,
+	"IsDeleted" BOOLEAN NOT NULL
+);
+
+
+
+
+INSERT INTO spRoles (Id, ShortCode, Description, IsDeleted) VALUES (1, 'Administrator', 'Administrator', false);
+INSERT INTO spRoles (Id, ShortCode, Description, IsDeleted) VALUES (2, 'Employee', 'Employee', false);
+INSERT INTO spRoles (Id, ShortCode, Description, IsDeleted) VALUES (3, 'Member', 'Member', false);
+
+
+
+
+
+

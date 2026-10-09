@@ -1,201 +1,121 @@
 ﻿@model ffWeb.UI.MVC.Models.LoginModel
-
 @{
     ViewBag.Title = "Log in";
 }
 
-<hgroup class="title">
-    <h2 class="page-title">@ViewBag.Title.</h2>
-</hgroup>
+<link href="~/Content/login.css" rel="stylesheet" type="text/css" /> 
+ 
+<div class="container py-4 py-lg-5">
+    <div class="row justify-content-center g-4">
 
-<section id="loginForm">
+        <!-- Local Account Login Form -->
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card card-auth shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-sm-5">
 
-    <h2 class="page-title">Use a local account to log in.</h2>
+                    <div class="text-center mb-4">
+                        <div class="auth-icon-wrapper bg-primary-subtle text-primary rounded-circle mx-auto mb-3">
+                            <svg class="svg-icon fs-3 text-primary" viewBox="0 0 16 16"><path d="M5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.5 1.5 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.5 1.5 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56zM8 5c-.552 0-1 .448-1 1v2c0 .552.448 1 1 1s1-.448 1-1V6c0-.552-.448-1-1-1z" /></svg>
+                        </div>
+                        <h2 class="h4 fw-bold text-dark">Welcome Back</h2>
+                        <p class="text-secondary small">Log in to your Fanikiwa account to continue</p>
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "login-main-form" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", id = "login-main-form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+                        if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3 small mb-4" role="alert">
+                                @Html.ValidationSummary(true)
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        }
 
-        <fieldset>
-            <legend>Log in</legend>
-            <ol>
-                <li>
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </li>
-                <li>
-                    @Html.ValidationMessageFor(m => m.Password)
-                </li>
-            </ol>
+                        <!-- Username Input -->
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(m => m.UserName, new { id = "txtusername", @class = "form-control rounded-3", @autofocus = "autofocus", @placeholder = "name@example.com", type = "email", @required = "true" })
+                            @Html.LabelFor(m => m.UserName)
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "invalid-feedback d-block" })
+                        </div>
 
-            <ol>
-                <li>
-                    @Html.LabelFor(m => m.UserName)
-                    @Html.TextBoxFor(m => m.UserName, new { @autofocus = "autofocus", placeholder = "username@domain.co.ke", type = "email", @autocomplete = "autocomplete" }) 
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { placeholder = "password" }) 
-                </li>
-                <li>
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-                </li>
-            </ol>
+                        <!-- Password Input with SVG Eye Toggle Button -->
+                        <div class="form-floating mb-2 position-relative">
+                            @Html.PasswordFor(m => m.Password, new { id = "txtpassword", @class = "form-control rounded-3 pe-5", @placeholder = "Password" })
+                            @Html.LabelFor(m => m.Password)
+                            <button type="button" id="btnTogglePassword" class="btn border-0 text-secondary position-absolute top-50 end-0 translate-middle-y me-2" title="Toggle Password Visibility">
+                                <svg id="passwordToggleSvg" class="svg-icon fs-5" viewBox="0 0 16 16"><path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" /><path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" /><path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.707z" /></svg>
+                            </button>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "invalid-feedback d-block" })
+                        </div>
 
-            <input type="submit" value="Log in" id="btnSubmitMainLoginForm" />
+                        <!-- Password Strength Indicator -->
+                        <div id="password-strength-container" class="mb-3 d-none">
+                            <div class="progress progress-thin mb-1">
+                                <div id="password-strength-bar" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center extra-small">
+                                <span id="password-strength-text" class="fw-semibold text-secondary">Strength</span>
+                                <span id="password-strength-feedback" class="text-muted"></span>
+                            </div>
+                        </div>
 
-        </fieldset>
-         
-    }
+                        <!-- Remember Me & Show Password Checkboxes -->
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 gap-2 small">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.RememberMe, new { id = "chkrememberme", @class = "form-check-input" })
+                                @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label text-secondary" })
+                            </div>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.ShowPassword, new { id = "chkshowpassword", @class = "form-check-input" })
+                                @Html.LabelFor(m => m.ShowPassword, new { @class = "form-check-label text-secondary" })
+                            </div>
+                        </div>
 
-
-    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { enctype = "multipart/form-data", id = "register-from-login-form" }))
-    { 
-        <p>
-            <a id="btnSubmitRegisterFromLoginForm" style="cursor: pointer;">Register</a> if you don't have an account.
-          @*@Html.ActionLink("Register", "Register") *@
-        </p> 
-         
-    }
-
-</section>
-
-
-
-
-<section class="social" id="socialLoginForm">
-
-    <h2 class="page-title">Use another service to log in.</h2>
-
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-
-</section>
-
-
-
-
-
-
-
+                        <!-- Submit Button -->
+                        <button type="submit" id="btnSubmitMainLoginForm" class="btn btn-primary btn-lg w-100 rounded-3 fw-semibold shadow-sm mb-3">
+                            Log in
+                        </button>
+                    }
+                    <!-- Social / External Login Divider -->
+                    <div class="d-flex align-items-center my-4">
+                        <hr class="flex-grow-1 my-0 text-secondary opacity-25">
+                        <span class="px-3 text-secondary extra-small text-uppercase fw-semibold">Or log in with</span>
+                        <hr class="flex-grow-1 my-0 text-secondary opacity-25">
+                    </div>
+                    <!-- Redesigned Google Authentication Option -->
+                    @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "google-login-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" name="provider" value="Google" class="btn btn-outline-secondary w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 fw-medium shadow-sm">
+                            <svg class="svg-icon fs-5" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                            </svg>
+                            <span>Log in with Google</span>
+                        </button>
+                    }
+                    <!-- Registration Direct Navigation Form -->
+                    <div class="text-center pt-4 border-top mt-4">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Get, new { id = "register-from-login-form", @class = "d-inline" }))
+                        {
+                            <p class="text-secondary small mb-0">
+                                Don't have an account?
+                                <button type="submit" id="btnSubmitRegisterFromLoginForm" class="btn btn-link p-0 fw-semibold text-primary text-decoration-none align-baseline">
+                                    Register here
+                                </button>
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $("#progress").hide();
-
-            $.ajaxSetup({ cache: false });
-
-        });
-
-        //$("#btnSubmitMainLoginForm").on("click", function (e) {
-
-        //    e.preventDefault();
-
-        //    $("#login-main-form").validate()
-
-        //    //if (!$("#login-main-form").valid()) {
-        //    //    return false;
-        //    //}
-
-        //    //if ($("#login-main-form").valid()) {
-
-        //        $("#progress").removeClass('displaynone');
-        //        $("#progress").addClass('displayblock');
-        //        $("#progress").show();
-
-        //        $("#login-main-form").submit();
-        //    //}
-
-        //});
-
-        //$("#btnSubmitLoginForm").on("click", function (e) {
-
-        //    e.preventDefault();
-
-        //    $("#login-main-form").validate().form();
-
-        //    if (!$("#login-main-form").valid()) {
-
-        //        //alert("Not Valid");
-
-        //        //return false;
-        //    }
-
-        //    //$("#login-main-form").unbind("validate", false);
-
-        //    if ($("#login-main-form").valid()) {
-
-        //        alert("Valid");
-
-        //        $("#progress").removeClass('displaynone');
-        //        $("#progress").addClass('displayblock');
-        //        $("#progress").show();
-
-        //        $("#login-main-form").submit();
-
-        //        //return true;
-        //    }
-
-        //});
-
-
-        //// Handle form submit ...
-        //$("#login-main-form").on('submit', function (e) {
-
-        //    e.preventDefault();
-
-        //    //$("#login-main-form").validate().form();
-
-        //    //if ($("#login-main-form").valid() == false) {
-        //    //    alert("Not Valid");
-        //    //    return false;
-        //    //}
-
-        //    //$("#login-main-form").unbind("validate", false);
-
-        //    if ($("#login-main-form").validate().form()) {
-        //        //alert("Valid");
-        //        $("#progress").removeClass('displaynone');
-        //        $("#progress").addClass('displayblock');
-        //        $("#progress").show();
-
-        //        $("#login-main-form").submit();
-
-        //        return true;
-        //    }
-
-        //    return false;
-
-        //});
-
-        $("#btnSubmitRegisterFromLoginForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#register-from-login-form").submit();
-
-        });
-
-        $("#btnSubmitExternalLoginForm").on("click", function (e) {
-
-            e.preventDefault();
-
-            $("#progress").removeClass('displaynone');
-            $("#progress").addClass('displayblock');
-            $("#progress").show();
-
-            $("#external-login-form").submit();
-
-        });
-
-    </script>
-
+    <script src="~/Scripts/login.js"></script>
 }

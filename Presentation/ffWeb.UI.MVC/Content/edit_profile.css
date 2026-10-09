@@ -1,0 +1,158 @@
+﻿/* Mobile-First Layout Core Styles */
+.profile-dashboard {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Embedded SVG Icon Utilities */
+.svg-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    display: inline-block;
+    vertical-align: text-bottom;
+    stroke-width: 2;
+}
+
+.svg-icon-sm {
+    width: 0.9rem;
+    height: 0.9rem;
+}
+
+.svg-icon-md {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Quick Nav Scroll Pills */
+.quick-nav-wrapper .quick-nav-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quick-nav-wrapper .btn-nav-pill {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 50rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    color: #495057;
+    transition: all 0.2s ease-in-out;
+    width: 100%; /* Full width when stacked */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-nav-wrapper .btn-nav-pill:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #212529;
+}
+
+.quick-nav-wrapper form {
+    width: 100%;
+}
+
+
+/* Profile Avatar Management */
+.profile-avatar-wrapper {
+    width: 130px;
+    height: 130px;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-upload-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Modern Form Field Enhancements */
+.form-floating > .form-control:focus,
+.form-floating > .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Loading Overlay */
+.dashboard-progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1055;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Media Query Breakpoints */
+
+/* Mobile Phones (< 576px) */
+@media (max-width: 575.98px) {
+    .profile-dashboard {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .btn-lg {
+        width: 100%;
+    }
+}
+
+/* Tablets (>= 768px and < 992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .profile-avatar-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Desktop Screens (>= 992px) */
+@media (min-width: 992px) {
+    .quick-nav-wrapper {
+        background-color: transparent;
+        padding-top: calc(var(--header-height) + 1rem);
+    }
+
+    .profile-dashboard {
+        padding-top: calc(var(--header-height) + 1rem);
+    }
+}
+
+
+/* Media Query Breakpoints */
+
+/* Mobile Screens (< 768px): Stack downwards */
+@media (max-width: 767.98px) {
+    .quick-nav-wrapper .quick-nav-container {
+        flex-direction: column; /* Stack buttons vertically */
+        overflow-x: visible;
+    }
+}
+
+/* Tablet & Desktop Screens (>= 768px): Horizontal row scroll */
+@media (min-width: 768px) {
+    .quick-nav-wrapper .quick-nav-container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .quick-nav-wrapper form {
+        width: auto; /* Allow auto width for horizontal pill row */
+    }
+
+    .quick-nav-wrapper .btn-nav-pill {
+        width: auto;
+    }
+}

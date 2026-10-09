@@ -1,153 +1,128 @@
 ﻿@model fPeerLending.Entities.OfferModel
-
 @{
     ViewBag.Title = "Create Borrow Offer";
 }
 
-<h2 class="page-title">Create Borrow Offer</h2>
+<link href="~/Content/create_borrow_offer.css" rel="stylesheet" type="text/css" />
 
-@using (Html.BeginForm("CreateBorrowOffer", "Offers", FormMethod.Post, new { id = "create-borrow-offer-form", enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    
-    <fieldset>
-        <legend>Create Offer</legend>
-
-
-        <article class="col1">
-            <div class="pad">
-
-
-                <ol>
-
-                    <li>
-                        @Html.ValidationMessageFor(model => model.Description)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(model => model.PublicOffer)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(model => model.OfferType)
-                    </li>
-
-                </ol>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Description)
+<div class="offer-container">
+    <div class="card form-card shadow-sm border-0">
+        <div class="card-header bg-white border-0 pt-4 pb-0 px-4">
+            <div class="d-flex align-items-center gap-3">
+                <div class="icon-shape bg-primary-subtle text-primary rounded-circle p-3">
+                    <!-- SVG Icon for Create Offer -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
                 </div>
-                <div class="editor-field">
-                    @Html.TextAreaFor(model => model.Description, new { style = "width: 310px;height: 50px;", placeholder = "offer description", @autofocus = "autofocus", @autocomplete = "autocomplete", @required = "required" })
+                <div>
+                    <h2 class="h4 mb-1 fw-bold text-dark">Create Borrow Offer</h2>
+                    <p class="text-muted small mb-0">Fill in the details below to submit your peer-to-peer offer request.</p>
                 </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.PublicOffer)
-                </div>
-                <div class="editor-field">
-                    @{
-    List<SelectListItem> _offermailingmethods = new List<SelectListItem>();
-    _offermailingmethods.Add(new SelectListItem
-    {
-        Text = "Public",
-        Value = "B",
-        Selected = true
-    });
-    _offermailingmethods.Add(new SelectListItem
-    {
-        Text = "Private",
-        Value = "V"
-    });
-                    }
-                    @Html.DropDownListFor(model => model.PublicOffer, _offermailingmethods, "-- Select Mailing Method --", new { id = "cboOfferMailingMethods", style = "width: 310px;height: 30px;", @required = "required" })
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.OfferType)
-                </div>
-                <div class="editor-field">
-                    @{
-    List<SelectListItem> _offerTypes = new List<SelectListItem>();
-    _offerTypes.Add(new SelectListItem
-    {
-        Text = "Borrow",
-        Value = "B",
-        Selected = true
-    });
-    _offerTypes.Add(new SelectListItem
-    {
-        Text = "Lend",
-        Value = "L"
-    });
-                    }
-                    @Html.DropDownListFor(model => model.OfferType, _offerTypes, "-- Select Offer Type --", new { id = "cboOfferTypes", style = "width: 310px;height: 30px;", @required = "required", @disabled = "disabled" })
-                </div>
-
             </div>
-        </article>
+        </div>
+        <div class="card-body p-4">
+    @using (Html.BeginForm("CreateBorrowOffer", "Offers", FormMethod.Post, new { id = "create-borrow-offer-form", enctype = "multipart/form-data", @class="needs-validation", novalidate = "novalidate" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
 
-        <article class="col2">
-            <div class="pad">
-
-
-                <ol>
-
-                    <li>
-                        @Html.ValidationMessageFor(model => model.Amount)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(model => model.Term)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(model => model.Interest)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(model => model.PartialPay)
-                    </li>
-
-                </ol>
-
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Amount)
+            <div class="row g-4">
+                <!-- Column 1: Offer Configuration -->
+                <div class="col-12 col-md-6">
+                    <div class="p-3 rounded bg-light-subtle border h-100">
+                        <h5 class="card-subtitle mb-3 text-secondary fw-semibold">Offer Details</h5>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Description, new { @class = "form-label fw-medium" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "3", placeholder = "Describe your offer details...", autofocus = "autofocus", autocomplete = "autocomplete", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.PublicOffer, new { @class = "form-label fw-medium" })
+                            @{
+                                    List<SelectListItem> _offermailingmethods = new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Public", Value = "B", Selected = true },
+                                        new SelectListItem { Text = "Private", Value = "V" }
+                                    };
+                            }
+                            @Html.DropDownListFor(model => model.PublicOffer, _offermailingmethods, "-- Select Mailing Method --", new { @class = "form-select", id = "cboOfferMailingMethods", required = "required" })
+                            @Html.ValidationMessageFor(model => model.PublicOffer, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.OfferType, new { @class = "form-label fw-medium" })
+                            @{
+                                    List<SelectListItem> _offerTypes = new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Borrow", Value = "B", Selected = true },
+                                        new SelectListItem { Text = "Lend", Value = "L" }
+                                    };
+                            }
+                            @Html.DropDownListFor(model => model.OfferType, _offerTypes, "-- Select Offer Type --", new { @class = "form-select", id = "cboOfferTypes", required = "required", disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.OfferType, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                    </div>
                 </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Amount, new { type = "number", @required = "required" })
+                <!-- Column 2: Financial Terms -->
+                <div class="col-12 col-md-6">
+                    <div class="p-3 rounded bg-light-subtle border h-100">
+                        <h5 class="card-subtitle mb-3 text-secondary fw-semibold">Financial Terms</h5>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Amount, new { @class = "form-label fw-medium" })
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "0.00", required = "required", step = "0.01" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Term, new { @class = "form-label fw-medium" })
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.Term, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "e.g. 12", required = "required" } })
+                                <span class="input-group-text">Months</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Term, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Interest, new { @class = "form-label fw-medium" })
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.Interest, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "0.00", required = "required", step = "0.01" } })
+                                <span class="input-group-text">%</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Interest, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch pt-2">
+                                @Html.CheckBoxFor(model => model.PartialPay, new { @class = "form-check-input", role = "switch", id = "PartialPaySwitch" })
+                                @Html.LabelFor(model => model.PartialPay, new { @class = "form-check-label fw-medium", @for = "PartialPaySwitch" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.PartialPay, "", new { @class = "invalid-feedback d-block" })
+                        </div>
+                    </div>
                 </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Term)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Term, new { type = "number", @required = "required" })
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Interest)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Interest, new { type = "number", @required = "required" })
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.PartialPay)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.PartialPay)
-                </div>
-
             </div>
-        </article>
 
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-
-    </fieldset>
-}
-
-
+                <!-- Form Actions -->
+            <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                <button type="button" class="btn btn-outline-secondary px-4">Cancel</button>
+                <button type="submit" class="btn btn-primary px-4 d-inline-flex align-items-center gap-2">
+                    <span>Create Offer</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/create_borrow_offer.js"></script>
 }

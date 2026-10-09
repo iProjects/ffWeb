@@ -1,0 +1,128 @@
+﻿/* Custom Variable Configuration */
+:root { 
+    --primary-color: #0d6efd;
+    --bg-light: #f8f9fa;
+    --transition-speed: 0.2s;
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--bg-light);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #212529;
+}
+
+/* Prevent Header Content Overlap */
+.app-header {
+    height: var(--header-height);
+    z-index: 1030;
+}
+
+.main-content {
+    padding-top: calc(var(--header-height) + 1.5rem);
+    padding-bottom: 3rem;
+}
+
+/* User Avatar Helper */
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Interactive Action Cards */
+.action-card {
+    background-color: #ffffff;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.action-card:active {
+    transform: translateY(0);
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+}
+
+/* Custom Table Styling */
+.custom-table thead th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6c757d;
+    font-weight: 600;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.custom-table tbody tr {
+    transition: background-color var(--transition-speed) ease;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-wrapper {
+    text-align: center;
+}
+
+/* Utility Display Classes */
+.displaynone {
+    display: none !important;
+}
+
+.displayblock {
+    display: flex !important;
+}
+
+/* Media Query Fine-Tuning */
+@media (max-width: 575.98px) {
+    .main-content {
+        padding-top: calc(var(--header-height) + 1rem);
+    }
+
+    .offer-mobile-card {
+        border-color: #e3e8ed !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Tablet Specific Adjustments */
+    .action-card small {
+        font-size: 0.75rem;
+    }
+}

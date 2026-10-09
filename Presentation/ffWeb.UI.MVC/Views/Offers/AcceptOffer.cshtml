@@ -1,35 +1,125 @@
-﻿@model fPeerLending.Entities.Offer
-
+﻿@model fPeerLending.Entities.OfferModel
 @{
-    ViewBag.Title = "Accept Offer";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create Offer";
+
+    // Prepare dropdown lists cleanly in view logic
+    var offerMailingMethods = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Public", Value = "B", Selected = true },
+        new SelectListItem { Text = "Private", Value = "V" }
+    };
+
+    var offerTypes = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Borrow", Value = "B" },
+        new SelectListItem { Text = "Lend", Value = "L" }
+    };
 }
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
+                <!-- Card Header -->
+                <div class="card-header bg-primary text-white p-4">
+                    <h2 class="h4 mb-0 fw-semibold">
+                        <i class="bi bi-plus-circle me-2"></i>Create New Offer
+                    </h2>
+                    <p class="small text-white-50 mb-0 mt-1">Fill out the details below to submit a new lending or borrowing offer.</p>
+                </div>
+                <!-- Form Content -->
+                <div class="card-body p-4 p-md-5">
+                    @using (Html.BeginForm("Create", "Offers", FormMethod.Post, new { id = "createOfferForm", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-<h2 class="page-title">Cannot accept a @Model.Status offer.</h2>
+                        if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                                <strong><i class="bi bi-exclamation-triangle-fill me-2"></i>Please fix the errors below:</strong>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger mb-0 mt-2" })
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        }
 
+                        <div class="row g-4">
+                            <!-- Left Column: General Information -->
+                            <div class="col-md-6">
+                                <h5 class="text-uppercase text-muted fs-7 fw-bold mb-3 tracking-wider">General Information</h5>
+                                <!-- Description -->
+                                <div class="form-floating mb-3">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control custom-textarea", placeholder = "Offer Description", autofocus = "autofocus", style = "height: 120px;" })
+                                    @Html.LabelFor(model => model.Description, "Offer Description")
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                                <!-- Public / Private Offer -->
+                                <div class="form-floating mb-3">
+                                    @Html.DropDownListFor(model => model.PublicOffer, offerMailingMethods, "-- Select Mailing Method --", new { @class = "form-select", id = "cboOfferMailingMethods" })
+                                    @Html.LabelFor(model => model.PublicOffer, "Mailing Method")
+                                    @Html.ValidationMessageFor(model => model.PublicOffer, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                                <!-- Offer Type -->
+                                <div class="form-floating mb-3">
+                                    @Html.DropDownListFor(model => model.OfferType, offerTypes, "-- Select Offer Type --", new { @class = "form-select", id = "cboOfferTypes" })
+                                    @Html.LabelFor(model => model.OfferType, "Offer Type")
+                                    @Html.ValidationMessageFor(model => model.OfferType, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                            </div>
+                            <!-- Right Column: Financial Terms -->
+                            <div class="col-md-6">
+                                <h5 class="text-uppercase text-muted fs-7 fw-bold mb-3 tracking-wider">Financial Details</h5>
+                                <!-- Amount -->
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.Amount, new { @class = "form-label fw-medium" })
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", type = "number", step = "0.01", placeholder = "0.00" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                                <!-- Term -->
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.Term, new { @class = "form-label fw-medium" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Term, new { @class = "form-control", type = "number", placeholder = "e.g. 12" })
+                                        <span class="input-group-text">Months</span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Term, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                                <!-- Interest -->
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.Interest, new { @class = "form-label fw-medium" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Interest, new { @class = "form-control", type = "number", step = "0.01", placeholder = "0.00" })
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Interest, "", new { @class = "text-danger small mt-1" })
+                                </div>
+                                <!-- Partial Payment Checkbox -->
+                                <div class="form-check form-switch mt-4 pt-2">
+                                    @Html.CheckBoxFor(model => model.PartialPay, new { @class = "form-check-input", id = "chkPartialPay", role = "switch" })
+                                    @Html.LabelFor(model => model.PartialPay, "Allow Partial Payments", new { @class = "form-check-label fw-medium ms-2" })
+                                    @Html.ValidationMessageFor(model => model.PartialPay, "", new { @class = "text-danger small d-block" })
+                                </div>
+                            </div>
+                        </div>
 
+                        <hr class="my-4 text-muted opacity-25" />
 
-
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <a href="@Url.Action("Index", "Offers")" class="btn btn-light btn-lg px-4 fs-6 fw-semibold">Cancel</a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5 fs-6 fw-semibold">
+                                <i class="bi bi-check-lg me-1"></i> Create Offer
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-
-        $(document).ready(function () { 
-
-            $("#progress").hide();
-
-            $.ajaxSetup({ cache: false });
-
-        });
-        </script>
- 
+    <script src="~/Scripts/create-offer.js"></script>
 }
-
-
-
-
-
-
-
-
